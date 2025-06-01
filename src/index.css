@@ -1,24 +1,28 @@
-:root {
-  font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
-  line-height: 1.5;
-  font-weight: 400;
+@font-face {
+  font-family: 'Roboto Mono';
+  src: url('fonts/RobotoMono.ttf');
+}
 
-  color-scheme: light dark;
-  color: rgba(255, 255, 255, 0.87);
-  background-color: #18191C;
-
-  font-synthesis: none;
-  text-rendering: optimizeLegibility;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+@font-face {
+  font-family: 'Roboto';
+  src: url('fonts/Roboto.ttf');
 }
 
 body {
   margin: 0;
   min-width: 320px;
   min-height: 100vh;
+  font-family: Avenir, Arial, Helvetica, sans-serif;
 }
 
 #root {
   height: 100vh;
+}
+
+.leva-c-hwBXYF {
+  display: none!important;
+}
+
+.leva-c-hBtFDW-lbFLlY-isRoot-false::after {
+  background-color: unset!important;
 }

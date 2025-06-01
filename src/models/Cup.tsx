@@ -13,7 +13,7 @@ export function Cup(props: JSX.IntrinsicElements['group']) {
   const { nodes } = useGLTF('/cup.glb')
   const cupOptions = useMemo(() => {
     return {
-      Scale: { value: 2, min: 1, max: 25, step: 0.5 },
+      Scale: { value: 1.5, min: 1, max: 25, step: 0.2 },
       Color: { value: '#fafafa' },
       Roughness: { value: 0.2, min: 0, max: 1, step: 0.1 },
       Transmission: { value: 0, min: 0, max: 1, step: 0.1 }

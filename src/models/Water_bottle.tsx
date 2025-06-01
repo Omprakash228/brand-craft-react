@@ -12,7 +12,7 @@ export function WaterBottle(props: JSX.IntrinsicElements['group']) {
   const { nodes } = useGLTF('/water_bottle.glb')
   const bottleOptions = useMemo(() => {
     return {
-      Scale: { value: 3, min: 1, max: 25, step: 0.5 },
+      Scale: { value: 2.5, min: 1, max: 25, step: 0.2 },
       Bottle: folder({
         'Bottle color': { value: '#fafafa' },
         'Bottle roughness': { value: 0.3, min: 0, max: 1, step: 0.1 },
