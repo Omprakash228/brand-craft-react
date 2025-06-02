@@ -1,0 +1,46 @@
+#nav-container {
+  height: 30px;
+  background: #101012;
+  border-bottom: 1px solid #ffffff1f;
+  padding: 10px 30px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+#left-container,
+#right-container {
+  display: flex;
+  align-items: center;
+  gap: 1.2rem;
+}
+
+#app-name-container {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+#logo {
+  background: url("/images/logo.png");
+  height: 20px;
+  width: 20px;
+  background-size: contain;
+  background-repeat: no-repeat;
+}
+
+#app-name {
+  font-size: 20px;
+  color: white;
+}
+
+#version-container {
+  background: #2d2f34;
+  border-radius: 5px;
+  color: #8c92a4;
+  font-size: 12px;
+  padding: 5px;
+  height: 20px;
+  text-align: center;
+  line-height: 20px;
+}

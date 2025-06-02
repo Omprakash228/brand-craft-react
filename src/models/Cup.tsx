@@ -4,29 +4,45 @@ Command: npx gltfjsx@6.5.3 .\public\cup.glb -t
 */
 
 import * as THREE from 'three'
-import { useMemo, type JSX } from 'react'
+import { useMemo, useRef, type JSX } from 'react'
 import { useGLTF } from '@react-three/drei'
-import { useControls } from 'leva'
-
+import { folder, useControls } from 'leva'
 
 export function Cup(props: JSX.IntrinsicElements['group']) {
   const { nodes } = useGLTF('/cup.glb')
+  const meshGroup = useRef(new THREE.Group())
   const cupOptions = useMemo(() => {
     return {
+      Rotation: folder({
+        // AutoRotate: { value: false },
+        // Clockwise: { value: false },
+        X: { value: 0, min: 0, max: Math.PI * 2, step: 0.1 },
+        Y: { value: 0, min: 0, max: Math.PI * 2, step: 0.1 },
+        Z: { value: 0, min: 0, max: Math.PI * 2, step: 0.1 }
+      }, { collapsed: true }),
       Scale: { value: 1.5, min: 1, max: 25, step: 0.2 },
-      Color: { value: '#fafafa' },
-      Roughness: { value: 0.2, min: 0, max: 1, step: 0.1 },
-      Transmission: { value: 0, min: 0, max: 1, step: 0.1 }
+      Color: { value: '#eaeaea' },
+      Roughness: { value: 0.1, min: 0, max: 1, step: 0.1 },
+      Metalness: { value: 0.1, min: 0, max: 1, step: 0.1 },
+      Transmission: { value: 0, min: 0, max: 1, step: 0.1 },
     }
   }, [])
   const cup = useControls('Cup', cupOptions)
 
+  // useFrame(() => {
+  //   if (cup.AutoRotate) {
+  //     const multiplier = cup.Clockwise ? -1 : 1;
+  //     meshGroup.current.rotation.y += (0.01 * multiplier);
+  //   }
+  // })
+
   return (
-    <group {...props} dispose={null} scale={cup.Scale}>
+    <group {...props} ref={meshGroup} dispose={null} scale={cup.Scale} rotation={[cup.X, cup.Y, cup.Z]}>
       <mesh geometry={(nodes.cup as THREE.Mesh).geometry}>
         <meshPhysicalMaterial
           color={cup.Color}
           roughness={cup.Roughness}
+          metalness={cup.Metalness}
           transmission={cup.Transmission}
           ior={1.2}></meshPhysicalMaterial>
       </mesh>

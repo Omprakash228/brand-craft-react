@@ -13,8 +13,6 @@
   background: #101012;
   width: 80%;
   padding: 10px;
-}
-
-#scene-canvas {
-  border-radius: 10px;
+  position: relative;
+  overflow: hidden;
 }

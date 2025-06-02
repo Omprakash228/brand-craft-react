@@ -12,38 +12,50 @@ export function WaterBottle(props: JSX.IntrinsicElements['group']) {
   const { nodes } = useGLTF('/water_bottle.glb')
   const bottleOptions = useMemo(() => {
     return {
+      Rotation: folder({
+        X: { value: 0, min: 0, max: Math.PI * 2, step: 0.1 },
+        Y: { value: 0, min: 0, max: Math.PI * 2, step: 0.1 },
+        Z: { value: 0, min: 0, max: Math.PI * 2, step: 0.1 }
+      }, { collapsed: true }),
       Scale: { value: 2.5, min: 1, max: 25, step: 0.2 },
-      Bottle: folder({
-        'Bottle color': { value: '#fafafa' },
-        'Bottle roughness': { value: 0.3, min: 0, max: 1, step: 0.1 },
-        'Bottle transmission': { value: 0, min: 0, max: 1, step: 0.1 }
-      }, {
-        collapsed: true,
-      }),
-      Cap: folder({
-        'Cap color': { value: '#fafafa' },
-        'Cap roughness': { value: 0.3, min: 0, max: 1, step: 0.1 },
-        'Cap transmission': { value: 0, min: 0, max: 1, step: 0.1 }
-      }, {
-        collapsed: true,
-      }),
+    }
+  }, [])
+  const bodyOptions = useMemo(() => {
+    return {
+      Color: { value: '#fafafa' },
+      Roughness: { value: 0.3, min: 0, max: 1, step: 0.1 },
+      Metalness: { value: 0, min: 0, max: 1, step: 0.1 },
+      Transmission: { value: 0, min: 0, max: 1, step: 0.1 }
+    }
+  }, [])
+
+  const capOptions = useMemo(() => {
+    return {
+      Color: { value: '#fafafa' },
+      Roughness: { value: 0.3, min: 0, max: 1, step: 0.1 },
+      Metalness: { value: 0, min: 0, max: 1, step: 0.1 },
+      Transmission: { value: 0, min: 0, max: 1, step: 0.1 }
     }
   }, [])
   const bottle = useControls('Water bottle', bottleOptions)
+  const body = useControls('Bottle body', bodyOptions)
+  const cap = useControls('Bottle body', capOptions)
 
   return (
     <group {...props} dispose={null} scale={bottle.Scale}>
       <mesh geometry={(nodes.Bottle as THREE.Mesh).geometry}>
         <meshPhysicalMaterial
-          color={bottle['Bottle color']}
-          roughness={bottle['Bottle roughness']}
-          transmission={bottle['Bottle transmission']}></meshPhysicalMaterial>
+          color={body.Color}
+          roughness={body.Roughness}
+          metalness={body.Metalness}
+          transmission={body.Transmission}></meshPhysicalMaterial>
       </mesh>
       <mesh geometry={(nodes.Bottle_cap as THREE.Mesh).geometry}>
         <meshPhysicalMaterial
-          color={bottle['Cap color']}
-          roughness={bottle['Cap roughness']}
-          transmission={bottle['Cap transmission']}></meshPhysicalMaterial>
+          color={cap.Color}
+          roughness={cap.Roughness}
+          metalness={cap.Metalness}
+          transmission={cap.Transmission}></meshPhysicalMaterial>
       </mesh>
     </group>
   )
