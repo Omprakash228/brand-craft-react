@@ -1,0 +1,32 @@
+import { createListCollection,} from '@chakra-ui/react'
+import useEnvironmentStore from './SceneStore';
+import Dropdown from '../ui/Dropdown/Dropdown';
+import { MdTexture } from 'react-icons/md';
+import SolidColorSettings from './SolidColorSettings';
+import HdriSettings from './HdriSettings';
+
+export default function SceneSettings() {
+    const envStore = useEnvironmentStore();
+
+    const envOptions = createListCollection({
+        items: [
+            { label: "Solid color", value: "Solid color" },
+            { label: "HDRI", value: "HDRI" },
+        ],
+    })
+
+    return (
+        <>
+            <div className="property-title"><MdTexture />Background</div>
+            <Dropdown collection={envOptions} selectedValue={envStore.environment} size="sm" multiple={false} onChange={((value) => { envStore.setEnvironment(value[0]) })} />
+            {
+                envStore.environment === 'Solid color' &&
+                <SolidColorSettings />
+            }
+            {
+                envStore.environment === 'HDRI' &&
+                <HdriSettings />
+            }
+        </>
+    )
+}

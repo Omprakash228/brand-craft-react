@@ -1,0 +1,52 @@
+.chakra-tabs__root {
+  height: 100%;
+}
+
+.chakra-tabs__content {
+  padding: 8px 10px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 0.65rem;
+}
+
+.chakra-accordion__root {
+  background: #1a1c1f;
+  border-radius: 5px;
+  padding: 7px 10px;
+}
+
+.chakra-accordion__item {
+  border: none;
+}
+
+.chakra-accordion__itemTrigger {
+  font-size: 14px;
+}
+
+.chakra-accordion__itemContent * {
+  font-size: 13px !important;
+  border-color: rgb(58, 58, 60);
+}
+
+.chakra-accordion__itemBody {
+  position: relative;
+  z-index: 1000;
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+  padding-left: 5px;
+  padding-right: 20px;
+}
+
+.chakra-checkbox__root {
+  display: flex;
+  justify-content: space-between;
+}
+
+.property-title {
+  font-size: 15px;
+  display: flex;
+  gap: 0.4rem;
+  align-items: center;
+}

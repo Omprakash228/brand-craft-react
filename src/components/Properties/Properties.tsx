@@ -1,5 +1,33 @@
+import { Tabs } from "@chakra-ui/react";
+import { LuFileOutput, LuPackage } from "react-icons/lu";
+import './Properties.css'
+import SceneSettings from "../Scene/SceneSettings";
+import ProductSettings from "../Product/ProductSettings";
+import { MdTexture } from "react-icons/md";
+
 export default function Properties() {
     return (
-        <div id="side-panel"></div>
+        <Tabs.Root defaultValue="product" variant={'outline'} orientation="vertical">
+            <Tabs.List>
+                <Tabs.Trigger value="product">
+                    <LuPackage />
+                </Tabs.Trigger>
+                <Tabs.Trigger value="background">
+                    <MdTexture />
+                </Tabs.Trigger>
+                <Tabs.Trigger value="export">
+                    <LuFileOutput />
+                </Tabs.Trigger>
+            </Tabs.List>
+            <Tabs.Content value="product">
+                <ProductSettings />
+            </Tabs.Content>
+            <Tabs.Content value="background">
+                <SceneSettings />
+            </Tabs.Content>
+            <Tabs.Content value="export">
+                Export settings
+            </Tabs.Content>
+        </Tabs.Root>
     )
 }
