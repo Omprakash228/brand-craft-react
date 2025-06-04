@@ -1,5 +1,5 @@
 #nav-container {
-  height: 30px;
+  height: 50px;
   background: #101012;
   border-bottom: 1px solid #ffffff1f;
   padding: 10px 30px;
@@ -39,8 +39,8 @@
   border-radius: 5px;
   color: #8c92a4;
   font-size: 12px;
-  padding: 5px;
-  height: 20px;
+  padding: 3px 5px;
+  height: 23px;
   text-align: center;
   line-height: 20px;
 }

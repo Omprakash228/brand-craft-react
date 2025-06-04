@@ -18,11 +18,3 @@ body {
 #root {
   height: 100vh;
 }
-
-.leva-c-hwBXYF {
-  display: none!important;
-}
-
-.leva-c-hBtFDW-lbFLlY-isRoot-false::after {
-  background-color: unset!important;
-}
