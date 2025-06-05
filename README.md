@@ -1,54 +1,27 @@
-# React + TypeScript + Vite
+# Brand-Craft
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+**Brand-Craft** is a 3D customization tool built with React and Three.js (React Three Fiber) that lets users apply images to 3D models. Users can add full-surface textures or logos/stickers as decals. The app is powered by Zustand for dynamic image management and real-time updates.
 
-Currently, two official plugins are available:
+## ✨ Features
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- Apply images as:
+  - ✅ Full object textures
+  - 🎯 Logo/sticker decals (using decals)
+- Dynamically add and remove image layers
+- Transform images (scale, rotate, move)
+- Real-time rendering with React Three Fiber
+- Organized control panel UI using Chakra UI
 
-## Expanding the ESLint configuration
+## 🧱 Built With
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+- [React](https://reactjs.org/)
+- [Three.js](https://threejs.org/) via [React Three Fiber](https://docs.pmnd.rs/react-three-fiber)
+- [Zustand](https://github.com/pmndrs/zustand) for state management
+- [Chakra UI](https://chakra-ui.com/) for UI
+- [@react-three/drei](https://github.com/pmndrs/drei) for 3D utilities
 
-```js
-export default tseslint.config({
-  extends: [
-    // Remove ...tseslint.configs.recommended and replace with this
-    ...tseslint.configs.recommendedTypeChecked,
-    // Alternatively, use this for stricter rules
-    ...tseslint.configs.strictTypeChecked,
-    // Optionally, add this for stylistic rules
-    ...tseslint.configs.stylisticTypeChecked,
-  ],
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
-```
+## 🚀 Getting Started
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
-
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
-
-export default tseslint.config({
-  plugins: {
-    // Add the react-x and react-dom plugins
-    'react-x': reactX,
-    'react-dom': reactDom,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended typescript rules
-    ...reactX.configs['recommended-typescript'].rules,
-    ...reactDom.configs.recommended.rules,
-  },
-})
-```
+```bash
+npm install
+npm run dev
