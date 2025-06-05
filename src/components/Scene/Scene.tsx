@@ -8,6 +8,7 @@ import './Scene.css'
 import { SodaCan } from "../../models/SodaCan/SodaCan";
 import useProductStore from "../Product/ProductStore";
 import useEnvironmentStore from "./SceneStore";
+import Loading from "./Loading";
 
 export default function Scene() {
     const productStore = useProductStore();
@@ -44,32 +45,32 @@ export default function Scene() {
                     </>
                 }
 
-                {
-                    envStore.environment === 'Solid color' &&
-                    <Environment background={!envStore.colorTransparent} near={1} far={1000} resolution={256} environmentIntensity={envStore.colorIntensity}>
-                        <mesh scale={100}>
-                            <sphereGeometry args={[1, 64, 64]} />
-                            <meshBasicMaterial color={envStore.color} side={THREE.BackSide} />
-                        </mesh>
-                    </Environment>
-                }
-                {
-                    envStore.environment === 'HDRI' &&
-                    <Environment
-                        background={!envStore.hdriTransparent}
-                        near={1}
-                        far={1000}
-                        environmentIntensity={envStore.hdriIntensity}
-                        environmentRotation={[0, envStore.hdriRotation, 0]}
-                        backgroundIntensity={envStore.hdriIntensity}
-                        backgroundBlurriness={envStore.hdriBlurness}
-                        backgroundRotation={[0, envStore.hdriRotation, 0]}
-                        files={hdrMap[envStore.hdri]}></Environment>
-                }
+                <Suspense fallback={<Loading />}>
+                    {
+                        envStore.environment === 'Solid color' &&
+                        <Environment background={!envStore.colorTransparent} near={1} far={1000} resolution={256} environmentIntensity={envStore.colorIntensity}>
+                            <mesh scale={100}>
+                                <sphereGeometry args={[1, 64, 64]} />
+                                <meshBasicMaterial color={envStore.color} side={THREE.BackSide} />
+                            </mesh>
+                        </Environment>
+                    }
+                    {
+                        envStore.environment === 'HDRI' &&
+                            <Environment
+                                background={!envStore.hdriTransparent}
+                                near={1}
+                                far={1000}
+                                environmentIntensity={envStore.hdriIntensity}
+                                environmentRotation={[0, envStore.hdriRotation, 0]}
+                                backgroundIntensity={envStore.hdriIntensity}
+                                backgroundBlurriness={envStore.hdriBlurness}
+                                backgroundRotation={[0, envStore.hdriRotation, 0]}
+                                files={hdrMap[envStore.hdri]}></Environment>
+                    }
 
-                {/* <primitive object={model.scene} scale={product.scale} /> */}
-
-                <Suspense>{componentMap[productStore.product]}</Suspense>
+                    {componentMap[productStore.product]}
+                </Suspense>
             </Canvas>
         </>
     )
