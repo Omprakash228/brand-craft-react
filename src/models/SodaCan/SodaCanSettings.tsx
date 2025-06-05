@@ -10,10 +10,10 @@ export default function SodaCanSettings() {
     
     return (
         <>
-            <Accordion.Root collapsible defaultValue={['Cup']}>
-                <Accordion.Item value='Cup'>
+            <Accordion.Root collapsible defaultValue={['Soda can', 'Image']} multiple={true}>
+                <Accordion.Item value='Soda can'>
                     <Accordion.ItemTrigger>
-                        <Span flex="10" style={{ display: "flex", alignItems: "center", gap: "0.2rem" }}><LuSettings2 size={"16px"} />Cup</Span>
+                        <Span flex="10" style={{ display: "flex", alignItems: "center", gap: "0.2rem" }}><LuSettings2 size={"16px"} />Soda can</Span>
                         <Span flex="0" style={{ cursor: "pointer", opacity: "0.5" }} onClick={($event) => { $event.stopPropagation(); canStore.resetSettings() }}><MdRefresh /></Span>
                         <Accordion.ItemIndicator />
                     </Accordion.ItemTrigger>
@@ -103,6 +103,51 @@ export default function SodaCanSettings() {
                                     width="60%"
                                     selectedValue={canStore.rotationZ}
                                     onChange={((value) => { canStore.setRotationZ(value) })} />
+                            </div>
+                        </Accordion.ItemBody>
+                    </Accordion.ItemContent>
+                </Accordion.Item>
+                <Accordion.Item value='Image'>
+                    <Accordion.ItemTrigger>
+                        <Span flex="10" style={{ display: "flex", alignItems: "center", gap: "0.2rem" }}><LuSettings2 size={"16px"} />Image</Span>
+                        <Span flex="0" style={{ cursor: "pointer", opacity: "0.5" }} onClick={($event) => { $event.stopPropagation(); canStore.resetSettings() }}><MdRefresh /></Span>
+                        <Accordion.ItemIndicator />
+                    </Accordion.ItemTrigger>
+                    <Accordion.ItemContent>
+                        <Accordion.ItemBody>
+                            <div className="input-wrapper">
+                                Scale
+                                <InputSlider
+                                    size="sm"
+                                    indicatorPosition="bottom"
+                                    min={0}
+                                    max={1.5}
+                                    step={0.1}
+                                    width="60%"
+                                    selectedValue={canStore.imageScale}
+                                    onChange={((value) => { canStore.setImageScale(value) })} />
+                            </div>
+                            <div className="input-wrapper">
+                                Horizontal Position
+                                <InputSlider
+                                    size="sm"
+                                    min={0}
+                                    max={1}
+                                    step={0.1}
+                                    width="60%"
+                                    selectedValue={canStore.imagePosX}
+                                    onChange={((value) => { canStore.setImagePosX(value) })} />
+                            </div>
+                            <div className="input-wrapper">
+                                Vertical Position
+                                <InputSlider
+                                    size="sm"
+                                    min={0}
+                                    max={1}
+                                    step={0.1}
+                                    width="60%"
+                                    selectedValue={canStore.imagePosY}
+                                    onChange={((value) => { canStore.setImagePosY(value) })} />
                             </div>
                         </Accordion.ItemBody>
                     </Accordion.ItemContent>

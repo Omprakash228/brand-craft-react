@@ -4,13 +4,26 @@ Command: npx gltfjsx@6.5.3 .\public\soda_can.glb -t
 */
 
 import * as THREE from 'three'
-import { type JSX } from 'react'
+import { useEffect, type JSX } from 'react'
 import { useGLTF } from '@react-three/drei'
 import useCanStore from './SodaCanStore'
+import { useLoader } from '@react-three/fiber'
 
 export function SodaCan(props: JSX.IntrinsicElements['group']) {
   const { nodes, materials } = useGLTF('/soda_can.glb')
   const canStore = useCanStore();
+  const texture = useLoader(THREE.TextureLoader, '/images/sample_texture.jpeg')
+
+  useEffect(() => {
+    texture.flipY = false;
+    texture.wrapS = THREE.RepeatWrapping
+    texture.wrapT = THREE.RepeatWrapping
+    useCanStore.subscribe((state ) => {
+      console.log('update', state)
+      texture.repeat.set(state.imageScale, state.imageScale);
+      texture.offset.set(state.imagePosX, state.imagePosY);
+    })
+  }, [texture])
 
   return (
     <group {...props} dispose={null} scale={canStore.scale} rotation={[canStore.rotationX, canStore.rotationY, canStore.rotationZ]}>
@@ -22,6 +35,7 @@ export function SodaCan(props: JSX.IntrinsicElements['group']) {
       </mesh>
       <mesh geometry={(nodes.Soda_can_body as THREE.Mesh).geometry} material={materials['Can metal material']}>
         <meshPhysicalMaterial
+          map={texture}
           color={canStore.color}
           roughness={canStore.roughness}
           metalness={canStore.metallic}

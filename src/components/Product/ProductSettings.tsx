@@ -1,4 +1,4 @@
-import { createListCollection, Portal, Select } from "@chakra-ui/react";
+import { createListCollection } from "@chakra-ui/react";
 import useProductStore from "./ProductStore"
 import { LuPackage } from "react-icons/lu";
 import Dropdown from "../ui/Dropdown/Dropdown";

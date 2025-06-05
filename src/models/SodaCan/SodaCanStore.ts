@@ -9,6 +9,9 @@ type Can = {
   rotationX: number;
   rotationY: number;
   rotationZ: number;
+  imageScale: number;
+  imagePosX: number;
+  imagePosY: number;
 };
 
 type Action = {
@@ -20,6 +23,9 @@ type Action = {
   setRotationX: (rotationX: Can['rotationX']) => void;
   setRotationY: (rotationY: Can['rotationY']) => void;
   setRotationZ: (rotationZ: Can['rotationZ']) => void;
+  setImageScale: (scale: Can['imageScale']) => void;
+  setImagePosX: (posX: Can['imagePosX']) => void;
+  setImagePosY: (posY: Can['imagePosY']) => void;
   resetSettings: () => void;
 };
 
@@ -32,6 +38,9 @@ const createInitialState = () => ({
   rotationX: 0,
   rotationY: 0,
   rotationZ: 0,
+  imageScale: 1,
+  imagePosX: 0,
+  imagePosY: 0,
 });
 
 const useCanStore = create<Can & Action>((set) => ({
@@ -44,6 +53,9 @@ const useCanStore = create<Can & Action>((set) => ({
   setRotationX: (rotationX: number) => set(() => ({ rotationX: rotationX })),
   setRotationY: (rotationY: number) => set(() => ({ rotationY: rotationY })),
   setRotationZ: (rotationZ: number) => set(() => ({ rotationZ: rotationZ })),
+  setImageScale: (scale: number) => set(() => ({imageScale: scale})),
+  setImagePosX: (posX: number) => set(() => ({imagePosX: posX})),
+  setImagePosY: (posY: number) => set(() => ({imagePosY: posY})),
   resetSettings: () => set(createInitialState()),
 }));
 

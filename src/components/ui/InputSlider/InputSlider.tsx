@@ -35,7 +35,7 @@ export default function InputSlider({
             step={step}
             width={width}
             value={[selectedValue]}
-            onValueChange={(value) => { onChange?.(value.value[0]); console.log(value) }}
+            onValueChange={(value) => { onChange?.(value.value[0]) }}
         >
             <Slider.Control>
                 <Slider.Track>
