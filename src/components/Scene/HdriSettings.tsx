@@ -48,7 +48,7 @@ export default function HdriSettings() {
                                     min={0.1}
                                     max={1}
                                     step={0.1}
-                                    width="60%"
+                                    width="55%"
                                     selectedValue={envStore.hdriIntensity}
                                     onChange={((value) => { envStore.setHdriIntensity(value) })} />
                             </div>
@@ -59,7 +59,7 @@ export default function HdriSettings() {
                                     min={0}
                                     max={1}
                                     step={0.1}
-                                    width="60%"
+                                    width="55%"
                                     selectedValue={envStore.hdriBlurness}
                                     onChange={((value) => { envStore.setHdriBlurness(value) })} />
                             </div>
@@ -70,7 +70,7 @@ export default function HdriSettings() {
                                     min={0}
                                     max={Math.PI * 2}
                                     step={0.05}
-                                    width="60%"
+                                    width="55%"
                                     selectedValue={envStore.hdriRotation}
                                     onChange={((value) => { envStore.setHdriRotation(value) })} />
                             </div>

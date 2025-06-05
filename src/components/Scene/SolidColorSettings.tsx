@@ -27,7 +27,7 @@ export default function SolidColorSettings() {
                                 Color
                                 <Colorpicker
                                     size="2xs"
-                                    width="60%"
+                                    width="55%"
                                     selectedValue={envStore.color}
                                     onChange={((value) => { envStore.setColor(value) })} />
                             </div>
@@ -38,7 +38,7 @@ export default function SolidColorSettings() {
                                     min={0}
                                     max={1}
                                     step={0.1}
-                                    width="60%"
+                                    width="55%"
                                     selectedValue={envStore.colorIntensity}
                                     onChange={((value) => { envStore.setColorIntensity(value) })} />
                             </div>

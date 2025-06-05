@@ -26,7 +26,7 @@ export default function WaterBottleSettings() {
                                 min={1}
                                 max={5}
                                 step={0.1}
-                                width="60%"
+                                width="55%"
                                 selectedValue={bottleStore.scale}
                                 onChange={((value) => { bottleStore.setScale(value) })} />
                         </div>
@@ -37,7 +37,7 @@ export default function WaterBottleSettings() {
                                 min={0}
                                 max={Math.PI * 2}
                                 step={0.1}
-                                width="60%"
+                                width="55%"
                                 selectedValue={bottleStore.rotationX}
                                 onChange={((value) => { bottleStore.setRotationX(value) })} />
                         </div>
@@ -48,7 +48,7 @@ export default function WaterBottleSettings() {
                                 min={0}
                                 max={Math.PI * 2}
                                 step={0.1}
-                                width="60%"
+                                width="55%"
                                 selectedValue={bottleStore.rotationY}
                                 onChange={((value) => { bottleStore.setRotationY(value) })} />
                         </div>
@@ -59,7 +59,7 @@ export default function WaterBottleSettings() {
                                 min={0}
                                 max={Math.PI * 2}
                                 step={0.1}
-                                width="60%"
+                                width="55%"
                                 selectedValue={bottleStore.rotationZ}
                                 onChange={((value) => { bottleStore.setRotationZ(value) })} />
                         </div>
@@ -78,7 +78,7 @@ export default function WaterBottleSettings() {
                             Color
                             <Colorpicker
                                 size="2xs"
-                                width="60%"
+                                width="55%"
                                 selectedValue={bottleStore.bodyColor}
                                 onChange={((value) => { bottleStore.setBodyColor(value) })} />
                         </div>
@@ -89,7 +89,7 @@ export default function WaterBottleSettings() {
                                 min={0}
                                 max={1}
                                 step={0.1}
-                                width="60%"
+                                width="55%"
                                 selectedValue={bottleStore.bodyRoughness}
                                 onChange={((value) => { bottleStore.setBodyRoughness(value) })} />
                         </div>
@@ -100,7 +100,7 @@ export default function WaterBottleSettings() {
                                 min={0}
                                 max={1}
                                 step={0.1}
-                                width="60%"
+                                width="55%"
                                 selectedValue={bottleStore.bodyMetallic}
                                 onChange={((value) => { bottleStore.setBodyMetallic(value) })} />
                         </div>
@@ -111,7 +111,7 @@ export default function WaterBottleSettings() {
                                 min={0}
                                 max={1}
                                 step={0.1}
-                                width="60%"
+                                width="55%"
                                 selectedValue={bottleStore.bodyTransmission}
                                 onChange={((value) => { bottleStore.setBodyTransmission(value) })} />
                         </div>
@@ -130,7 +130,7 @@ export default function WaterBottleSettings() {
                             Color
                             <Colorpicker
                                 size="2xs"
-                                width="60%"
+                                width="55%"
                                 selectedValue={bottleStore.capColor}
                                 onChange={((value) => { bottleStore.setCapColor(value) })} />
                         </div>
@@ -141,7 +141,7 @@ export default function WaterBottleSettings() {
                                 min={0}
                                 max={1}
                                 step={0.1}
-                                width="60%"
+                                width="55%"
                                 selectedValue={bottleStore.capRoughness}
                                 onChange={((value) => { bottleStore.setCapRoughness(value) })} />
                         </div>
@@ -152,7 +152,7 @@ export default function WaterBottleSettings() {
                                 min={0}
                                 max={1}
                                 step={0.1}
-                                width="60%"
+                                width="55%"
                                 selectedValue={bottleStore.capMetallic}
                                 onChange={((value) => { bottleStore.setCapMetallic(value) })} />
                         </div>
@@ -163,7 +163,7 @@ export default function WaterBottleSettings() {
                                 min={0}
                                 max={1}
                                 step={0.1}
-                                width="60%"
+                                width="55%"
                                 selectedValue={bottleStore.capTransmission}
                                 onChange={((value) => { bottleStore.setCapTransmission(value) })} />
                         </div>

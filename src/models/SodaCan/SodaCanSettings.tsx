@@ -23,7 +23,7 @@ export default function SodaCanSettings() {
                                 Color
                                 <Colorpicker
                                     size="2xs"
-                                    width="60%"
+                                    width="55%"
                                     selectedValue={canStore.color}
                                     onChange={((value) => { canStore.setColor(value) })} />
                             </div>
@@ -34,7 +34,7 @@ export default function SodaCanSettings() {
                                     min={1}
                                     max={3}
                                     step={0.1}
-                                    width="60%"
+                                    width="55%"
                                     selectedValue={canStore.scale}
                                     onChange={((value) => { canStore.setScale(value) })} />
                             </div>
@@ -45,7 +45,7 @@ export default function SodaCanSettings() {
                                     min={0}
                                     max={1}
                                     step={0.1}
-                                    width="60%"
+                                    width="55%"
                                     selectedValue={canStore.roughness}
                                     onChange={((value) => { canStore.setRoughness(value) })} />
                             </div>
@@ -56,7 +56,7 @@ export default function SodaCanSettings() {
                                     min={0}
                                     max={1}
                                     step={0.1}
-                                    width="60%"
+                                    width="55%"
                                     selectedValue={canStore.metallic}
                                     onChange={((value) => { canStore.setMetallic(value) })} />
                             </div>
@@ -67,7 +67,7 @@ export default function SodaCanSettings() {
                                     min={0}
                                     max={1}
                                     step={0.1}
-                                    width="60%"
+                                    width="55%"
                                     selectedValue={canStore.transmission}
                                     onChange={((value) => { canStore.setTransmission(value) })} />
                             </div>
@@ -78,7 +78,7 @@ export default function SodaCanSettings() {
                                     min={0}
                                     max={Math.PI * 2}
                                     step={0.1}
-                                    width="60%"
+                                    width="55%"
                                     selectedValue={canStore.rotationX}
                                     onChange={((value) => { canStore.setRotationX(value) })} />
                             </div>
@@ -89,7 +89,7 @@ export default function SodaCanSettings() {
                                     min={0}
                                     max={Math.PI * 2}
                                     step={0.1}
-                                    width="60%"
+                                    width="55%"
                                     selectedValue={canStore.rotationY}
                                     onChange={((value) => { canStore.setRotationY(value) })} />
                             </div>
@@ -100,7 +100,7 @@ export default function SodaCanSettings() {
                                     min={0}
                                     max={Math.PI * 2}
                                     step={0.1}
-                                    width="60%"
+                                    width="55%"
                                     selectedValue={canStore.rotationZ}
                                     onChange={((value) => { canStore.setRotationZ(value) })} />
                             </div>
@@ -123,7 +123,7 @@ export default function SodaCanSettings() {
                                     min={0}
                                     max={1.5}
                                     step={0.1}
-                                    width="60%"
+                                    width="55%"
                                     selectedValue={canStore.imageScale}
                                     onChange={((value) => { canStore.setImageScale(value) })} />
                             </div>
@@ -134,7 +134,7 @@ export default function SodaCanSettings() {
                                     min={0}
                                     max={1}
                                     step={0.1}
-                                    width="60%"
+                                    width="55%"
                                     selectedValue={canStore.imagePosX}
                                     onChange={((value) => { canStore.setImagePosX(value) })} />
                             </div>
@@ -145,7 +145,7 @@ export default function SodaCanSettings() {
                                     min={0}
                                     max={1}
                                     step={0.1}
-                                    width="60%"
+                                    width="55%"
                                     selectedValue={canStore.imagePosY}
                                     onChange={((value) => { canStore.setImagePosY(value) })} />
                             </div>

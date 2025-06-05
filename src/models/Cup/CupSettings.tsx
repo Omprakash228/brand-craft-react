@@ -23,7 +23,7 @@ export default function CupSettings() {
                                 Color
                                 <Colorpicker
                                     size="2xs"
-                                    width="60%"
+                                    width="55%"
                                     selectedValue={cupStore.color}
                                     onChange={((value) => { cupStore.setColor(value) })} />
                             </div>
@@ -34,7 +34,7 @@ export default function CupSettings() {
                                     min={1}
                                     max={3}
                                     step={0.1}
-                                    width="60%"
+                                    width="55%"
                                     selectedValue={cupStore.scale}
                                     onChange={((value) => { cupStore.setScale(value) })} />
                             </div>
@@ -45,7 +45,7 @@ export default function CupSettings() {
                                     min={0}
                                     max={1}
                                     step={0.1}
-                                    width="60%"
+                                    width="55%"
                                     selectedValue={cupStore.roughness}
                                     onChange={((value) => { cupStore.setRoughness(value) })} />
                             </div>
@@ -56,7 +56,7 @@ export default function CupSettings() {
                                     min={0}
                                     max={1}
                                     step={0.1}
-                                    width="60%"
+                                    width="55%"
                                     selectedValue={cupStore.metallic}
                                     onChange={((value) => { cupStore.setMetallic(value) })} />
                             </div>
@@ -67,7 +67,7 @@ export default function CupSettings() {
                                     min={0}
                                     max={1}
                                     step={0.1}
-                                    width="60%"
+                                    width="55%"
                                     selectedValue={cupStore.transmission}
                                     onChange={((value) => { cupStore.setTransmission(value) })} />
                             </div>
@@ -78,7 +78,7 @@ export default function CupSettings() {
                                     min={0}
                                     max={Math.PI * 2}
                                     step={0.1}
-                                    width="60%"
+                                    width="55%"
                                     selectedValue={cupStore.rotationX}
                                     onChange={((value) => { cupStore.setRotationX(value) })} />
                             </div>
@@ -89,7 +89,7 @@ export default function CupSettings() {
                                     min={0}
                                     max={Math.PI * 2}
                                     step={0.1}
-                                    width="60%"
+                                    width="55%"
                                     selectedValue={cupStore.rotationY}
                                     onChange={((value) => { cupStore.setRotationY(value) })} />
                             </div>
@@ -100,7 +100,7 @@ export default function CupSettings() {
                                     min={0}
                                     max={Math.PI * 2}
                                     step={0.1}
-                                    width="60%"
+                                    width="55%"
                                     selectedValue={cupStore.rotationZ}
                                     onChange={((value) => { cupStore.setRotationZ(value) })} />
                             </div>
