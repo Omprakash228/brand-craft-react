@@ -2,12 +2,34 @@ import { Accordion, Span } from "@chakra-ui/react";
 import Colorpicker from "../../components/ui/Colorpicker/Colorpicker";
 import InputSlider from "../../components/ui/InputSlider/InputSlider";
 import useCanStore from "./SodaCanStore";
-import { LuSettings2 } from "react-icons/lu";
+import { LuImage, LuSettings2 } from "react-icons/lu";
 import { MdRefresh } from "react-icons/md";
+import { useTextureStore } from "../../shared/TextureStore";
+import Fileupload from "../../components/ui/Fileupload/Fileupload";
+import * as THREE from 'three'
+import CheckBox from "../../components/ui/CheckBox/CheckBox";
 
 export default function SodaCanSettings() {
     const canStore = useCanStore();
-    
+    const textureStore = useTextureStore();
+
+    const addImageTexture = (files: File[]) => {
+        const file = files[0]
+        if (!file) return;
+
+        const reader = new FileReader();
+        reader.onload = () => {
+            const imageUrl = reader.result as string;
+            const loader = new THREE.TextureLoader();
+            loader.load(imageUrl, (texture) => {
+                texture.flipY = false;
+                texture.wrapS = texture.wrapT = textureStore.repeat ? THREE.RepeatWrapping : THREE.ClampToEdgeWrapping;
+                textureStore.setTexture(texture);
+            });
+        };
+        reader.readAsDataURL(file);
+    }
+
     return (
         <>
             <Accordion.Root collapsible defaultValue={['Soda can', 'Image']} multiple={true}>
@@ -107,52 +129,68 @@ export default function SodaCanSettings() {
                         </Accordion.ItemBody>
                     </Accordion.ItemContent>
                 </Accordion.Item>
-                <Accordion.Item value='Image'>
+            </Accordion.Root>
+            <Accordion.Root collapsible defaultValue={['Cover image']} multiple={true}>
+                <Accordion.Item value='Cover image'>
                     <Accordion.ItemTrigger>
-                        <Span flex="10" style={{ display: "flex", alignItems: "center", gap: "0.2rem" }}><LuSettings2 size={"16px"} />Image</Span>
-                        <Span flex="0" style={{ cursor: "pointer", opacity: "0.5" }} onClick={($event) => { $event.stopPropagation(); canStore.resetSettings() }}><MdRefresh /></Span>
+                        <Span flex="10" style={{ display: "flex", alignItems: "center", gap: "0.2rem" }}><LuImage size={"16px"} />Cover image</Span>
                         <Accordion.ItemIndicator />
                     </Accordion.ItemTrigger>
                     <Accordion.ItemContent>
                         <Accordion.ItemBody>
-                            <div className="input-wrapper">
-                                Scale
-                                <InputSlider
-                                    size="sm"
-                                    indicatorPosition="bottom"
-                                    min={0}
-                                    max={1.5}
-                                    step={0.1}
-                                    width="55%"
-                                    selectedValue={canStore.imageScale}
-                                    onChange={((value) => { canStore.setImageScale(value) })} />
-                            </div>
-                            <div className="input-wrapper">
-                                Horizontal Position
-                                <InputSlider
-                                    size="sm"
-                                    min={0}
-                                    max={1}
-                                    step={0.1}
-                                    width="55%"
-                                    selectedValue={canStore.imagePosX}
-                                    onChange={((value) => { canStore.setImagePosX(value) })} />
-                            </div>
-                            <div className="input-wrapper">
-                                Vertical Position
-                                <InputSlider
-                                    size="sm"
-                                    min={0}
-                                    max={1}
-                                    step={0.1}
-                                    width="55%"
-                                    selectedValue={canStore.imagePosY}
-                                    onChange={((value) => { canStore.setImagePosY(value) })} />
-                            </div>
+                            <Fileupload 
+                                size="xs" 
+                                width="100%" 
+                                label="Select image (upto 3MB)" 
+                                maxFiles={1} 
+                                onChange={(files: File[]) => addImageTexture(files)}
+                                onClear={() => textureStore.resetTexture()} />
+                            {
+                                textureStore.texture && <>
+                                    <CheckBox
+                                        label="Repeat"
+                                        size="lg"
+                                        selectedValue={textureStore.repeat}
+                                        onChange={((value) => { console.log(value); textureStore.setRepeat(!!value) })} />
+                                    <div className="input-wrapper">
+                                        Scale
+                                        <InputSlider
+                                            size="sm"
+                                            min={0.5}
+                                            max={1.5}
+                                            step={0.1}
+                                            width="55%"
+                                            selectedValue={textureStore.scale}
+                                            onChange={((value) => { textureStore.setImageScale(value) })} />
+                                    </div>
+                                    <div className="input-wrapper">
+                                        Horizontal Position
+                                        <InputSlider
+                                            size="sm"
+                                            min={0}
+                                            max={1}
+                                            step={0.1}
+                                            width="55%"
+                                            selectedValue={textureStore.offsetX}
+                                            onChange={((value) => { textureStore.setOffsetX(value) })} />
+                                    </div>
+                                    <div className="input-wrapper">
+                                        Vertical Position
+                                        <InputSlider
+                                            size="sm"
+                                            min={0}
+                                            max={1}
+                                            step={0.1}
+                                            width="55%"
+                                            selectedValue={textureStore.offsetY}
+                                            onChange={((value) => { textureStore.setOffsetY(value) })} />
+                                    </div>
+                                </>
+                            }
                         </Accordion.ItemBody>
                     </Accordion.ItemContent>
                 </Accordion.Item>
-            </Accordion.Root>
+            </Accordion.Root >
         </>
     )
 }
