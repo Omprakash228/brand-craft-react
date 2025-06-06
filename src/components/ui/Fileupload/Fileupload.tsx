@@ -1,4 +1,4 @@
-import { CloseButton, Code, FileUpload, Input, InputGroup, Stack, useFileUpload, type FileUploadFileAcceptDetails } from "@chakra-ui/react";
+import { CloseButton, Code, FileUpload, Input, InputGroup, Stack, type FileUploadFileAcceptDetails } from "@chakra-ui/react";
 import type { FileChangeDetails } from "@zag-js/file-upload";
 import { useState } from "react";
 import { LuImage } from "react-icons/lu";

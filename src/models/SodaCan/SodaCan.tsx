@@ -4,13 +4,13 @@ Command: npx gltfjsx@6.5.3 .\public\soda_can.glb -t
 */
 
 import * as THREE from 'three'
-import { useEffect, useMemo, useRef, type JSX } from 'react'
+import { useEffect, useRef, type JSX } from 'react'
 import { useGLTF } from '@react-three/drei'
 import useCanStore from './SodaCanStore'
 import { useTextureStore } from '../../shared/TextureStore'
 
 export function SodaCan(props: JSX.IntrinsicElements['group']) {
-  const { nodes, materials } = useGLTF('/soda_can.glb')
+  const { nodes } = useGLTF('/soda_can.glb')
   const canStore = useCanStore();
   const texture = useTextureStore((state) => state.texture);
   const materialRef = useRef<THREE.MeshPhysicalMaterial>(null);
