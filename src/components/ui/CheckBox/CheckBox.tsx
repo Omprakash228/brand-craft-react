@@ -15,7 +15,7 @@ export default function CheckBox({
 }: CheckBoxProps) {
     return (
         <Checkbox.Root 
-            size={size} value={selectedValue ? 'on' : 'off'} 
+            size={size} defaultChecked={selectedValue} value={selectedValue ? 'on' : 'off'} 
             onCheckedChange={(value) => { onChange?.(value.checked); }}>
             <Checkbox.HiddenInput />
             <Checkbox.Label>{label}</Checkbox.Label>

@@ -4,39 +4,58 @@ Command: npx gltfjsx@6.5.3 .\public\soda_can.glb -t
 */
 
 import * as THREE from 'three'
-import { useEffect, type JSX } from 'react'
+import { useEffect, useMemo, useRef, type JSX } from 'react'
 import { useGLTF } from '@react-three/drei'
 import useCanStore from './SodaCanStore'
-import { useLoader } from '@react-three/fiber'
+import { useTextureStore } from '../../shared/TextureStore'
 
 export function SodaCan(props: JSX.IntrinsicElements['group']) {
   const { nodes, materials } = useGLTF('/soda_can.glb')
   const canStore = useCanStore();
-  const texture = useLoader(THREE.TextureLoader, '/images/sample_texture.jpeg')
-
+  const texture = useTextureStore((state) => state.texture);
+  const materialRef = useRef<THREE.MeshPhysicalMaterial>(null);
+  
   useEffect(() => {
-    texture.flipY = false;
-    texture.wrapS = THREE.RepeatWrapping
-    texture.wrapT = THREE.RepeatWrapping
-    useCanStore.subscribe((state ) => {
-      console.log('update', state)
-      texture.repeat.set(state.imageScale, state.imageScale);
-      texture.offset.set(state.imagePosX, state.imagePosY);
+    if (materialRef.current) {
+      materialRef.current.needsUpdate = true;
+    }
+    useTextureStore.subscribe((state, prevState) => {
+      if (texture && texture.repeat.x !== state.scale) {
+        texture.repeat.set(2 - state.scale, 2 - state.scale);
+      }
+      if (texture && (texture.offset.x !== state.offsetX || texture.offset.y !== state.offsetY)) {
+        texture.offset.set(state.offsetX, state.offsetY);
+      }
+      console.log(state, prevState)
+      if (texture && (state.repeat !== prevState.repeat)) {
+        texture.wrapS = texture.wrapT = state.repeat ? THREE.RepeatWrapping : THREE.ClampToEdgeWrapping;
+        texture.needsUpdate = true;
+      }
     })
-  }, [texture])
+  }, [texture]);
 
   return (
     <group {...props} dispose={null} scale={canStore.scale} rotation={[canStore.rotationX, canStore.rotationY, canStore.rotationZ]}>
-      <mesh geometry={(nodes.Soda_can_metal as THREE.Mesh).geometry} material={materials['Can metal material']}>
+      <mesh geometry={(nodes.Soda_can_metal as THREE.Mesh).geometry}>
         <meshPhysicalMaterial
-          color={'#eaeaea'}
+          color={'#dadada'}
           roughness={0.1}
+          side={THREE.DoubleSide}
           metalness={0.9}></meshPhysicalMaterial>
       </mesh>
-      <mesh geometry={(nodes.Soda_can_body as THREE.Mesh).geometry} material={materials['Can metal material']}>
+      <mesh geometry={(nodes.Soda_can_body as THREE.Mesh).geometry}>
         <meshPhysicalMaterial
-          map={texture}
           color={canStore.color}
+          roughness={canStore.roughness}
+          metalness={canStore.metallic}
+          transmission={canStore.transmission}></meshPhysicalMaterial>
+      </mesh>
+      <mesh geometry={(nodes.Soda_can_body_image as THREE.Mesh).geometry} >
+        <meshPhysicalMaterial
+          ref={materialRef}
+          map={texture}
+          transparent={true}
+          opacity={texture ? 1 : 0}
           roughness={canStore.roughness}
           metalness={canStore.metallic}
           transmission={canStore.transmission}></meshPhysicalMaterial>

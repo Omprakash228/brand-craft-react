@@ -33,7 +33,7 @@ export default function Scene() {
         <>
             <div id="transparent-bg"></div>
             <Canvas id="scene-canvas" camera={{ fov: 45, position: [3, 2, 6] }}>
-                <OrbitControls makeDefault />
+                <OrbitControls makeDefault enableDamping dampingFactor={0.1}/>
                 {
                     envStore.environment !== 'HDRI' &&
                     <>
