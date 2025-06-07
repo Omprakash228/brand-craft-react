@@ -50,6 +50,10 @@
   border: none !important;
 }
 
+.chakra-file-upload__label  {
+  color: #8a8a8a;
+}
+
 .property-title {
   font-size: 15px;
   display: flex;
