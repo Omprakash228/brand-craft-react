@@ -137,18 +137,36 @@ export default function CupSettings() {
                                         label="Repeat"
                                         size="lg"
                                         selectedValue={cupStore.textureRepeat}
-                                        onChange={((value) => { console.log(value); cupStore.setTextureRepeat(!!value) })} />
+                                        onChange={((value) => { cupStore.setTextureRepeat(!!value) })} />
+                                    <CheckBox
+                                        label="Lock aspect ratio"
+                                        size="lg"
+                                        selectedValue={cupStore.aspectLock}
+                                        onChange={((value) => { cupStore.setAspectLock(!!value) })} />
                                     <div className="input-wrapper">
-                                        Scale
+                                        {cupStore.aspectLock ? 'Scale' : 'Horizontal Scale'}
                                         <InputSlider
                                             size="sm"
                                             min={0}
                                             max={2}
-                                            step={0.1}
+                                            step={0.01}
                                             width="55%"
-                                            selectedValue={cupStore.textureScale}
-                                            onChange={((value) => { cupStore.setTextureScale(value) })} />
+                                            selectedValue={cupStore.textureScaleX}
+                                            onChange={((value) => { cupStore.setTextureScaleX(value) })} />
                                     </div>
+                                    {!cupStore.aspectLock &&
+                                        <div className="input-wrapper">
+                                            Vertical Scale
+                                            <InputSlider
+                                                size="sm"
+                                                min={0}
+                                                max={2}
+                                                step={0.01}
+                                                width="55%"
+                                                selectedValue={cupStore.textureScaleY}
+                                                onChange={((value) => { cupStore.setTextureScaleY(value) })} />
+                                        </div>
+                                    }
                                     <div className="input-wrapper">
                                         Horizontal Position
                                         <InputSlider

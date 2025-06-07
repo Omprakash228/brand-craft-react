@@ -137,18 +137,36 @@ export default function SodaCanSettings() {
                                         label="Repeat"
                                         size="lg"
                                         selectedValue={canStore.textureRepeat}
-                                        onChange={((value) => { console.log(value); canStore.setTextureRepeat(!!value) })} />
+                                        onChange={((value) => { canStore.setTextureRepeat(!!value) })} />
+                                    <CheckBox
+                                        label="Lock aspect ratio"
+                                        size="lg"
+                                        selectedValue={canStore.aspectLock}
+                                        onChange={((value) => { canStore.setAspectLock(!!value) })} />
                                     <div className="input-wrapper">
-                                        Scale
+                                        {canStore.aspectLock ? 'Scale' : 'Horizontal Scale'}
                                         <InputSlider
                                             size="sm"
                                             min={0}
                                             max={2}
-                                            step={0.1}
+                                            step={0.01}
                                             width="55%"
-                                            selectedValue={canStore.textureScale}
-                                            onChange={((value) => { canStore.setTextureScale(value) })} />
+                                            selectedValue={canStore.textureScaleX}
+                                            onChange={((value) => { canStore.setTextureScaleX(value) })} />
                                     </div>
+                                    {!canStore.aspectLock &&
+                                        <div className="input-wrapper">
+                                            Vertical Scale
+                                            <InputSlider
+                                                size="sm"
+                                                min={0}
+                                                max={2}
+                                                step={0.01}
+                                                width="55%"
+                                                selectedValue={canStore.textureScaleY}
+                                                onChange={((value) => { canStore.setTextureScaleY(value) })} />
+                                        </div>
+                                    }
                                     <div className="input-wrapper">
                                         Horizontal Position
                                         <InputSlider

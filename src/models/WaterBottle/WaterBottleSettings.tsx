@@ -204,18 +204,36 @@ export default function WaterBottleSettings() {
                                     label="Repeat"
                                     size="lg"
                                     selectedValue={bottleStore.textureRepeat}
-                                    onChange={((value) => { console.log(value); bottleStore.setTextureRepeat(!!value) })} />
+                                    onChange={((value) => { bottleStore.setTextureRepeat(!!value) })} />
+                                <CheckBox
+                                    label="Lock aspect ratio"
+                                    size="lg"
+                                    selectedValue={bottleStore.aspectLock}
+                                    onChange={((value) => { bottleStore.setAspectLock(!!value) })} />
                                 <div className="input-wrapper">
-                                    Scale
+                                    {bottleStore.aspectLock ? 'Scale' : 'Horizontal Scale'}
                                     <InputSlider
                                         size="sm"
                                         min={0}
                                         max={2}
-                                        step={0.1}
+                                        step={0.01}
                                         width="55%"
-                                        selectedValue={bottleStore.textureScale}
-                                        onChange={((value) => { bottleStore.setTextureScale(value) })} />
+                                        selectedValue={bottleStore.textureScaleX}
+                                        onChange={((value) => { bottleStore.setTextureScaleX(value) })} />
                                 </div>
+                                {!bottleStore.aspectLock &&
+                                    <div className="input-wrapper">
+                                        Vertical Scale
+                                        <InputSlider
+                                            size="sm"
+                                            min={0}
+                                            max={2}
+                                            step={0.01}
+                                            width="55%"
+                                            selectedValue={bottleStore.textureScaleY}
+                                            onChange={((value) => { bottleStore.setTextureScaleY(value) })} />
+                                    </div>
+                                }
                                 <div className="input-wrapper">
                                     Horizontal Position
                                     <InputSlider
