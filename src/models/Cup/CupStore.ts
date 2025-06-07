@@ -12,12 +12,14 @@ type Cup = {
   rotationZ: number;
 
   texture: THREE.Texture | null;
-  textureScale: number;
+  textureScaleX: number;
+  textureScaleY: number;
   textureRepeat: boolean;
   texturePosX: number;
   texturePosY: number;
   textureRoughness: number;
   textureTransmission: number;
+  aspectLock: boolean;
 };
 
 type Action = {
@@ -31,12 +33,14 @@ type Action = {
   setRotationZ: (rotationZ: Cup["rotationZ"]) => void;
   resetSettings: () => void;
   setTexture: (texture: THREE.Texture) => void;
-  setTextureScale: (scale: number) => void;
+  setTextureScaleX: (scaleX: number) => void;
+  setTextureScaleY: (scaleY: number) => void;
   setTextureRepeat: (repeat: boolean) => void;
   setTexturePosX: (posX: number) => void;
   setTexturePosY: (posY: number) => void;
   setTextureRoughness: (roughness: number) => void;
   setTextureTransmission: (transmission: number) => void;
+  setAspectLock: (aspectLock: boolean) => void;
   removeTexture: () => void;
   resetTexture: () => void;
 };
@@ -52,12 +56,14 @@ const createInitialState = () => ({
   rotationZ: 0,
 });
 const createInitialTextureState = () => ({
-  textureScale: 1,
+  textureScaleX: 1,
+  textureScaleY: 1,
   textureRepeat: false,
   texturePosX: 0,
   texturePosY: 0,
   textureRoughness: 0,
   textureTransmission: 0,
+  aspectLock: true,
 });
 
 const useCupStore = create<Cup & Action>((set) => ({
@@ -75,7 +81,8 @@ const useCupStore = create<Cup & Action>((set) => ({
   setRotationZ: (rotationZ: number) => set(() => ({ rotationZ: rotationZ })),
   resetSettings: () => set(createInitialState()),
   setTexture: (texture: THREE.Texture) => set(() => ({ texture: texture })),
-  setTextureScale: (scale: number) => set(() => ({ textureScale: scale })),
+  setTextureScaleX: (scaleX: number) => set(() => ({ textureScaleX: scaleX })),
+  setTextureScaleY: (scaleY: number) => set(() => ({ textureScaleY: scaleY })),
   setTextureRepeat: (repeat: boolean) => set(() => ({ textureRepeat: repeat })),
   setTexturePosX: (posX: number) => set(() => ({ texturePosX: posX })),
   setTexturePosY: (posY: number) => set(() => ({ texturePosY: posY })),
@@ -83,6 +90,8 @@ const useCupStore = create<Cup & Action>((set) => ({
     set(() => ({ textureRoughness: roughness })),
   setTextureTransmission: (transmission: number) =>
     set(() => ({ textureTransmission: transmission })),
+  setAspectLock: (aspectLock: boolean) =>
+    set(() => ({ aspectLock: aspectLock, textureScaleX: 1, textureScaleY: 1 })),
   resetTexture: () => set(createInitialTextureState()),
   removeTexture: () =>
     set(() => ({ texture: null, ...createInitialTextureState() })),
