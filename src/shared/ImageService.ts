@@ -1,4 +1,3 @@
-import type { StoreApi, UseBoundStore } from "zustand";
 import * as THREE from 'three'
 
 export const CreateTexture = (
