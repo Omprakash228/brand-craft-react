@@ -20,8 +20,8 @@
 #info-message {
   position: absolute;
   z-index: 1000;
-  bottom: 10px;
-  right: 10px;
+  top: 60px;
+  left: 10px;
   border: 1px solid #8a8a8a2a;
   background: #1a1c1f;
   border-radius: 5px;
