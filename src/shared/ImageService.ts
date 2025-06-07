@@ -30,7 +30,7 @@ export const CreateTexture = (
       texture.generateMipmaps = false;
       texture.flipY = false;
       texture.center.set(0.5, 0.5);
-      texture.wrapS = texture.wrapT = store?.repeat
+      texture.wrapS = texture.wrapT = store?.textureRepeat
         ? THREE.RepeatWrapping
         : THREE.ClampToEdgeWrapping;
 
