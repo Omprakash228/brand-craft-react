@@ -21,12 +21,12 @@
   position: absolute;
   z-index: 1000;
   top: 60px;
-  left: 10px;
+  left: 5px;
   border: 1px solid #8a8a8a2a;
-  background: #1a1c1f;
+  background: #d19944;
   border-radius: 5px;
   font-size: 12px;
-  color: #8a8a8ad3;
+  color: #3a3a3ad3;
   padding: 15px 20px;
 }
 
