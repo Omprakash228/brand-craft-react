@@ -7,30 +7,31 @@ import * as THREE from 'three'
 import { useEffect, useRef, type JSX } from 'react'
 import { useGLTF } from '@react-three/drei'
 import useCanStore from './SodaCanStore'
-import { useTextureStore } from '../../shared/TextureStore'
 
 export function SodaCan(props: JSX.IntrinsicElements['group']) {
   const { nodes } = useGLTF('/soda_can.glb')
   const canStore = useCanStore();
-  const texture = useTextureStore((state) => state.texture);
+  const texture = useCanStore((state) => state.texture);
   const materialRef = useRef<THREE.MeshPhysicalMaterial>(null);
 
   useEffect(() => {
     if (materialRef.current) {
       materialRef.current.needsUpdate = true;
     }
-    useTextureStore.subscribe((state, prevState) => {
-      if (texture && texture.repeat.x !== state.scale) {
+    useCanStore.subscribe((state, prevState) => {
+      // set Scale
+      if (texture && texture.repeat.x !== state.textureScale) {
         // Avoid divide-by-zero
-        const safeScale = 1 / Math.max(state.scale, 0.01);
+        const safeScale = 1 / Math.max(state.textureScale, 0.01);
         texture.repeat.set(safeScale, safeScale);
       }
-      if (texture && (texture.offset.x !== state.offsetX || texture.offset.y !== state.offsetY)) {
-        texture.offset.set(state.offsetX, state.offsetY);
+      // set Position
+      if (texture && (texture.offset.x !== state.texturePosX || texture.offset.y !== state.texturePosY)) {
+        texture.offset.set(state.texturePosX, state.texturePosY);
       }
-      console.log(state, prevState)
-      if (texture && (state.repeat !== prevState.repeat)) {
-        texture.wrapS = texture.wrapT = state.repeat ? THREE.RepeatWrapping : THREE.ClampToEdgeWrapping;
+      // set Repeat
+      if (texture && (state.textureRepeat !== prevState.textureRepeat)) {
+        texture.wrapS = texture.wrapT = state.textureRepeat ? THREE.RepeatWrapping : THREE.ClampToEdgeWrapping;
         texture.needsUpdate = true;
       }
     })
@@ -53,17 +54,19 @@ export function SodaCan(props: JSX.IntrinsicElements['group']) {
           side={THREE.DoubleSide}
           transmission={canStore.transmission}></meshPhysicalMaterial>
       </mesh>
-      <mesh geometry={(nodes.Soda_can_body_image as THREE.Mesh).geometry} >
-        <meshPhysicalMaterial
-          ref={materialRef}
-          map={texture}
-          transparent={true}
-          opacity={texture ? 1 : 0}
-          roughness={canStore.roughness}
-          metalness={canStore.metallic}
-          side={THREE.DoubleSide}
-          transmission={canStore.transmission}></meshPhysicalMaterial>
-      </mesh>
+      {
+        texture !== null &&
+        <mesh geometry={(nodes.Soda_can_body_image as THREE.Mesh).geometry}>
+          <meshPhysicalMaterial
+            ref={materialRef}
+            map={texture}
+            transparent={true}
+            roughness={canStore.textureRoughness}
+            metalness={canStore.metallic}
+            side={THREE.DoubleSide}
+            transmission={Math.min(canStore.textureTransmission + 0.1, 1)}></meshPhysicalMaterial>
+        </mesh>
+      }
     </group>
   )
 }

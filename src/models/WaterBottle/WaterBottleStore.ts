@@ -1,4 +1,5 @@
 import { create } from "zustand";
+import * as THREE from "three";
 
 type Bottle = {
   scale: number;
@@ -10,6 +11,13 @@ type Bottle = {
   bodyRoughness: number;
   bodyMetallic: number;
   bodyTransmission: number;
+  texture: THREE.Texture | null;
+  textureScale: number;
+  textureRepeat: boolean;
+  texturePosX: number;
+  texturePosY: number;
+  textureRoughness: number;
+  textureTransmission: number;
 
   capColor: string;
   capRoughness: number;
@@ -31,8 +39,17 @@ type Action = {
   setRotationY: (rotationY: Bottle["rotationY"]) => void;
   setRotationZ: (rotationZ: Bottle["rotationZ"]) => void;
   resetSettings: () => void;
-  resetBodySettings:() => void;
+  resetBodySettings: () => void;
   resetCapSettings: () => void;
+  setTexture: (texture: THREE.Texture) => void;
+  setTextureScale: (scale: number) => void;
+  setTextureRepeat: (repeat: boolean) => void;
+  setTexturePosX: (posX: number) => void;
+  setTexturePosY: (posY: number) => void;
+  setTextureRoughness: (roughness: number) => void;
+  setTextureTransmission: (transmission: number) => void;
+  removeTexture: () => void;
+  resetTexture: () => void;
 };
 
 const createInitialState = () => ({
@@ -49,6 +66,15 @@ const createInitialBodyState = () => ({
   bodyTransmission: 0,
 });
 
+const createInitialTextureState = () => ({
+  textureScale: 1,
+  textureRepeat: false,
+  texturePosX: 0,
+  texturePosY: 0,
+  textureRoughness: 0,
+  textureTransmission: 0,
+});
+
 const createInitialCapState = () => ({
   capColor: "#eaeaea",
   capRoughness: 0.1,
@@ -59,15 +85,20 @@ const createInitialCapState = () => ({
 const useBottleStore = create<Bottle & Action>((set) => ({
   ...createInitialState(),
   ...createInitialBodyState(),
+  texture: null,
+  ...createInitialTextureState(),
   ...createInitialCapState(),
   setScale: (scale: number) => set(() => ({ scale: scale })),
   setBodyColor: (color: string) => set(() => ({ bodyColor: color })),
-  setBodyRoughness: (roughness: number) => set(() => ({ bodyRoughness: roughness })),
-  setBodyMetallic: (metallic: number) => set(() => ({ bodyMetallic: metallic })),
+  setBodyRoughness: (roughness: number) =>
+    set(() => ({ bodyRoughness: roughness })),
+  setBodyMetallic: (metallic: number) =>
+    set(() => ({ bodyMetallic: metallic })),
   setBodyTransmission: (transmission: number) =>
     set(() => ({ bodyTransmission: transmission })),
   setCapColor: (color: string) => set(() => ({ capColor: color })),
-  setCapRoughness: (roughness: number) => set(() => ({ capRoughness: roughness })),
+  setCapRoughness: (roughness: number) =>
+    set(() => ({ capRoughness: roughness })),
   setCapMetallic: (metallic: number) => set(() => ({ capMetallic: metallic })),
   setCapTransmission: (transmission: number) =>
     set(() => ({ capTransmission: transmission })),
@@ -76,7 +107,19 @@ const useBottleStore = create<Bottle & Action>((set) => ({
   setRotationZ: (rotationZ: number) => set(() => ({ rotationZ: rotationZ })),
   resetSettings: () => set(createInitialState()),
   resetBodySettings: () => set(createInitialBodyState()),
-  resetCapSettings: () => set(createInitialCapState())
+  resetCapSettings: () => set(createInitialCapState()),
+  setTexture: (texture: THREE.Texture) => set(() => ({ texture: texture })),
+  setTextureScale: (scale: number) => set(() => ({ textureScale: scale })),
+  setTextureRepeat: (repeat: boolean) => set(() => ({ textureRepeat: repeat })),
+  setTexturePosX: (posX: number) => set(() => ({ texturePosX: posX })),
+  setTexturePosY: (posY: number) => set(() => ({ texturePosY: posY })),
+  setTextureRoughness: (roughness: number) =>
+    set(() => ({ textureRoughness: roughness })),
+  setTextureTransmission: (transmission: number) =>
+    set(() => ({ textureTransmission: transmission })),
+  resetTexture: () => set(createInitialTextureState()),
+  removeTexture: () =>
+    set(() => ({ texture: null, ...createInitialTextureState() })),
 }));
 
 export default useBottleStore;

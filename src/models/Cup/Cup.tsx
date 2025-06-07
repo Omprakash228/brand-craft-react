@@ -4,7 +4,7 @@ Command: npx gltfjsx@6.5.3 .\public\cup.glb -t
 */
 
 import * as THREE from 'three'
-import { useRef, type JSX } from 'react'
+import { useEffect, useRef, type JSX } from 'react'
 import { useGLTF } from '@react-three/drei'
 import useCupStore from './CupStore'
 
@@ -12,6 +12,31 @@ export function Cup(props: JSX.IntrinsicElements['group']) {
   const { nodes } = useGLTF('/cup.glb')
   const meshGroup = useRef(new THREE.Group())
   const cupStore = useCupStore();
+  const texture = useCupStore((state) => state.texture);
+  const materialRef = useRef<THREE.MeshPhysicalMaterial>(null);
+
+  useEffect(() => {
+    if (materialRef.current) {
+      materialRef.current.needsUpdate = true;
+    }
+    useCupStore.subscribe((state, prevState) => {
+      // set Scale
+      if (texture && texture.repeat.x !== state.textureScale) {
+        // Avoid divide-by-zero
+        const safeScale = 1 / Math.max(state.textureScale, 0.01);
+        texture.repeat.set(safeScale, safeScale);
+      }
+      // set Position
+      if (texture && (texture.offset.x !== state.texturePosX || texture.offset.y !== state.texturePosY)) {
+        texture.offset.set(state.texturePosX, state.texturePosY);
+      }
+      // set Repeat
+      if (texture && (state.textureRepeat !== prevState.textureRepeat)) {
+        texture.wrapS = texture.wrapT = state.textureRepeat ? THREE.RepeatWrapping : THREE.ClampToEdgeWrapping;
+        texture.needsUpdate = true;
+      }
+    })
+  }, [texture]);
 
   // useFrame(() => {
   //   if (cup.AutoRotate) {
@@ -27,9 +52,30 @@ export function Cup(props: JSX.IntrinsicElements['group']) {
           color={cupStore.color}
           roughness={cupStore.roughness}
           metalness={cupStore.metallic}
-          transmission={cupStore.transmission}
-          ior={1.2}></meshPhysicalMaterial>
+          side={THREE.DoubleSide}
+          transmission={cupStore.transmission}></meshPhysicalMaterial>
       </mesh>
+      <mesh geometry={(nodes.cup_body as THREE.Mesh).geometry}>
+        <meshPhysicalMaterial
+          color={cupStore.color}
+          roughness={cupStore.roughness}
+          metalness={cupStore.metallic}
+          side={THREE.DoubleSide}
+          transmission={cupStore.transmission}></meshPhysicalMaterial>
+      </mesh>
+      {
+        texture !== null &&
+        <mesh geometry={(nodes.cup_image as THREE.Mesh).geometry}>
+          <meshPhysicalMaterial
+            ref={materialRef}
+            map={texture}
+            transparent={true}
+            roughness={cupStore.textureRoughness}
+            metalness={cupStore.metallic}
+            side={THREE.DoubleSide}
+            transmission={Math.min(cupStore.textureTransmission + 0.1, 1)}></meshPhysicalMaterial>
+        </mesh>
+      }
     </group>
   )
 }

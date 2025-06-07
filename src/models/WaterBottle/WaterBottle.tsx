@@ -4,30 +4,78 @@ Command: npx gltfjsx@6.5.3 .\public\water_bottle.glb -t
 */
 
 import * as THREE from 'three'
-import { type JSX } from 'react'
+import { useEffect, useRef, type JSX } from 'react'
 import { useGLTF } from '@react-three/drei'
 import useBottleStore from './WaterBottleStore'
 
 export function WaterBottle(props: JSX.IntrinsicElements['group']) {
   const { nodes } = useGLTF('/water_bottle.glb')
   const bottleStore = useBottleStore();
+  const texture = useBottleStore((state) => state.texture);
+  const materialRef = useRef<THREE.MeshPhysicalMaterial>(null);
+
+  useEffect(() => {
+    if (materialRef.current) {
+      materialRef.current.needsUpdate = true;
+    }
+    useBottleStore.subscribe((state, prevState) => {
+      // set Scale
+      if (texture && texture.repeat.x !== state.textureScale) {
+        // Avoid divide-by-zero
+        const safeScale = 1 / Math.max(state.textureScale, 0.01);
+        texture.repeat.set(safeScale, safeScale);
+      }
+      // set Position
+      if (texture && (texture.offset.x !== state.texturePosX || texture.offset.y !== state.texturePosY)) {
+        texture.offset.set(state.texturePosX, state.texturePosY);
+      }
+      // set Repeat
+      if (texture && (state.textureRepeat !== prevState.textureRepeat)) {
+        texture.wrapS = texture.wrapT = state.textureRepeat ? THREE.RepeatWrapping : THREE.ClampToEdgeWrapping;
+        texture.needsUpdate = true;
+      }
+    })
+  }, [texture]);
 
   return (
     <group {...props} dispose={null} scale={bottleStore.scale} rotation={[bottleStore.rotationX, bottleStore.rotationY, bottleStore.rotationZ]}>
-      <mesh geometry={(nodes.Bottle as THREE.Mesh).geometry}>
-        <meshPhysicalMaterial
-          color={bottleStore.bodyColor}
-          roughness={bottleStore.bodyRoughness}
-          metalness={bottleStore.bodyMetallic}
-          transmission={bottleStore.bodyTransmission}></meshPhysicalMaterial>
-      </mesh>
       <mesh geometry={(nodes.Bottle_cap as THREE.Mesh).geometry}>
         <meshPhysicalMaterial
           color={bottleStore.capColor}
           roughness={bottleStore.capRoughness}
           metalness={bottleStore.capMetallic}
+          side={THREE.DoubleSide}
           transmission={bottleStore.capTransmission}></meshPhysicalMaterial>
       </mesh>
+      <mesh geometry={(nodes.Bottle as THREE.Mesh).geometry} frustumCulled={false}>
+        <meshPhysicalMaterial
+          color={bottleStore.bodyColor}
+          roughness={bottleStore.bodyRoughness}
+          metalness={bottleStore.bodyMetallic}
+          side={THREE.DoubleSide}
+          transmission={bottleStore.bodyTransmission}></meshPhysicalMaterial>
+      </mesh>
+      <mesh geometry={(nodes.Bottle_body as THREE.Mesh).geometry} frustumCulled={false}>
+        <meshPhysicalMaterial
+          color={bottleStore.bodyColor}
+          roughness={bottleStore.bodyRoughness}
+          metalness={bottleStore.bodyMetallic}
+          side={THREE.DoubleSide}
+          transmission={bottleStore.bodyTransmission}></meshPhysicalMaterial>
+      </mesh>
+      {
+        texture !== null &&
+        <mesh geometry={(nodes.Bottle_body_image as THREE.Mesh).geometry}>
+          <meshPhysicalMaterial
+            ref={materialRef}
+            map={texture}
+            transparent={true}
+            roughness={bottleStore.textureRoughness}
+            metalness={bottleStore.bodyMetallic}
+            side={THREE.DoubleSide}
+            transmission={Math.min(bottleStore.textureTransmission + 0.1, 1)}></meshPhysicalMaterial>
+        </mesh>
+      }
     </group>
   )
 }

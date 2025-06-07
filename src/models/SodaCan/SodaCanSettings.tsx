@@ -4,18 +4,16 @@ import InputSlider from "../../components/ui/InputSlider/InputSlider";
 import useCanStore from "./SodaCanStore";
 import { LuImage, LuSettings2 } from "react-icons/lu";
 import { MdRefresh } from "react-icons/md";
-import { useTextureStore } from "../../shared/TextureStore";
 import Fileupload from "../../components/ui/Fileupload/Fileupload";
 import CheckBox from "../../components/ui/CheckBox/CheckBox";
 import { CreateTexture } from "../../shared/ImageService";
 
 export default function SodaCanSettings() {
     const canStore = useCanStore();
-    const textureStore = useTextureStore();
 
     const addImageTexture = (files: File[]) => {
         if (!files[0]) return;
-        CreateTexture(files[0], textureStore);
+        CreateTexture(files[0], canStore);
     }
 
     return (
@@ -47,39 +45,6 @@ export default function SodaCanSettings() {
                                     width="55%"
                                     selectedValue={canStore.scale}
                                     onChange={((value) => { canStore.setScale(value) })} />
-                            </div>
-                            <div className="input-wrapper">
-                                Roughness
-                                <InputSlider
-                                    size="sm"
-                                    min={0}
-                                    max={1}
-                                    step={0.1}
-                                    width="55%"
-                                    selectedValue={canStore.roughness}
-                                    onChange={((value) => { canStore.setRoughness(value) })} />
-                            </div>
-                            <div className="input-wrapper">
-                                Metallic
-                                <InputSlider
-                                    size="sm"
-                                    min={0}
-                                    max={1}
-                                    step={0.1}
-                                    width="55%"
-                                    selectedValue={canStore.metallic}
-                                    onChange={((value) => { canStore.setMetallic(value) })} />
-                            </div>
-                            <div className="input-wrapper">
-                                Transmission
-                                <InputSlider
-                                    size="sm"
-                                    min={0}
-                                    max={1}
-                                    step={0.1}
-                                    width="55%"
-                                    selectedValue={canStore.transmission}
-                                    onChange={((value) => { canStore.setTransmission(value) })} />
                             </div>
                             <div className="input-wrapper">
                                 X rotation
@@ -114,14 +79,46 @@ export default function SodaCanSettings() {
                                     selectedValue={canStore.rotationZ}
                                     onChange={((value) => { canStore.setRotationZ(value) })} />
                             </div>
+                            <div className="input-wrapper">
+                                Roughness
+                                <InputSlider
+                                    size="sm"
+                                    min={0}
+                                    max={1}
+                                    step={0.1}
+                                    width="55%"
+                                    selectedValue={canStore.roughness}
+                                    onChange={((value) => { canStore.setRoughness(value) })} />
+                            </div>
+                            <div className="input-wrapper">
+                                Metallic
+                                <InputSlider
+                                    size="sm"
+                                    min={0}
+                                    max={1}
+                                    step={0.1}
+                                    width="55%"
+                                    selectedValue={canStore.metallic}
+                                    onChange={((value) => { canStore.setMetallic(value) })} />
+                            </div>
+                            <div className="input-wrapper">
+                                Glass
+                                <InputSlider
+                                    size="sm"
+                                    min={0}
+                                    max={1}
+                                    step={0.1}
+                                    width="55%"
+                                    selectedValue={canStore.transmission}
+                                    onChange={((value) => { canStore.setTransmission(value) })} />
+                            </div>
                         </Accordion.ItemBody>
                     </Accordion.ItemContent>
                 </Accordion.Item>
-            </Accordion.Root>
-            <Accordion.Root collapsible defaultValue={['Cover image']} multiple={true}>
-                <Accordion.Item value='Cover image'>
+                <Accordion.Item value='Image'>
                     <Accordion.ItemTrigger>
-                        <Span flex="10" style={{ display: "flex", alignItems: "center", gap: "0.2rem" }}><LuImage size={"16px"} />Cover image</Span>
+                        <Span flex="10" style={{ display: "flex", alignItems: "center", gap: "0.2rem" }}><LuImage size={"16px"} />Image</Span>
+                        <Span flex="0" style={{ cursor: "pointer", opacity: "0.5" }} onClick={($event) => { $event.stopPropagation(); canStore.resetTexture() }}><MdRefresh /></Span>
                         <Accordion.ItemIndicator />
                     </Accordion.ItemTrigger>
                     <Accordion.ItemContent>
@@ -132,14 +129,15 @@ export default function SodaCanSettings() {
                                 info='1760x1000'
                                 maxFiles={1}
                                 onChange={(files: File[]) => addImageTexture(files)}
-                                onClear={() => textureStore.resetTexture()} />
+                                onClear={() => canStore.removeTexture()} />
                             {
-                                textureStore.texture && <>
+                                canStore.texture &&
+                                <>
                                     <CheckBox
                                         label="Repeat"
                                         size="lg"
-                                        selectedValue={textureStore.repeat}
-                                        onChange={((value) => { console.log(value); textureStore.setRepeat(!!value) })} />
+                                        selectedValue={canStore.textureRepeat}
+                                        onChange={((value) => { console.log(value); canStore.setTextureRepeat(!!value) })} />
                                     <div className="input-wrapper">
                                         Scale
                                         <InputSlider
@@ -148,37 +146,59 @@ export default function SodaCanSettings() {
                                             max={2}
                                             step={0.1}
                                             width="55%"
-                                            selectedValue={textureStore.scale}
-                                            onChange={((value) => { textureStore.setImageScale(value) })} />
+                                            selectedValue={canStore.textureScale}
+                                            onChange={((value) => { canStore.setTextureScale(value) })} />
                                     </div>
                                     <div className="input-wrapper">
                                         Horizontal Position
                                         <InputSlider
                                             size="sm"
-                                            min={-0.5}
-                                            max={0.5}
-                                            step={0.1}
+                                            min={-1}
+                                            max={1}
+                                            step={0.01}
                                             width="55%"
-                                            selectedValue={textureStore.offsetX}
-                                            onChange={((value) => { textureStore.setOffsetX(value) })} />
+                                            selectedValue={canStore.texturePosX}
+                                            onChange={((value) => { canStore.setTexturePosX(value) })} />
                                     </div>
                                     <div className="input-wrapper">
                                         Vertical Position
                                         <InputSlider
                                             size="sm"
-                                            min={-0.5}
-                                            max={0.5}
+                                            min={-1}
+                                            max={1}
+                                            step={0.01}
+                                            width="55%"
+                                            selectedValue={canStore.texturePosY}
+                                            onChange={((value) => { canStore.setTexturePosY(value) })} />
+                                    </div>
+                                    <div className="input-wrapper">
+                                        Roughness
+                                        <InputSlider
+                                            size="sm"
+                                            min={0}
+                                            max={1}
                                             step={0.1}
                                             width="55%"
-                                            selectedValue={textureStore.offsetY}
-                                            onChange={((value) => { textureStore.setOffsetY(value) })} />
+                                            selectedValue={canStore.textureRoughness}
+                                            onChange={((value) => { canStore.setTextureRoughness(value) })} />
+                                    </div>
+                                    <div className="input-wrapper">
+                                        Glass
+                                        <InputSlider
+                                            size="sm"
+                                            min={0}
+                                            max={1}
+                                            step={0.1}
+                                            width="55%"
+                                            selectedValue={canStore.textureTransmission}
+                                            onChange={((value) => { canStore.setTextureTransmission(value) })} />
                                     </div>
                                 </>
                             }
                         </Accordion.ItemBody>
                     </Accordion.ItemContent>
                 </Accordion.Item>
-            </Accordion.Root >
+            </Accordion.Root>
         </>
     )
 }
