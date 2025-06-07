@@ -7,7 +7,7 @@ interface FileuploadProps {
     maxFiles: number;
     size?: "2xs" | "xs" | "sm" | "md" | "lg";
     width: string;
-    label: string;
+    info: string;
     onChange?: (value: File[]) => void;
     onClear?: () => void;
 }
@@ -16,7 +16,7 @@ export default function Fileupload({
     maxFiles,
     size,
     width,
-    label,
+    info,
     onChange,
     onClear
 }: FileuploadProps) {
@@ -46,8 +46,9 @@ export default function Fileupload({
                     onFileAccept={handleChange}
                     onFileChange={handleError}
                     accept={['image/jpeg', 'image/png', 'image/svg+xml']}
-                    maxFileSize={3145728}>
+                    maxFileSize={5242880}>
                     <FileUpload.HiddenInput />
+                    <FileUpload.Label>Optimal resolution: {info}</FileUpload.Label>
                     <InputGroup
                         startElement={<LuImage />}
                         endElement={
@@ -65,14 +66,14 @@ export default function Fileupload({
                     >
                         <Input size={size} asChild>
                             <FileUpload.Trigger >
-                                <FileUpload.FileText fallback={label} lineClamp={1} />
+                                <FileUpload.FileText fallback={'Select image(upto 5MB)'} lineClamp={1} />
                             </FileUpload.Trigger>
                         </Input>
                     </InputGroup>
                 </FileUpload.Root>
                 {
                     error &&
-                    <Code colorPalette="red">File size exceeded</Code>
+                    <div style={{color: 'rgb(179, 22, 22)'}}>File size exceeded</div>
                 }
             </Stack>
         </>

@@ -6,28 +6,16 @@ import { LuImage, LuSettings2 } from "react-icons/lu";
 import { MdRefresh } from "react-icons/md";
 import { useTextureStore } from "../../shared/TextureStore";
 import Fileupload from "../../components/ui/Fileupload/Fileupload";
-import * as THREE from 'three'
 import CheckBox from "../../components/ui/CheckBox/CheckBox";
+import { CreateTexture } from "../../shared/ImageService";
 
 export default function SodaCanSettings() {
     const canStore = useCanStore();
     const textureStore = useTextureStore();
 
     const addImageTexture = (files: File[]) => {
-        const file = files[0]
-        if (!file) return;
-
-        const reader = new FileReader();
-        reader.onload = () => {
-            const imageUrl = reader.result as string;
-            const loader = new THREE.TextureLoader();
-            loader.load(imageUrl, (texture) => {
-                texture.flipY = false;
-                texture.wrapS = texture.wrapT = textureStore.repeat ? THREE.RepeatWrapping : THREE.ClampToEdgeWrapping;
-                textureStore.setTexture(texture);
-            });
-        };
-        reader.readAsDataURL(file);
+        if (!files[0]) return;
+        CreateTexture(files[0], textureStore);
     }
 
     return (
@@ -138,11 +126,11 @@ export default function SodaCanSettings() {
                     </Accordion.ItemTrigger>
                     <Accordion.ItemContent>
                         <Accordion.ItemBody>
-                            <Fileupload 
-                                size="xs" 
-                                width="100%" 
-                                label="Select image (upto 3MB)" 
-                                maxFiles={1} 
+                            <Fileupload
+                                size="xs"
+                                width="100%"
+                                info='1760x1000'
+                                maxFiles={1}
                                 onChange={(files: File[]) => addImageTexture(files)}
                                 onClear={() => textureStore.resetTexture()} />
                             {
@@ -156,8 +144,8 @@ export default function SodaCanSettings() {
                                         Scale
                                         <InputSlider
                                             size="sm"
-                                            min={0.5}
-                                            max={1.5}
+                                            min={0}
+                                            max={2}
                                             step={0.1}
                                             width="55%"
                                             selectedValue={textureStore.scale}
@@ -167,8 +155,8 @@ export default function SodaCanSettings() {
                                         Horizontal Position
                                         <InputSlider
                                             size="sm"
-                                            min={0}
-                                            max={1}
+                                            min={-0.5}
+                                            max={0.5}
                                             step={0.1}
                                             width="55%"
                                             selectedValue={textureStore.offsetX}
@@ -178,8 +166,8 @@ export default function SodaCanSettings() {
                                         Vertical Position
                                         <InputSlider
                                             size="sm"
-                                            min={0}
-                                            max={1}
+                                            min={-0.5}
+                                            max={0.5}
                                             step={0.1}
                                             width="55%"
                                             selectedValue={textureStore.offsetY}

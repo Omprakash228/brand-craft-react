@@ -14,14 +14,16 @@ export function SodaCan(props: JSX.IntrinsicElements['group']) {
   const canStore = useCanStore();
   const texture = useTextureStore((state) => state.texture);
   const materialRef = useRef<THREE.MeshPhysicalMaterial>(null);
-  
+
   useEffect(() => {
     if (materialRef.current) {
       materialRef.current.needsUpdate = true;
     }
     useTextureStore.subscribe((state, prevState) => {
       if (texture && texture.repeat.x !== state.scale) {
-        texture.repeat.set(2 - state.scale, 2 - state.scale);
+        // Avoid divide-by-zero
+        const safeScale = 1 / Math.max(state.scale, 0.01);
+        texture.repeat.set(safeScale, safeScale);
       }
       if (texture && (texture.offset.x !== state.offsetX || texture.offset.y !== state.offsetY)) {
         texture.offset.set(state.offsetX, state.offsetY);
@@ -48,6 +50,7 @@ export function SodaCan(props: JSX.IntrinsicElements['group']) {
           color={canStore.color}
           roughness={canStore.roughness}
           metalness={canStore.metallic}
+          side={THREE.DoubleSide}
           transmission={canStore.transmission}></meshPhysicalMaterial>
       </mesh>
       <mesh geometry={(nodes.Soda_can_body_image as THREE.Mesh).geometry} >
@@ -58,6 +61,7 @@ export function SodaCan(props: JSX.IntrinsicElements['group']) {
           opacity={texture ? 1 : 0}
           roughness={canStore.roughness}
           metalness={canStore.metallic}
+          side={THREE.DoubleSide}
           transmission={canStore.transmission}></meshPhysicalMaterial>
       </mesh>
     </group>
