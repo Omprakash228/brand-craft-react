@@ -44,7 +44,7 @@ export default function WaterBottleSettings() {
                                 size="sm"
                                 min={0}
                                 max={Math.PI * 2}
-                                step={0.1}
+                                step={0.01}
                                 width="55%"
                                 selectedValue={bottleStore.rotationX}
                                 onChange={((value) => { bottleStore.setRotationX(value) })} />
@@ -55,7 +55,7 @@ export default function WaterBottleSettings() {
                                 size="sm"
                                 min={0}
                                 max={Math.PI * 2}
-                                step={0.1}
+                                step={0.01}
                                 width="55%"
                                 selectedValue={bottleStore.rotationY}
                                 onChange={((value) => { bottleStore.setRotationY(value) })} />
@@ -66,7 +66,7 @@ export default function WaterBottleSettings() {
                                 size="sm"
                                 min={0}
                                 max={Math.PI * 2}
-                                step={0.1}
+                                step={0.01}
                                 width="55%"
                                 selectedValue={bottleStore.rotationZ}
                                 onChange={((value) => { bottleStore.setRotationZ(value) })} />

@@ -52,7 +52,7 @@ export default function SodaCanSettings() {
                                     size="sm"
                                     min={0}
                                     max={Math.PI * 2}
-                                    step={0.1}
+                                    step={0.01}
                                     width="55%"
                                     selectedValue={canStore.rotationX}
                                     onChange={((value) => { canStore.setRotationX(value) })} />
@@ -63,7 +63,7 @@ export default function SodaCanSettings() {
                                     size="sm"
                                     min={0}
                                     max={Math.PI * 2}
-                                    step={0.1}
+                                    step={0.01}
                                     width="55%"
                                     selectedValue={canStore.rotationY}
                                     onChange={((value) => { canStore.setRotationY(value) })} />
@@ -74,7 +74,7 @@ export default function SodaCanSettings() {
                                     size="sm"
                                     min={0}
                                     max={Math.PI * 2}
-                                    step={0.1}
+                                    step={0.01}
                                     width="55%"
                                     selectedValue={canStore.rotationZ}
                                     onChange={((value) => { canStore.setRotationZ(value) })} />

@@ -52,7 +52,7 @@ export default function CupSettings() {
                                     size="sm"
                                     min={0}
                                     max={Math.PI * 2}
-                                    step={0.1}
+                                    step={0.01}
                                     width="55%"
                                     selectedValue={cupStore.rotationX}
                                     onChange={((value) => { cupStore.setRotationX(value) })} />
@@ -63,7 +63,7 @@ export default function CupSettings() {
                                     size="sm"
                                     min={0}
                                     max={Math.PI * 2}
-                                    step={0.1}
+                                    step={0.01}
                                     width="55%"
                                     selectedValue={cupStore.rotationY}
                                     onChange={((value) => { cupStore.setRotationY(value) })} />
@@ -74,7 +74,7 @@ export default function CupSettings() {
                                     size="sm"
                                     min={0}
                                     max={Math.PI * 2}
-                                    step={0.1}
+                                    step={0.01}
                                     width="55%"
                                     selectedValue={cupStore.rotationZ}
                                     onChange={((value) => { cupStore.setRotationZ(value) })} />
