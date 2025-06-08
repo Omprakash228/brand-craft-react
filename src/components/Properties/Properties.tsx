@@ -4,6 +4,7 @@ import './Properties.css'
 import SceneSettings from "../Scene/SceneSettings";
 import ProductSettings from "../Product/ProductSettings";
 import { MdTexture } from "react-icons/md";
+import Export from "../Export/Export";
 
 export default function Properties() {
     return (
@@ -26,7 +27,7 @@ export default function Properties() {
                 <SceneSettings />
             </Tabs.Content>
             <Tabs.Content value="export">
-                Export settings
+                <Export />
             </Tabs.Content>
         </Tabs.Root>
     )

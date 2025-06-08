@@ -27,7 +27,16 @@ export default function ProductSettings() {
     return (
         <>
             <div className="property-title"><LuPackage />Product</div>
-            <Dropdown collection={products} selectedValue={productStore.product} size="sm" multiple={false} onChange={((value) => { productStore.setProduct(value[0]) })} />
+            <div className="input-wrapper">
+                Choose product
+                <Dropdown
+                    collection={products}
+                    selectedValue={productStore.product}
+                    size="sm"
+                    width="60%"
+                    multiple={false}
+                    onChange={((value) => { productStore.setProduct(value[0]) })} />
+            </div>
             <Suspense>{productSettingsMap[productStore.product]}</Suspense>
         </>
     )
