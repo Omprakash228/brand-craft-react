@@ -9,6 +9,7 @@ import { SodaCan } from "../../models/SodaCan/SodaCan";
 import useProductStore from "../Product/ProductStore";
 import useEnvironmentStore from "./SceneStore";
 import Loading from "./Loading";
+import { hdrMap } from "../../shared/Constants";
 
 export default function Scene() {
     const productStore = useProductStore();
@@ -17,16 +18,6 @@ export default function Scene() {
         'Cup': <Cup />,
         'Water bottle': <WaterBottle />,
         'Soda can': <SodaCan />
-    }
-
-    const hdrMap: Record<string, string> = {
-        'Apartment': 'hdr/lebombo_1k.hdr',
-        'City': 'hdr/potsdamer_platz_1k.hdr',
-        'Dawn': 'hdr/kiara_1_dawn_1k.hdr',
-        'Forest': 'hdr/forest_slope_1k.hdr',
-        'Lobby': 'hdr/st_fagans_interior_1k.hdr',
-        'Night': 'hdr/dikhololo_night_1k.hdr',
-        'Studio': 'hdr/studio_small_03_1k.hdr'
     }
 
     return (

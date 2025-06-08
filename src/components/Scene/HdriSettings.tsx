@@ -4,19 +4,11 @@ import Dropdown from "../ui/Dropdown/Dropdown"
 import useEnvironmentStore from "./SceneStore"
 import InputSlider from "../ui/InputSlider/InputSlider"
 import CheckBox from "../ui/CheckBox/CheckBox"
+import { hdrMap } from "../../shared/Constants"
 
 export default function HdriSettings() {
     const envStore = useEnvironmentStore()
 
-    const hdrMap: Record<string, string> = {
-        'Apartment': 'hdr/lebombo_1k.hdr',
-        'City': 'hdr/potsdamer_platz_1k.hdr',
-        'Dawn': 'hdr/kiara_1_dawn_1k.hdr',
-        'Forest': 'hdr/forest_slope_1k.hdr',
-        'Lobby': 'hdr/st_fagans_interior_1k.hdr',
-        'Night': 'hdr/dikhololo_night_1k.hdr',
-        'Studio': 'hdr/studio_small_03_1k.hdr'
-    }
     const hdriOptions = createListCollection({
         items: Object.keys(hdrMap).map((key) => { return { label: key, value: key } })
     })
@@ -69,7 +61,7 @@ export default function HdriSettings() {
                                     size="sm"
                                     min={0}
                                     max={Math.PI * 2}
-                                    step={0.05}
+                                    step={0.01}
                                     width="55%"
                                     selectedValue={envStore.hdriRotation}
                                     onChange={((value) => { envStore.setHdriRotation(value) })} />
