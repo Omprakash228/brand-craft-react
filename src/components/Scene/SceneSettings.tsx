@@ -20,7 +20,13 @@ export default function SceneSettings() {
             <div className="property-title"><MdTexture />Background</div>
             <div className="input-wrapper">
                 Choose background
-                <Dropdown collection={envOptions} selectedValue={envStore.environment} size="sm" multiple={false} onChange={((value) => { envStore.setEnvironment(value[0]) })} />
+                <Dropdown 
+                    collection={envOptions} 
+                    selectedValue={envStore.environment} 
+                    size="sm" 
+                    width="60%"
+                    multiple={false} 
+                    onChange={((value) => { envStore.setEnvironment(value[0]) })} />
             </div>
             {
                 envStore.environment === 'Solid color' &&
