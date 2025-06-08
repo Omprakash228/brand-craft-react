@@ -1,4 +1,4 @@
-import { createListCollection,} from '@chakra-ui/react'
+import { createListCollection, } from '@chakra-ui/react'
 import useEnvironmentStore from './SceneStore';
 import Dropdown from '../ui/Dropdown/Dropdown';
 import { MdTexture } from 'react-icons/md';
@@ -18,7 +18,10 @@ export default function SceneSettings() {
     return (
         <>
             <div className="property-title"><MdTexture />Background</div>
-            <Dropdown collection={envOptions} selectedValue={envStore.environment} size="sm" multiple={false} onChange={((value) => { envStore.setEnvironment(value[0]) })} />
+            <div className="input-wrapper">
+                Choose background
+                <Dropdown collection={envOptions} selectedValue={envStore.environment} size="sm" multiple={false} onChange={((value) => { envStore.setEnvironment(value[0]) })} />
+            </div>
             {
                 envStore.environment === 'Solid color' &&
                 <SolidColorSettings />
