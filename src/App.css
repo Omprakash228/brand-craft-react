@@ -4,14 +4,14 @@
 }
 
 #property-container {
-  width: 27%;
+  width: 25%;
   background: #101012;
   /* border-left: 1px solid #ffffff1f; */
 }
 
 #scene-container {
   background: #101012;
-  width: 73%;
+  width: 75%;
   padding: 10px;
   position: relative;
   overflow: hidden;
@@ -37,31 +37,34 @@
   position: absolute;
   z-index: 0;
   border-radius: 12px;
-	background-image: repeating-conic-gradient(#a4a4a4 0% 25%, #c0c0c0 0% 50%);
-	background-position: 0 0, 8px 8px;
-	background-size: 16px 16px;
-	background-color: #c0c0c0;
-  transition: all ease 0.3s;	
+  width: 100%;
+  height: 100%;
+  background-image: repeating-conic-gradient(#a4a4a4 0% 25%, #c0c0c0 0% 50%);
+  background-position: 0 0, 8px 8px;
+  background-size: 16px 16px;
+  background-color: #c0c0c0;
+  transition: all ease 0.3s;
 }
 
 #aspect-container {
+  position: relative;
   transition: all ease 0.3s;
 }
 
 @media only screen and (max-width: 1200px) {
   #property-container {
-    width: 30%!important;
+    width: 30% !important;
   }
   #scene-container {
-    width: 70%!important;
+    width: 70% !important;
   }
 }
 
 @media only screen and (max-width: 950px) {
   #property-container {
-    width: 40%!important;
+    width: 40% !important;
   }
   #scene-container {
-    width: 60%!important;
+    width: 60% !important;
   }
 }

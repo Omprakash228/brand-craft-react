@@ -58,6 +58,10 @@
   color: #8a8a8a;
 }
 
+.chakra-select__content {
+  max-height: 200px;
+}
+
 .property-title {
   font-size: 15px;
   display: flex;

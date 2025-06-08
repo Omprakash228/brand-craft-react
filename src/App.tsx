@@ -67,7 +67,7 @@ function App() {
       <div id="app-container">
         <div ref={containerRef} id="scene-container">
           <div id="aspect-container" style={{ width: `${containerDim[0]}%`, height: `${containerDim[1]}%` }}>
-            <div id="transparent-bg" style={{ display: solidTransparent || hdriTransparent ? 'block' : 'none', width: `calc(${containerDim[0]}% - 20px)`, height: `calc(${containerDim[1]}% - 20px)` }}></div>
+            <div id="transparent-bg" style={{ display: solidTransparent || hdriTransparent ? 'block' : 'none' }}></div>
             <Scene />
           </div>
         </div>

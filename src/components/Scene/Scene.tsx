@@ -31,7 +31,7 @@ export default function Scene() {
 
     return (
         <>
-            <Canvas id="scene-canvas" camera={{ fov: 45, position: [3, 2, 6] }}>
+            <Canvas id="scene-canvas" camera={{ fov: 35, position: [3, 2, 6] }} resize={{debounce: 100}} gl={{ preserveDrawingBuffer: true }}>
                 <OrbitControls makeDefault enableDamping dampingFactor={0.1}/>
                 {
                     envStore.environment !== 'HDRI' &&
