@@ -31,7 +31,6 @@ export default function Scene() {
 
     return (
         <>
-            <div id="transparent-bg"></div>
             <Canvas id="scene-canvas" camera={{ fov: 45, position: [3, 2, 6] }}>
                 <OrbitControls makeDefault enableDamping dampingFactor={0.1}/>
                 {

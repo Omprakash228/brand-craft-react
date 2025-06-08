@@ -14,6 +14,7 @@ interface DropdownProps<T extends DropdownItem> {
     collection: ListCollection<T>;
     selectedValue: string;
     size?: "sm" | "md" | "lg";
+    width?: string;
     multiple?: boolean;
     onChange?: (value: string[]) => void;
 }
@@ -22,6 +23,7 @@ export default function Dropdown<T extends DropdownItem>({
     collection,
     selectedValue,
     size = "md",
+    width,
     multiple = false,
     onChange,
 }: DropdownProps<T>) {
@@ -34,6 +36,7 @@ export default function Dropdown<T extends DropdownItem>({
             collection={collection}
             size={size}
             multiple={multiple}
+            width={width || '100%'}
             value={[selectedValue]}
             onValueChange={handleChange}
         >
