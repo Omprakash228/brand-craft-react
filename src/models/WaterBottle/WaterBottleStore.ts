@@ -12,14 +12,12 @@ type Bottle = {
   bodyMetallic: number;
   bodyTransmission: number;
   texture: THREE.Texture | null;
-  textureScaleX: number;
-  textureScaleY: number;
+  textureScale: number;
   textureRepeat: boolean;
   texturePosX: number;
   texturePosY: number;
   textureRoughness: number;
   textureTransmission: number;
-  aspectLock: boolean;
 
   capColor: string;
   capRoughness: number;
@@ -44,14 +42,12 @@ type Action = {
   resetBodySettings: () => void;
   resetCapSettings: () => void;
   setTexture: (texture: THREE.Texture) => void;
-  setTextureScaleX: (scaleX: number) => void;
-  setTextureScaleY: (scaleY: number) => void;
+  setTextureScale: (scale: number) => void;
   setTextureRepeat: (repeat: boolean) => void;
   setTexturePosX: (posX: number) => void;
   setTexturePosY: (posY: number) => void;
   setTextureRoughness: (roughness: number) => void;
   setTextureTransmission: (transmission: number) => void;
-  setAspectLock: (aspectLock: boolean) => void;
   removeTexture: () => void;
   resetTexture: () => void;
 };
@@ -71,14 +67,12 @@ const createInitialBodyState = () => ({
 });
 
 const createInitialTextureState = () => ({
-  textureScaleX: 1,
-  textureScaleY: 1,
+  textureScale: 1,
   textureRepeat: false,
   texturePosX: 0,
   texturePosY: 0,
   textureRoughness: 0,
   textureTransmission: 0,
-  aspectLock: true,
 });
 
 const createInitialCapState = () => ({
@@ -115,8 +109,7 @@ const useBottleStore = create<Bottle & Action>((set) => ({
   resetBodySettings: () => set(createInitialBodyState()),
   resetCapSettings: () => set(createInitialCapState()),
   setTexture: (texture: THREE.Texture) => set(() => ({ texture: texture })),
-  setTextureScaleX: (scaleX: number) => set(() => ({ textureScaleX: scaleX })),
-  setTextureScaleY: (scaleY: number) => set(() => ({ textureScaleY: scaleY })),
+  setTextureScale: (scale: number) => set(() => ({ textureScale: scale })),
   setTextureRepeat: (repeat: boolean) => set(() => ({ textureRepeat: repeat })),
   setTexturePosX: (posX: number) => set(() => ({ texturePosX: posX })),
   setTexturePosY: (posY: number) => set(() => ({ texturePosY: posY })),
@@ -124,8 +117,6 @@ const useBottleStore = create<Bottle & Action>((set) => ({
     set(() => ({ textureRoughness: roughness })),
   setTextureTransmission: (transmission: number) =>
     set(() => ({ textureTransmission: transmission })),
-  setAspectLock: (aspectLock: boolean) =>
-    set(() => ({ aspectLock: aspectLock, textureScaleX: 1, textureScaleY: 1 })),
   resetTexture: () => set(createInitialTextureState()),
   removeTexture: () =>
     set(() => ({ texture: null, ...createInitialTextureState() })),

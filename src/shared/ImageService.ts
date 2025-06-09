@@ -2,6 +2,8 @@ import * as THREE from 'three'
 
 export const CreateTexture = (
   image: File,
+  targetWidth: number,
+  targetHeight: number,
   store: any
 ) => {
 
@@ -12,18 +14,30 @@ export const CreateTexture = (
     img.src = reader.result as string;
 
     img.onload = () => {
-      const bordersize = 1;
       // Create canvas with transparent border
       const canvas = document.createElement("canvas");
-      const width = img.width + bordersize * 2;
-      const height = img.height + bordersize * 2;
+
+      const wq = Math.floor(img.width / targetWidth);
+      const wr = img.width % targetWidth;
+      const wFactor = wr === 0 ? wq : wq + 1;
+      
+      const hq = Math.floor(img.height / targetHeight);
+      const hr = img.height % targetHeight;
+      const hFactor = hr === 0 ? hq : hq + 1;
+      const factor = Math.max(wFactor, hFactor);
+
+      const wRem = (targetWidth * factor) - img.width + 2;
+      const hRem = (targetHeight * factor) - img.height + 2;
+
+      const width = img.width + wRem;
+      const height = img.height + hRem;
 
       canvas.width = width;
       canvas.height = height;
 
       const ctx = canvas.getContext("2d");
       ctx?.clearRect(0, 0, width, height);
-      ctx?.drawImage(img, bordersize, bordersize);
+      ctx?.drawImage(img, Math.floor(wRem / 2), Math.floor(hRem/2));
 
       // Create THREE texture from canvas
       const texture = new THREE.CanvasTexture(canvas);

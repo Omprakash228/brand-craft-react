@@ -10,10 +10,11 @@ import { CreateTexture } from "../../shared/ImageService";
 
 export default function SodaCanSettings() {
     const canStore = useCanStore();
+    const [targetWidth, targetHeight] = [1760, 1000]
 
     const addImageTexture = (files: File[]) => {
         if (!files[0]) return;
-        CreateTexture(files[0], canStore);
+        CreateTexture(files[0], targetWidth, targetHeight, canStore);
     }
 
     return (
@@ -126,7 +127,7 @@ export default function SodaCanSettings() {
                             <Fileupload
                                 size="xs"
                                 width="100%"
-                                info='1760x1000'
+                                info={`${targetWidth}x${targetHeight}`}
                                 maxFiles={1}
                                 onChange={(files: File[]) => addImageTexture(files)}
                                 onClear={() => canStore.removeTexture()} />
@@ -138,35 +139,17 @@ export default function SodaCanSettings() {
                                         size="lg"
                                         selectedValue={canStore.textureRepeat}
                                         onChange={((value) => { canStore.setTextureRepeat(!!value) })} />
-                                    <CheckBox
-                                        label="Lock aspect ratio"
-                                        size="lg"
-                                        selectedValue={canStore.aspectLock}
-                                        onChange={((value) => { canStore.setAspectLock(!!value) })} />
                                     <div className="input-wrapper">
-                                        {canStore.aspectLock ? 'Scale' : 'Horizontal Scale'}
+                                        Scale
                                         <InputSlider
                                             size="sm"
                                             min={0}
                                             max={2}
                                             step={0.01}
                                             width="55%"
-                                            selectedValue={canStore.textureScaleX}
-                                            onChange={((value) => { canStore.setTextureScaleX(value) })} />
+                                            selectedValue={canStore.textureScale}
+                                            onChange={((value) => { canStore.setTextureScale(value) })} />
                                     </div>
-                                    {!canStore.aspectLock &&
-                                        <div className="input-wrapper">
-                                            Vertical Scale
-                                            <InputSlider
-                                                size="sm"
-                                                min={0}
-                                                max={2}
-                                                step={0.01}
-                                                width="55%"
-                                                selectedValue={canStore.textureScaleY}
-                                                onChange={((value) => { canStore.setTextureScaleY(value) })} />
-                                        </div>
-                                    }
                                     <div className="input-wrapper">
                                         Horizontal Position
                                         <InputSlider

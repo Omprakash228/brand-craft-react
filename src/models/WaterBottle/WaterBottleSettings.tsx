@@ -10,10 +10,11 @@ import CheckBox from "../../components/ui/CheckBox/CheckBox";
 
 export default function WaterBottleSettings() {
     const bottleStore = useBottleStore();
+    const [targetWidth, targetHeight] = [1000, 993]
 
     const addImageTexture = (files: File[]) => {
         if (!files[0]) return;
-        CreateTexture(files[0], bottleStore);
+        CreateTexture(files[0], targetWidth, targetHeight, bottleStore);
     }
 
     return (<>
@@ -193,7 +194,7 @@ export default function WaterBottleSettings() {
                         <Fileupload
                             size="xs"
                             width="100%"
-                            info='1000x993'
+                            info={`${targetWidth}x${targetHeight}`}
                             maxFiles={1}
                             onChange={(files: File[]) => addImageTexture(files)}
                             onClear={() => bottleStore.removeTexture()} />
@@ -205,35 +206,17 @@ export default function WaterBottleSettings() {
                                     size="lg"
                                     selectedValue={bottleStore.textureRepeat}
                                     onChange={((value) => { bottleStore.setTextureRepeat(!!value) })} />
-                                <CheckBox
-                                    label="Lock aspect ratio"
-                                    size="lg"
-                                    selectedValue={bottleStore.aspectLock}
-                                    onChange={((value) => { bottleStore.setAspectLock(!!value) })} />
                                 <div className="input-wrapper">
-                                    {bottleStore.aspectLock ? 'Scale' : 'Horizontal Scale'}
+                                    Scale
                                     <InputSlider
                                         size="sm"
                                         min={0}
                                         max={2}
                                         step={0.01}
                                         width="55%"
-                                        selectedValue={bottleStore.textureScaleX}
-                                        onChange={((value) => { bottleStore.setTextureScaleX(value) })} />
+                                        selectedValue={bottleStore.textureScale}
+                                        onChange={((value) => { bottleStore.setTextureScale(value) })} />
                                 </div>
-                                {!bottleStore.aspectLock &&
-                                    <div className="input-wrapper">
-                                        Vertical Scale
-                                        <InputSlider
-                                            size="sm"
-                                            min={0}
-                                            max={2}
-                                            step={0.01}
-                                            width="55%"
-                                            selectedValue={bottleStore.textureScaleY}
-                                            onChange={((value) => { bottleStore.setTextureScaleY(value) })} />
-                                    </div>
-                                }
                                 <div className="input-wrapper">
                                     Horizontal Position
                                     <InputSlider

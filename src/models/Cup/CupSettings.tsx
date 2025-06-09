@@ -10,10 +10,11 @@ import { CreateTexture } from "../../shared/ImageService";
 
 export default function CupSettings() {
     const cupStore = useCupStore();
+    const [targetWidth, targetHeight] = [3000, 1000];
 
     const addImageTexture = (files: File[]) => {
         if (!files[0]) return;
-        CreateTexture(files[0], cupStore);
+        CreateTexture(files[0], targetWidth, targetHeight, cupStore);
     }
 
     return (
@@ -126,7 +127,7 @@ export default function CupSettings() {
                             <Fileupload
                                 size="xs"
                                 width="100%"
-                                info='3000x1000'
+                                info={`${targetWidth}x${targetHeight}`}
                                 maxFiles={1}
                                 onChange={(files: File[]) => addImageTexture(files)}
                                 onClear={() => cupStore.removeTexture()} />
@@ -138,35 +139,17 @@ export default function CupSettings() {
                                         size="lg"
                                         selectedValue={cupStore.textureRepeat}
                                         onChange={((value) => { cupStore.setTextureRepeat(!!value) })} />
-                                    <CheckBox
-                                        label="Lock aspect ratio"
-                                        size="lg"
-                                        selectedValue={cupStore.aspectLock}
-                                        onChange={((value) => { cupStore.setAspectLock(!!value) })} />
                                     <div className="input-wrapper">
-                                        {cupStore.aspectLock ? 'Scale' : 'Horizontal Scale'}
+                                        Scale
                                         <InputSlider
                                             size="sm"
                                             min={0}
                                             max={2}
                                             step={0.01}
                                             width="55%"
-                                            selectedValue={cupStore.textureScaleX}
-                                            onChange={((value) => { cupStore.setTextureScaleX(value) })} />
+                                            selectedValue={cupStore.textureScale}
+                                            onChange={((value) => { cupStore.setTextureScale(value) })} />
                                     </div>
-                                    {!cupStore.aspectLock &&
-                                        <div className="input-wrapper">
-                                            Vertical Scale
-                                            <InputSlider
-                                                size="sm"
-                                                min={0}
-                                                max={2}
-                                                step={0.01}
-                                                width="55%"
-                                                selectedValue={cupStore.textureScaleY}
-                                                onChange={((value) => { cupStore.setTextureScaleY(value) })} />
-                                        </div>
-                                    }
                                     <div className="input-wrapper">
                                         Horizontal Position
                                         <InputSlider

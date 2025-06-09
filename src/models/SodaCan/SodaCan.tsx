@@ -20,15 +20,10 @@ export function SodaCan(props: JSX.IntrinsicElements['group']) {
     }
     useCanStore.subscribe((state, prevState) => {
       // set Scale
-      if (texture &&
-        (state.aspectLock !== prevState.aspectLock
-          || texture.repeat.x !== state.textureScaleX
-          || texture.repeat.y !== state.textureScaleY)) {
+      if (texture && texture.repeat.x !== state.textureScale) {
         // Avoid divide-by-zero
-        const safeScaleX = 1 / Math.max(state.textureScaleX, 0.01);
-        const scaleY = state.aspectLock ? state.textureScaleX : state.textureScaleY;
-        const safeScaleY = 1 / Math.max(scaleY, 0.01);
-        texture.repeat.set(safeScaleX, safeScaleY);
+        const safeScale = 1 / Math.max(state.textureScale, 0.01);
+        texture.repeat.set(safeScale, safeScale);
       }
       // set Position
       if (texture && (texture.offset.x !== state.texturePosX || texture.offset.y !== state.texturePosY)) {
