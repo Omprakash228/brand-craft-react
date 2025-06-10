@@ -1,6 +1,6 @@
 import { Environment, OrbitControls } from "@react-three/drei";
 import { useThree } from "@react-three/fiber";
-import { Suspense, useEffect, type JSX, type RefObject } from "react";
+import { Suspense, useEffect, type JSX } from "react";
 import * as THREE from 'three';
 import { Cup } from "../../models/Cup/Cup";
 import { WaterBottle } from "../../models/WaterBottle/WaterBottle";
