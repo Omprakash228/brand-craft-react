@@ -5,19 +5,21 @@ import Properties from './components/Properties/Properties';
 import { useEffect, useRef, useState } from 'react';
 import useExportStore from './components/Export/ExportStore';
 import useEnvironmentStore from './components/Scene/SceneStore';
+import { Canvas } from '@react-three/fiber';
 
 function App() {
   const [showToast, setShowToast] = useState(false);
-  const containerRef = useRef<HTMLDivElement>(null)
+  const sceneRef = useRef<HTMLDivElement>(null)
   const aspectRatio = useExportStore((s) => s.aspectRatio)
   const solidTransparent = useEnvironmentStore((s) => s.colorTransparent)
   const hdriTransparent = useEnvironmentStore((s) => s.hdriTransparent)
-  const [containerDim, setContainerDim] = useState<[number, number]>([100,100])
+  const [containerDim, setContainerDim] = useState<[number, number]>([100, 100])
 
+  // Calculate scene container size on resize and on aspect ratio change
   useEffect(() => {
     const updateSize = () => {
-      if (!containerRef.current) return;
-      const newCtrDim = calculateNewDim(containerRef.current.offsetWidth - 20, containerRef.current.offsetHeight - 20, aspectRatio)
+      if (!sceneRef.current) return;
+      const newCtrDim = calculateNewDim(sceneRef.current.offsetWidth - 20, sceneRef.current.offsetHeight - 20, aspectRatio)
       setContainerDim(newCtrDim)
     };
 
@@ -27,6 +29,7 @@ function App() {
     return () => window.removeEventListener('resize', updateSize);
   }, [aspectRatio]);
 
+  // Display toast message on phone
   useEffect(() => {
     const isPortrait = window.matchMedia('(orientation: portrait)').matches
     const isMobile = window.innerWidth <= 768
@@ -35,6 +38,7 @@ function App() {
     }
   }, [])
 
+  // Hide toast message after 5 seconds
   useEffect(() => {
     if (showToast) {
       const timeout = setTimeout(() => {
@@ -45,7 +49,7 @@ function App() {
     }
   }, [showToast])
 
-  const calculateNewDim = (maxWidth: number, maxHeight: number, aspect: string) : [number, number] =>{
+  const calculateNewDim = (maxWidth: number, maxHeight: number, aspect: string): [number, number] => {
     if (aspect === 'Default') return [100, 100]
     const aspectRatio = aspect.split(':').map((s) => Number(s));
     const widthFactor = maxWidth / aspectRatio[0];
@@ -65,10 +69,12 @@ function App() {
     <div>
       <Navbar />
       <div id="app-container">
-        <div ref={containerRef} id="scene-container">
+        <div ref={sceneRef} id="scene-container">
           <div id="aspect-container" style={{ width: `${containerDim[0]}%`, height: `${containerDim[1]}%` }}>
             <div id="transparent-bg" style={{ display: solidTransparent || hdriTransparent ? 'block' : 'none' }}></div>
-            <Scene />
+            <Canvas id="scene-canvas" camera={{ fov: 45, position: [3, 2, 6] }} resize={{ debounce: 100 }} gl={{ preserveDrawingBuffer: true }}>
+              <Scene />
+            </Canvas>
           </div>
         </div>
         <div id="property-container">

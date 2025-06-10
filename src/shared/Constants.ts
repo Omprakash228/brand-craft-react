@@ -7,3 +7,19 @@ export const hdrMap: Record<string, string> = {
   Night: "hdr/rogland_clear_night_1k.hdr",
   Studio: "hdr/cyclorama_hard_light_1k.hdr",
 };
+
+export const aspectResolutions: Record<string, [number, number]> = {
+  "1:1": [1080, 1080],
+  "9:16": [1080, 1920],
+  "16:9": [1920, 1080],
+  "4:5": [1000, 1250],
+  "5:4": [1280, 1024],
+  "3:4": [1200, 1600],
+  "4:3": [1600, 1200],
+  "2:3": [1200, 1800],
+  "3:2": [1200, 800],
+  "5:7": [1000, 1400],
+  "7:5": [1400, 1000],
+  "1:2": [1000, 2000],
+  "2:1": [2000, 1000],
+};
