@@ -6,6 +6,7 @@ import { useEffect, useRef, useState } from 'react';
 import useExportStore from './components/Export/ExportStore';
 import useEnvironmentStore from './components/Scene/SceneStore';
 import { Canvas } from '@react-three/fiber';
+import { Bvh } from '@react-three/drei';
 
 function App() {
   const [showToast, setShowToast] = useState(false);
@@ -73,7 +74,9 @@ function App() {
           <div id="aspect-container" style={{ width: `${containerDim[0]}%`, height: `${containerDim[1]}%` }}>
             <div id="transparent-bg" style={{ display: solidTransparent || hdriTransparent ? 'block' : 'none' }}></div>
             <Canvas id="scene-canvas" camera={{ fov: 45, position: [3, 2, 6] }} resize={{ debounce: 100 }} gl={{ preserveDrawingBuffer: true }}>
-              <Scene />
+              <Bvh>
+                <Scene />
+              </Bvh>
             </Canvas>
           </div>
         </div>
