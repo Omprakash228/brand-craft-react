@@ -1,6 +1,6 @@
 import { createListCollection, } from '@chakra-ui/react'
 import useEnvironmentStore from './SceneStore';
-import Dropdown from '../ui/Dropdown/Dropdown';
+import Dropdown from '../../ui/Dropdown/Dropdown';
 import { MdTexture } from 'react-icons/md';
 import SolidColorSettings from './SolidColorSettings';
 import HdriSettings from './HdriSettings';

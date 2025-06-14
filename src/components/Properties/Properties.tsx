@@ -1,10 +1,10 @@
 import { Tabs } from "@chakra-ui/react";
 import { LuFileOutput, LuPackage } from "react-icons/lu";
 import './Properties.css'
-import SceneSettings from "../Scene/SceneSettings";
-import ProductSettings from "../Product/ProductSettings";
+import SceneSettings from "./Scene/SceneSettings";
 import { MdTexture } from "react-icons/md";
-import Export from "../Export/Export";
+import Export from "./Export/Export";
+import ProductSettings from "./Product/ProductSettings";
 
 export default function Properties() {
     return (

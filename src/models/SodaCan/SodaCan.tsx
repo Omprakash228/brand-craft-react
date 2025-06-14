@@ -6,19 +6,21 @@ Command: npx gltfjsx@6.5.3 .\public\soda_can.glb -t
 import * as THREE from 'three'
 import { useEffect, useRef, type JSX } from 'react'
 import { useGLTF } from '@react-three/drei'
-import useCanStore from './SodaCanStore'
+import { useCanMaterial, useCanTexture, useCanTransform } from './SodaCanStore';
 
 export function SodaCan(props: JSX.IntrinsicElements['group']) {
   const { nodes } = useGLTF('/soda_can.glb')
-  const canStore = useCanStore();
-  const texture = useCanStore((state) => state.texture);
+  const canTexture = useCanTexture();
+  const texture = useCanTexture((state) => state.texture);
+  const canTransform = useCanTransform();
+  const canMaterial = useCanMaterial();
   const materialRef = useRef<THREE.MeshPhysicalMaterial>(null);
 
   useEffect(() => {
     if (materialRef.current) {
       materialRef.current.needsUpdate = true;
     }
-    useCanStore.subscribe((state, prevState) => {
+    useCanTexture.subscribe((state) => {
       // set Scale
       if (texture && texture.repeat.x !== state.textureScale) {
         // Avoid divide-by-zero
@@ -29,16 +31,20 @@ export function SodaCan(props: JSX.IntrinsicElements['group']) {
       if (texture && (texture.offset.x !== state.texturePosX || texture.offset.y !== state.texturePosY)) {
         texture.offset.set(state.texturePosX, state.texturePosY);
       }
-      // set Repeat
-      if (texture && (state.textureRepeat !== prevState.textureRepeat)) {
-        texture.wrapS = texture.wrapT = state.textureRepeat ? THREE.RepeatWrapping : THREE.ClampToEdgeWrapping;
-        texture.needsUpdate = true;
-      }
     })
   }, [texture]);
 
   return (
-    <group {...props} dispose={null} scale={canStore.scale} rotation={[canStore.rotationX, canStore.rotationY, canStore.rotationZ]}>
+    <group 
+      {...props} 
+      dispose={null} 
+      scale={canTransform.scale} 
+      rotation={
+        [
+          canTransform.rotationX * Math.PI, 
+          canTransform.rotationY * Math.PI, 
+          canTransform.rotationZ * Math.PI
+        ]}>
       <mesh geometry={(nodes.Soda_can_metal as THREE.Mesh).geometry}>
         <meshPhysicalMaterial
           color={'#dadada'}
@@ -48,11 +54,11 @@ export function SodaCan(props: JSX.IntrinsicElements['group']) {
       </mesh>
       <mesh geometry={(nodes.Soda_can_body as THREE.Mesh).geometry}>
         <meshPhysicalMaterial
-          color={canStore.color}
-          roughness={canStore.roughness}
-          metalness={canStore.metallic}
+          color={canMaterial.color}
+          roughness={canMaterial.roughness}
+          metalness={canMaterial.metallic}
           side={THREE.DoubleSide}
-          transmission={canStore.transmission}></meshPhysicalMaterial>
+          transmission={canMaterial.transmission}></meshPhysicalMaterial>
       </mesh>
       {
         texture !== null &&
@@ -61,10 +67,10 @@ export function SodaCan(props: JSX.IntrinsicElements['group']) {
             ref={materialRef}
             map={texture}
             transparent={true}
-            roughness={canStore.textureRoughness}
-            metalness={canStore.metallic}
+            roughness={canTexture.textureRoughness}
+            metalness={canTexture.textureMetalness}
             side={THREE.DoubleSide}
-            transmission={Math.min(canStore.textureTransmission + 0.1, 1)}></meshPhysicalMaterial>
+            transmission={canTexture.textureTransmission}></meshPhysicalMaterial>
         </mesh>
       }
     </group>

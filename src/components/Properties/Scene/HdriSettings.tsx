@@ -1,10 +1,10 @@
 import { Accordion, createListCollection, Span } from "@chakra-ui/react"
 import { MdImage } from "react-icons/md"
-import Dropdown from "../ui/Dropdown/Dropdown"
+import Dropdown from "../../ui/Dropdown/Dropdown"
 import useEnvironmentStore from "./SceneStore"
-import InputSlider from "../ui/InputSlider/InputSlider"
-import CheckBox from "../ui/CheckBox/CheckBox"
-import { hdrMap } from "../../shared/Constants"
+import InputSlider from "../../ui/InputSlider/InputSlider"
+import CheckBox from "../../ui/CheckBox/CheckBox"
+import { hdrMap } from "../../../shared/Constants"
 
 export default function HdriSettings() {
     const envStore = useEnvironmentStore()
