@@ -1,4 +1,3 @@
-import CheckBox from "../../components/ui/CheckBox/CheckBox";
 import Fileupload from "../../components/ui/Fileupload/Fileupload"
 import InputSlider from "../../components/ui/InputSlider/InputSlider";
 import { CreateTexture } from "../ImageService";
