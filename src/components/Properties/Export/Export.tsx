@@ -1,10 +1,10 @@
 import { LuFileOutput } from "react-icons/lu"
-import Dropdown from "../ui/Dropdown/Dropdown"
+import Dropdown from "../../ui/Dropdown/Dropdown"
 import { Button, createListCollection } from "@chakra-ui/react"
 import useExportStore from "./ExportStore"
 import useProductStore from "../Product/ProductStore"
 import * as THREE from 'three'
-import { aspectResolutions } from "../../shared/Constants"
+import { aspectResolutions } from "../../../shared/Constants"
 
 export default function Export() {
     const exportStore = useExportStore();

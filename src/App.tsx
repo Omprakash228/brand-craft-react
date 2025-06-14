@@ -3,8 +3,8 @@ import Navbar from './components/Navbar/Navbar';
 import Scene from './components/Scene/Scene';
 import Properties from './components/Properties/Properties';
 import { useEffect, useRef, useState } from 'react';
-import useExportStore from './components/Export/ExportStore';
-import useEnvironmentStore from './components/Scene/SceneStore';
+import useExportStore from './components/Properties/Export/ExportStore';
+import useEnvironmentStore from './components/Properties/Scene/SceneStore';
 import { Canvas } from '@react-three/fiber';
 import { Bvh } from '@react-three/drei';
 

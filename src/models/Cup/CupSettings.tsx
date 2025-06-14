@@ -1,201 +1,53 @@
 import { Accordion, Span } from "@chakra-ui/react"
-import { LuImage, LuSettings2 } from "react-icons/lu"
-import useCupStore from "./CupStore"
-import InputSlider from "../../components/ui/InputSlider/InputSlider";
-import Colorpicker from "../../components/ui/Colorpicker/Colorpicker";
-import { MdRefresh } from "react-icons/md";
-import Fileupload from "../../components/ui/Fileupload/Fileupload";
-import CheckBox from "../../components/ui/CheckBox/CheckBox";
-import { CreateTexture } from "../../shared/ImageService";
+import { LuImage } from "react-icons/lu"
+import { MdColorLens, MdRefresh, MdTransform } from "react-icons/md";
+import TransformControls from "../../shared/components/TransformControls";
+import { useCupMaterial, useCupTexture, useCupTransform } from "./CupStore";
+import MaterialControls from "../../shared/components/MaterialControls";
+import TextureControls from "../../shared/components/TextureControls";
 
 export default function CupSettings() {
-    const cupStore = useCupStore();
+    const cupTransform = useCupTransform();
+    const cupMaterial = useCupMaterial();
+    const cupTexture = useCupTexture();
     const [targetWidth, targetHeight] = [3000, 1000];
-
-    const addImageTexture = (files: File[]) => {
-        if (!files[0]) return;
-        CreateTexture(files[0], targetWidth, targetHeight, cupStore);
-    }
 
     return (
         <>
-            <Accordion.Root collapsible defaultValue={['Cup', 'Image']} multiple={true}>
-                <Accordion.Item value='Cup'>
+            <Accordion.Root collapsible defaultValue={['Transform', 'Material', 'Image']} multiple={true}>
+                <Accordion.Item value='Transform'>
                     <Accordion.ItemTrigger>
-                        <Span flex="10" style={{ display: "flex", alignItems: "center", gap: "0.2rem" }}><LuSettings2 size={"16px"} />Cup</Span>
-                        <Span flex="0" style={{ cursor: "pointer", opacity: "0.5" }} onClick={($event) => { $event.stopPropagation(); cupStore.resetSettings() }}><MdRefresh /></Span>
+                        <Span flex="10" style={{ display: "flex", alignItems: "center", gap: "0.2rem" }}><MdTransform  size={"16px"} />Adjust</Span>
+                        <Span flex="0" style={{ cursor: "pointer", opacity: "0.5" }} onClick={($event) => { $event.stopPropagation(); cupTransform.resetTransform() }}><MdRefresh /></Span>
                         <Accordion.ItemIndicator />
                     </Accordion.ItemTrigger>
                     <Accordion.ItemContent>
                         <Accordion.ItemBody>
-                            <div className="input-wrapper">
-                                Color
-                                <Colorpicker
-                                    size="2xs"
-                                    width="55%"
-                                    selectedValue={cupStore.color}
-                                    onChange={((value) => { cupStore.setColor(value) })} />
-                            </div>
-                            <div className="input-wrapper">
-                                Scale
-                                <InputSlider
-                                    size="sm"
-                                    min={1}
-                                    max={3}
-                                    step={0.1}
-                                    width="55%"
-                                    selectedValue={cupStore.scale}
-                                    onChange={((value) => { cupStore.setScale(value) })} />
-                            </div>
-                            <div className="input-wrapper">
-                                X rotation
-                                <InputSlider
-                                    size="sm"
-                                    min={0}
-                                    max={Math.PI * 2}
-                                    step={0.01}
-                                    width="55%"
-                                    selectedValue={cupStore.rotationX}
-                                    onChange={((value) => { cupStore.setRotationX(value) })} />
-                            </div>
-                            <div className="input-wrapper">
-                                Y rotation
-                                <InputSlider
-                                    size="sm"
-                                    min={0}
-                                    max={Math.PI * 2}
-                                    step={0.01}
-                                    width="55%"
-                                    selectedValue={cupStore.rotationY}
-                                    onChange={((value) => { cupStore.setRotationY(value) })} />
-                            </div>
-                            <div className="input-wrapper">
-                                Z rotation
-                                <InputSlider
-                                    size="sm"
-                                    min={0}
-                                    max={Math.PI * 2}
-                                    step={0.01}
-                                    width="55%"
-                                    selectedValue={cupStore.rotationZ}
-                                    onChange={((value) => { cupStore.setRotationZ(value) })} />
-                            </div>
-                            <div className="input-wrapper">
-                                Roughness
-                                <InputSlider
-                                    size="sm"
-                                    min={0}
-                                    max={1}
-                                    step={0.1}
-                                    width="55%"
-                                    selectedValue={cupStore.roughness}
-                                    onChange={((value) => { cupStore.setRoughness(value) })} />
-                            </div>
-                            <div className="input-wrapper">
-                                Metallic
-                                <InputSlider
-                                    size="sm"
-                                    min={0}
-                                    max={1}
-                                    step={0.1}
-                                    width="55%"
-                                    selectedValue={cupStore.metallic}
-                                    onChange={((value) => { cupStore.setMetallic(value) })} />
-                            </div>
-                            <div className="input-wrapper">
-                                Glass
-                                <InputSlider
-                                    size="sm"
-                                    min={0}
-                                    max={1}
-                                    step={0.1}
-                                    width="55%"
-                                    selectedValue={cupStore.transmission}
-                                    onChange={((value) => { cupStore.setTransmission(value) })} />
-                            </div>
+                            <TransformControls store={cupTransform} />                            
+                        </Accordion.ItemBody>
+                    </Accordion.ItemContent>
+                </Accordion.Item>
+                <Accordion.Item value='Material'>
+                    <Accordion.ItemTrigger>
+                        <Span flex="10" style={{ display: "flex", alignItems: "center", gap: "0.2rem" }}><MdColorLens  size={"16px"} />Appearance</Span>
+                        <Span flex="0" style={{ cursor: "pointer", opacity: "0.5" }} onClick={($event) => { $event.stopPropagation(); cupMaterial.resetMaterial() }}><MdRefresh /></Span>
+                        <Accordion.ItemIndicator />
+                    </Accordion.ItemTrigger>
+                    <Accordion.ItemContent>
+                        <Accordion.ItemBody>
+                            <MaterialControls store={cupMaterial} />                            
                         </Accordion.ItemBody>
                     </Accordion.ItemContent>
                 </Accordion.Item>
                 <Accordion.Item value='Image'>
                     <Accordion.ItemTrigger>
                         <Span flex="10" style={{ display: "flex", alignItems: "center", gap: "0.2rem" }}><LuImage size={"16px"} />Image</Span>
-                        <Span flex="0" style={{ cursor: "pointer", opacity: "0.5" }} onClick={($event) => { $event.stopPropagation(); cupStore.resetTexture() }}><MdRefresh /></Span>
+                        <Span flex="0" style={{ cursor: "pointer", opacity: "0.5" }} onClick={($event) => { $event.stopPropagation(); cupTexture.resetTexture() }}><MdRefresh /></Span>
                         <Accordion.ItemIndicator />
                     </Accordion.ItemTrigger>
                     <Accordion.ItemContent>
                         <Accordion.ItemBody>
-                            <Fileupload
-                                size="xs"
-                                width="100%"
-                                info={`${targetWidth}x${targetHeight}`}
-                                maxFiles={1}
-                                onChange={(files: File[]) => addImageTexture(files)}
-                                onClear={() => cupStore.removeTexture()} />
-                            {
-                                cupStore.texture &&
-                                <>
-                                    <CheckBox
-                                        label="Repeat"
-                                        size="lg"
-                                        selectedValue={cupStore.textureRepeat}
-                                        onChange={((value) => { cupStore.setTextureRepeat(!!value) })} />
-                                    <div className="input-wrapper">
-                                        Scale
-                                        <InputSlider
-                                            size="sm"
-                                            min={0}
-                                            max={2}
-                                            step={0.01}
-                                            width="55%"
-                                            selectedValue={cupStore.textureScale}
-                                            onChange={((value) => { cupStore.setTextureScale(value) })} />
-                                    </div>
-                                    <div className="input-wrapper">
-                                        Horizontal Position
-                                        <InputSlider
-                                            size="sm"
-                                            min={-1}
-                                            max={1}
-                                            step={0.01}
-                                            width="55%"
-                                            selectedValue={cupStore.texturePosX}
-                                            onChange={((value) => { cupStore.setTexturePosX(value) })} />
-                                    </div>
-                                    <div className="input-wrapper">
-                                        Vertical Position
-                                        <InputSlider
-                                            size="sm"
-                                            min={-1}
-                                            max={1}
-                                            step={0.01}
-                                            width="55%"
-                                            selectedValue={cupStore.texturePosY}
-                                            onChange={((value) => { cupStore.setTexturePosY(value) })} />
-                                    </div>
-                                    <div className="input-wrapper">
-                                        Roughness
-                                        <InputSlider
-                                            size="sm"
-                                            min={0}
-                                            max={1}
-                                            step={0.1}
-                                            width="55%"
-                                            selectedValue={cupStore.textureRoughness}
-                                            onChange={((value) => { cupStore.setTextureRoughness(value) })} />
-                                    </div>
-                                    <div className="input-wrapper">
-                                        Glass
-                                        <InputSlider
-                                            size="sm"
-                                            min={0}
-                                            max={1}
-                                            step={0.1}
-                                            width="55%"
-                                            selectedValue={cupStore.textureTransmission}
-                                            onChange={((value) => { cupStore.setTextureTransmission(value) })} />
-                                    </div>
-                                </>
-                            }
+                            <TextureControls store={cupTexture} targetWidth={targetWidth} targetHeight={targetHeight} />
                         </Accordion.ItemBody>
                     </Accordion.ItemContent>
                 </Accordion.Item>

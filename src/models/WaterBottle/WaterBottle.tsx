@@ -6,19 +6,22 @@ Command: npx gltfjsx@6.5.3 .\public\water_bottle.glb -t
 import * as THREE from 'three'
 import { useEffect, useRef, type JSX } from 'react'
 import { useGLTF } from '@react-three/drei'
-import useBottleStore from './WaterBottleStore'
+import { useBodyMaterial, useBodyTexture, useBottleTransform, useCapMaterial } from './WaterBottleStore';
 
 export function WaterBottle(props: JSX.IntrinsicElements['group']) {
   const { nodes } = useGLTF('/water_bottle.glb')
-  const bottleStore = useBottleStore();
-  const texture = useBottleStore((state) => state.texture);
+  const texture = useBodyTexture((state) => state.texture);
+  const bottleTransform = useBottleTransform();
+  const capMaterial = useCapMaterial();
+  const bodyMaterial = useBodyMaterial();
+  const bodyTexture = useBodyTexture();
   const materialRef = useRef<THREE.MeshPhysicalMaterial>(null);
 
   useEffect(() => {
     if (materialRef.current) {
       materialRef.current.needsUpdate = true;
     }
-    useBottleStore.subscribe((state, prevState) => {
+    useBodyTexture.subscribe((state) => {
       // set Scale
       if (texture && texture.repeat.x !== state.textureScale) {
         // Avoid divide-by-zero
@@ -29,39 +32,43 @@ export function WaterBottle(props: JSX.IntrinsicElements['group']) {
       if (texture && (texture.offset.x !== state.texturePosX || texture.offset.y !== state.texturePosY)) {
         texture.offset.set(state.texturePosX, state.texturePosY);
       }
-      // set Repeat
-      if (texture && (state.textureRepeat !== prevState.textureRepeat)) {
-        texture.wrapS = texture.wrapT = state.textureRepeat ? THREE.RepeatWrapping : THREE.ClampToEdgeWrapping;
-        texture.needsUpdate = true;
-      }
     })
   }, [texture]);
 
   return (
-    <group {...props} dispose={null} scale={bottleStore.scale} rotation={[bottleStore.rotationX, bottleStore.rotationY, bottleStore.rotationZ]}>
+    <group 
+      {...props} 
+      dispose={null} 
+      scale={bottleTransform.scale} 
+      rotation={
+        [
+          bottleTransform.rotationX * Math.PI, 
+          bottleTransform.rotationY * Math.PI, 
+          bottleTransform.rotationZ * Math.PI
+        ]}>
       <mesh geometry={(nodes.Bottle_cap as THREE.Mesh).geometry}>
         <meshPhysicalMaterial
-          color={bottleStore.capColor}
-          roughness={bottleStore.capRoughness}
-          metalness={bottleStore.capMetallic}
+          color={capMaterial.color}
+          roughness={capMaterial.roughness}
+          metalness={capMaterial.metallic}
           side={THREE.DoubleSide}
-          transmission={bottleStore.capTransmission}></meshPhysicalMaterial>
+          transmission={capMaterial.transmission}></meshPhysicalMaterial>
       </mesh>
       <mesh geometry={(nodes.Bottle as THREE.Mesh).geometry} frustumCulled={false}>
         <meshPhysicalMaterial
-          color={bottleStore.bodyColor}
-          roughness={bottleStore.bodyRoughness}
-          metalness={bottleStore.bodyMetallic}
+          color={bodyMaterial.color}
+          roughness={bodyMaterial.roughness}
+          metalness={bodyMaterial.metallic}
           side={THREE.DoubleSide}
-          transmission={bottleStore.bodyTransmission}></meshPhysicalMaterial>
+          transmission={bodyMaterial.transmission}></meshPhysicalMaterial>
       </mesh>
       <mesh geometry={(nodes.Bottle_body as THREE.Mesh).geometry} frustumCulled={false}>
         <meshPhysicalMaterial
-          color={bottleStore.bodyColor}
-          roughness={bottleStore.bodyRoughness}
-          metalness={bottleStore.bodyMetallic}
+          color={bodyMaterial.color}
+          roughness={bodyMaterial.roughness}
+          metalness={bodyMaterial.metallic}
           side={THREE.DoubleSide}
-          transmission={bottleStore.bodyTransmission}></meshPhysicalMaterial>
+          transmission={bodyMaterial.transmission}></meshPhysicalMaterial>
       </mesh>
       {
         texture !== null &&
@@ -70,10 +77,10 @@ export function WaterBottle(props: JSX.IntrinsicElements['group']) {
             ref={materialRef}
             map={texture}
             transparent={true}
-            roughness={bottleStore.textureRoughness}
-            metalness={bottleStore.bodyMetallic}
+            roughness={bodyTexture.textureRoughness}
+            metalness={bodyTexture.textureMetalness}
             side={THREE.DoubleSide}
-            transmission={Math.min(bottleStore.textureTransmission + 0.1, 1)}></meshPhysicalMaterial>
+            transmission={bodyTexture.textureTransmission}></meshPhysicalMaterial>
         </mesh>
       }
     </group>

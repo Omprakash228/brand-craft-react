@@ -1,28 +1,16 @@
 import { createListCollection } from "@chakra-ui/react";
 import useProductStore from "./ProductStore"
 import { LuPackage } from "react-icons/lu";
-import Dropdown from "../ui/Dropdown/Dropdown";
-import { Suspense, type JSX } from "react";
-import CupSettings from "../../models/Cup/CupSettings";
-import WaterBottleSettings from "../../models/WaterBottle/WaterBottleSettings";
-import SodaCanSettings from "../../models/SodaCan/SodaCanSettings";
+import { Suspense } from "react";
+import Dropdown from "../../ui/Dropdown/Dropdown";
+import { productMap } from "../../../shared/Constants";
 
 export default function ProductSettings() {
     const productStore = useProductStore();
 
     const products = createListCollection({
-        items: [
-            { label: "Cup", value: "Cup" },
-            { label: "Water bottle", value: "Water bottle" },
-            { label: "Soda can", value: "Soda can" },
-        ],
+        items: Object.keys(productMap).map((v) => { return {label: v, value: v }}),
     })
-
-    const productSettingsMap: Record<string, JSX.Element> = {
-        'Cup': <CupSettings />,
-        'Water bottle': <WaterBottleSettings />,
-        'Soda can': <SodaCanSettings />
-    }
 
     return (
         <>
@@ -37,7 +25,7 @@ export default function ProductSettings() {
                     multiple={false}
                     onChange={((value) => { productStore.setProduct(value[0]) })} />
             </div>
-            <Suspense>{productSettingsMap[productStore.product]}</Suspense>
+            <Suspense>{productMap[productStore.product][1]}</Suspense>
         </>
     )
 }

@@ -1,25 +1,17 @@
 import { Environment, OrbitControls } from "@react-three/drei";
 import { useThree } from "@react-three/fiber";
-import { Suspense, useEffect, type JSX } from "react";
+import { Suspense, useEffect } from "react";
 import * as THREE from 'three';
-import { Cup } from "../../models/Cup/Cup";
-import { WaterBottle } from "../../models/WaterBottle/WaterBottle";
-import './Scene.css'
-import { SodaCan } from "../../models/SodaCan/SodaCan";
-import useProductStore from "../Product/ProductStore";
-import useEnvironmentStore from "./SceneStore";
+import useEnvironmentStore from "../Properties/Scene/SceneStore";
+import { hdrMap, productMap } from "../../shared/Constants";
+import useExportStore from "../Properties/Export/ExportStore";
+import useProductStore from "../Properties/Product/ProductStore";
 import Loading from "./Loading";
-import { hdrMap } from "../../shared/Constants";
-import useExportStore from "../Export/ExportStore";
+import './Scene.css'
 
 export default function Scene() {
     const productStore = useProductStore();
     const envStore = useEnvironmentStore();
-    const componentMap: Record<string, JSX.Element> = {
-        'Cup': <Cup />,
-        'Water bottle': <WaterBottle />,
-        'Soda can': <SodaCan />
-    }
     const { gl, scene, camera } = useThree();
     const setHandles = useExportStore((s) => s.setHandles);
 
@@ -29,7 +21,7 @@ export default function Scene() {
 
     return (
         <>
-            <OrbitControls makeDefault enableDamping dampingFactor={0.1} />
+            <OrbitControls makeDefault enableDamping dampingFactor={0.1} enableZoom={false} />
             {
                 envStore.environment !== 'HDRI' &&
                 <>
@@ -65,7 +57,7 @@ export default function Scene() {
                         files={hdrMap[envStore.hdri]}></Environment>
                 }
 
-                {componentMap[productStore.product]}
+                {productMap[productStore.product][0]}
             </Suspense>
         </>
     )

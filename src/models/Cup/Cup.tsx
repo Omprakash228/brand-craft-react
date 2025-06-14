@@ -6,20 +6,22 @@ Command: npx gltfjsx@6.5.3 .\public\cup.glb -t
 import * as THREE from 'three'
 import { useEffect, useRef, type JSX } from 'react'
 import { useGLTF } from '@react-three/drei'
-import useCupStore from './CupStore'
+import { useCupMaterial, useCupTexture, useCupTransform } from './CupStore'
 
 export function Cup(props: JSX.IntrinsicElements['group']) {
   const { nodes } = useGLTF('/cup.glb')
   const meshGroup = useRef(new THREE.Group())
-  const cupStore = useCupStore();
-  const texture = useCupStore((state) => state.texture);
+  const cupTexture = useCupTexture();
+  const cupTransform = useCupTransform();
+  const cupMaterial = useCupMaterial();
+  const texture = useCupTexture((state) => state.texture);
   const materialRef = useRef<THREE.MeshPhysicalMaterial>(null);
 
   useEffect(() => {
     if (materialRef.current) {
       materialRef.current.needsUpdate = true;
     }
-    useCupStore.subscribe((state, prevState) => {
+    useCupTexture.subscribe((state) => {
       // set Scale
       if (texture && texture.repeat.x !== state.textureScale) {
         // Avoid divide-by-zero
@@ -30,38 +32,41 @@ export function Cup(props: JSX.IntrinsicElements['group']) {
       if (texture && (texture.offset.x !== state.texturePosX || texture.offset.y !== state.texturePosY)) {
         texture.offset.set(state.texturePosX, state.texturePosY);
       }
-      // set Repeat
-      if (texture && (state.textureRepeat !== prevState.textureRepeat)) {
-        texture.wrapS = texture.wrapT = state.textureRepeat ? THREE.RepeatWrapping : THREE.ClampToEdgeWrapping;
-        texture.needsUpdate = true;
-      }
+      // // set Repeat
+      // if (texture && (state.textureRepeat !== prevState.textureRepeat)) {
+      //   texture.wrapS = texture.wrapT = state.textureRepeat ? THREE.RepeatWrapping : THREE.ClampToEdgeWrapping;
+      //   texture.needsUpdate = true;
+      // }
     })
   }, [texture]);
 
-  // useFrame(() => {
-  //   if (cup.AutoRotate) {
-  //     const multiplier = cup.Clockwise ? -1 : 1;
-  //     meshGroup.current.rotation.y += (0.01 * multiplier);
-  //   }
-  // })
-
   return (
-    <group {...props} ref={meshGroup} dispose={null} scale={cupStore.scale} rotation={[cupStore.rotationX, cupStore.rotationY, cupStore.rotationZ]}>
+    <group 
+      {...props} 
+      ref={meshGroup} 
+      dispose={null} 
+      scale={cupTransform.scale} 
+      rotation={
+        [
+          cupTransform.rotationX * Math.PI,
+          cupTransform.rotationY * Math.PI, 
+          cupTransform.rotationZ * Math.PI
+        ]}>
       <mesh geometry={(nodes.cup as THREE.Mesh).geometry}>
         <meshPhysicalMaterial
-          color={cupStore.color}
-          roughness={cupStore.roughness}
-          metalness={cupStore.metallic}
+          color={cupMaterial.color}
+          roughness={cupMaterial.roughness}
+          metalness={cupMaterial.metallic}
           side={THREE.DoubleSide}
-          transmission={cupStore.transmission}></meshPhysicalMaterial>
+          transmission={cupMaterial.transmission}></meshPhysicalMaterial>
       </mesh>
       <mesh geometry={(nodes.cup_body as THREE.Mesh).geometry}>
         <meshPhysicalMaterial
-          color={cupStore.color}
-          roughness={cupStore.roughness}
-          metalness={cupStore.metallic}
+          color={cupMaterial.color}
+          roughness={cupMaterial.roughness}
+          metalness={cupMaterial.metallic}
           side={THREE.DoubleSide}
-          transmission={cupStore.transmission}></meshPhysicalMaterial>
+          transmission={cupMaterial.transmission}></meshPhysicalMaterial>
       </mesh>
       {
         texture !== null &&
@@ -70,10 +75,10 @@ export function Cup(props: JSX.IntrinsicElements['group']) {
             ref={materialRef}
             map={texture}
             transparent={true}
-            roughness={cupStore.textureRoughness}
-            metalness={cupStore.metallic}
+            roughness={cupTexture.textureRoughness}
+            metalness={cupTexture.textureMetalness}
             side={THREE.DoubleSide}
-            transmission={Math.min(cupStore.textureTransmission + 0.1, 1)}></meshPhysicalMaterial>
+            transmission={cupTexture.textureTransmission}></meshPhysicalMaterial>
         </mesh>
       }
     </group>
