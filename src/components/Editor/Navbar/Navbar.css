@@ -23,8 +23,8 @@
 
 #logo {
   background: url("/images/logo.png");
-  height: 20px;
-  width: 20px;
+  height: 25px;
+  width: 25px;
   background-size: contain;
   background-repeat: no-repeat;
 }

@@ -1,0 +1,9 @@
+#examples {
+    height: 400px;
+    color: black;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 16px;
+    background: rgba(244, 238, 235, 1);
+}

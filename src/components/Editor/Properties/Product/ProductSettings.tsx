@@ -2,8 +2,8 @@ import { createListCollection } from "@chakra-ui/react";
 import useProductStore from "./ProductStore"
 import { LuPackage } from "react-icons/lu";
 import { Suspense } from "react";
-import Dropdown from "../../ui/Dropdown/Dropdown";
-import { productMap } from "../../../shared/Constants";
+import Dropdown from "../../../ui/Dropdown/Dropdown";
+import { productMap } from "../../../../shared/Constants";
 
 export default function ProductSettings() {
     const productStore = useProductStore();

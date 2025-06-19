@@ -19,7 +19,7 @@ export default function Loading() {
     return <>
         <Center ref={textRef}>
             <Text3D material={material} font="/fonts/Roboto_Regular.json" scale={0.3}>
-                {progress} % loaded
+                {progress.toString(2)}% loaded
             </Text3D>
         </Center>
     </>

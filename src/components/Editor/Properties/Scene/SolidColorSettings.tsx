@@ -1,9 +1,9 @@
 import { Accordion, Span } from "@chakra-ui/react"
-import CheckBox from "../../ui/CheckBox/CheckBox"
-import Colorpicker from "../../ui/Colorpicker/Colorpicker"
-import InputSlider from "../../ui/InputSlider/InputSlider"
 import useEnvironmentStore from "./SceneStore";
 import { MdColorLens } from "react-icons/md";
+import CheckBox from "../../../ui/CheckBox/CheckBox";
+import Colorpicker from "../../../ui/Colorpicker/Colorpicker";
+import InputSlider from "../../../ui/InputSlider/InputSlider";
 
 export default function SolidColorSettings() {
     const envStore = useEnvironmentStore();
