@@ -48,7 +48,7 @@ export default function Home() {
                             >
                                 <SodaCanLandingPage />
                             </Float>
-                            <ContactShadows position={[0.05, -1, -0.25]} opacity={0.4} scale={15} blur={2} far={5} />
+                            <ContactShadows position={[0.05, -1, -0.25]} opacity={0.35} scale={10} blur={2} far={5} />
                         </Suspense>
                     </Bvh>
                 </Canvas>
