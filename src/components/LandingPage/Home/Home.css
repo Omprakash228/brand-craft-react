@@ -85,9 +85,9 @@
   }
 
   #home-left {
-    width: 80%;
+    width: 90%;
     height: 50%;
-    margin-top: 67px;
+    gap: 1.4rem;
     margin-left: auto;
     margin-right: auto;
   }
@@ -103,7 +103,7 @@
 
   .bold-text {
     font-size: 14px;
-    line-height: 16px;
+    line-height: unset;
   }
 
   .main-text {
@@ -123,10 +123,17 @@
   }
 }
 
+@media only screen and (max-width: 850px) {
+  #home-left {
+    width: 100%;
+    gap: 1.4rem;
+  }
+}
+
 @media only screen and (max-width: 700px) {
   #home-left {
     width: 100%;
-    gap: 1.8rem;
+    gap: 1.4rem;
   }
 
   .bold-text {
