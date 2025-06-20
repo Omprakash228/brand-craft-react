@@ -1,5 +1,5 @@
 import { Canvas } from '@react-three/fiber'
-import { Bvh, ContactShadows, Environment, Float, OrbitControls } from '@react-three/drei'
+import { Bvh, ContactShadows, Environment, Float } from '@react-three/drei'
 import './Home.css'
 import { Suspense } from 'react'
 import { SodaCanLandingPage } from '../../../models/Soda_can_landing_page'
