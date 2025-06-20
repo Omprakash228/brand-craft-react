@@ -21,7 +21,7 @@ export function SodaCanLandingPage(props: JSX.IntrinsicElements['group']) {
   }, []);
 
   return (
-    <group {...props} dispose={null} rotation={[0, Math.PI/4, 0]} scale={isMobile ? 1.65 : 1.2}>
+    <group {...props} dispose={null} rotation={[0, Math.PI/4, 0]} scale={isMobile ? 1.5 : 1.2}>
       <mesh receiveShadow castShadow geometry={(nodes.Soda_can_body as THREE.Mesh).geometry} material={materials.white_shd} />
       <mesh receiveShadow castShadow geometry={(nodes.Soda_can_metal as THREE.Mesh).geometry}>
         <meshPhysicalMaterial
