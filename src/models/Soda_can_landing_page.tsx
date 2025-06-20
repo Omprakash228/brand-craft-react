@@ -5,12 +5,23 @@ Command: npx gltfjsx@6.5.3 .\public\soda_can_landing_page.glb -t
 
 import * as THREE from 'three'
 import { useGLTF } from '@react-three/drei'
-import type { JSX } from 'react'
+import { useEffect, useState, type JSX } from 'react'
 
 export function SodaCanLandingPage(props: JSX.IntrinsicElements['group']) {
   const { nodes, materials } = useGLTF('/soda_can_landing_page.glb')
+  const [isMobile, setIsMobile] = useState(window.innerWidth < 1050);
+
+  useEffect(() => {
+    const handleResize = () => {
+      setIsMobile(window.innerWidth < 1050);
+    };
+
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
+
   return (
-    <group {...props} dispose={null} rotation={[0, Math.PI/4, 0]} scale={1.2}>
+    <group {...props} dispose={null} rotation={[0, Math.PI/4, 0]} scale={isMobile ? 1.65 : 1.2}>
       <mesh receiveShadow castShadow geometry={(nodes.Soda_can_body as THREE.Mesh).geometry} material={materials.white_shd} />
       <mesh receiveShadow castShadow geometry={(nodes.Soda_can_metal as THREE.Mesh).geometry}>
         <meshPhysicalMaterial

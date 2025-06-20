@@ -26,7 +26,7 @@ type Action = {
 
 const useEnvironmentStore = create<Scene & Action>((set) => ({
   environment: "Solid color",
-  color: "#9E9882",
+  color: "#2e2e2e",
   colorTransparent: false,
   colorIntensity: 1,
   hdri: "Apartment",
