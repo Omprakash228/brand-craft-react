@@ -22,17 +22,6 @@ export default function Home() {
                 <div id="home-right">
                     <Canvas id="home-canvas" camera={{ fov: 35, position: [3, 2, 6] }} resize={{ debounce: 100 }} gl={{ preserveDrawingBuffer: true }}>
                         <Bvh>
-                            <OrbitControls
-                                makeDefault
-                                enableDamping
-                                dampingFactor={0.1}
-                                enableZoom={false}
-                                enablePan={false}
-                                minPolarAngle={Math.PI / 2.5}
-                                maxPolarAngle={Math.PI / 2.2}
-                                minAzimuthAngle={Math.PI / 8}
-                                maxAzimuthAngle={Math.PI / 2}
-                                rotateSpeed={0.25} />
                             <Environment
                                 background={false}
                                 near={1}

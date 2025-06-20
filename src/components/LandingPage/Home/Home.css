@@ -26,10 +26,6 @@
   gap: 2.5rem;
 }
 
-#home-right {
-  cursor: grab;
-}
-
 .bold-text {
   color: rgba(124, 101, 93, 1);
   font-family: "DM Sans", sans-serif;
@@ -104,7 +100,7 @@
 
   .bold-text {
     font-size: 14px;
-    line-height: unset;
+    line-height: 16px;
   }
 
   .main-text {
@@ -143,19 +139,9 @@
     height: 53%;
   }
 
-  .bold-text {
-    font-size: 14px;
-    line-height: 16px;
-  }
-
   .main-text {
     font-size: 45px;
     line-height: 50px;
-  }
-
-  .description {
-    font-size: 14px;
-    line-height: 16px;
   }
 
   .action-btn {
@@ -183,12 +169,12 @@
 
   .main-text {
     font-size: 35px;
-    line-height: 37px;
+    line-height: 40px;
   }
 
   .description {
     font-size: 12px;
-    line-height: 14px;
+    line-height: 18px;
   }
 
   .action-btn {
