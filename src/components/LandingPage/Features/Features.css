@@ -70,6 +70,8 @@
 
 ul {
   list-style-type: disc; /* or circle, disc, none, etc. */
+  list-style-position: inside;
+  text-align: left;
 }
 
 li::marker {
@@ -110,5 +112,9 @@ li::marker {
   .feature-card-description {
     font-size: 12px;
     line-height: 18px;
+  }
+
+  ul {
+    text-align: center;
   }
 }
