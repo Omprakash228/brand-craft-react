@@ -7,7 +7,7 @@ import { MdArrowForward, MdMenu } from "react-icons/md";
 import { usePath } from "crossroad";
 
 export default function LandingPage() {
-    const [path, setPath] = usePath();
+    const setPath = usePath()[1];
     const navigateTo = (dest: string) => {
         const targetElement = document.getElementById(dest);
         const offset = 67; // height of the fixed navbar

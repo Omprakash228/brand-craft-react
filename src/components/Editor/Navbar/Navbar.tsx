@@ -2,7 +2,7 @@ import { usePath } from 'crossroad';
 import './Navbar.css'
 
 export default function Navbar() {
-    const [path, setPath] = usePath();
+    const setPath = usePath()[1];
     
     return (
         <div id="nav-container">
