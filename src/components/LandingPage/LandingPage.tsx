@@ -1,7 +1,6 @@
 import Examples from "./Examples/Examples";
 import Features from "./Features/Features";
 import Home from "./Home/Home";
-import Pricing from "./Pricing/Pricing";
 import './LandingPage.css';
 import { MdArrowForward, MdMenu } from "react-icons/md";
 import { usePath } from "crossroad";
