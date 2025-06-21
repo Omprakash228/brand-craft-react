@@ -7,7 +7,7 @@ interface MaterialProps {
 }
 
 export default function MaterialControls({
-    store
+    store,
 }: MaterialProps) {
     return (
         <>

@@ -10,6 +10,7 @@ const createTransformState = () => ({
   rotationX: 0,
   rotationY: 0.25,
   rotationZ: 0,
+  globalMaterial: false,
 });
 
 export const useCanTransform = create<Transform & TransformActions>((set) => ({
@@ -18,6 +19,7 @@ export const useCanTransform = create<Transform & TransformActions>((set) => ({
   setRotationX: (rotationX: number) => set(() => ({ rotationX: rotationX })),
   setRotationY: (rotationY: number) => set(() => ({ rotationY: rotationY })),
   setRotationZ: (rotationZ: number) => set(() => ({ rotationZ: rotationZ })),
+  setGlobalMaterial: (globalMaterial: boolean) => set(() => ({ globalMaterial: globalMaterial })),
   resetTransform: () => set(createTransformState()),
 }));
 

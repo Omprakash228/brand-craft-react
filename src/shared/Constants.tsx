@@ -5,6 +5,8 @@ import SodaCanSettings from "../models/SodaCan/SodaCanSettings";
 import { Cup } from "../models/Cup/Cup";
 import { WaterBottle } from "../models/WaterBottle/WaterBottle";
 import { SodaCan } from "../models/SodaCan/SodaCan";
+import ShirtSettings from "../models/Shirt/ShirtSettings";
+import { Shirt } from "../models/Shirt/Shirt";
 
 export const hdrMap: Record<string, string> = {
   Apartment: "hdr/lebombo_1k.hdr",
@@ -35,5 +37,6 @@ export const aspectResolutions: Record<string, [number, number]> = {
 export const productMap: Record<string, JSX.Element[]> = {
   'Cup': [<Cup />, <CupSettings />],
   'Water bottle': [<WaterBottle />, <WaterBottleSettings />],
-  'Soda can': [<SodaCan />, <SodaCanSettings />]
+  'Soda can': [<SodaCan />, <SodaCanSettings />],
+  'T-shirt': [<Shirt/>, <ShirtSettings />]
 }

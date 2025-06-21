@@ -83,15 +83,15 @@
 }
 
 .cup {
-  background-image: url("/public/images/cup.webp");
+  background-image: url("/images/cup.webp");
 }
 
 .soda-can {
-  background-image: url("/public/images/soda_can.webp");
+  background-image: url("/images/soda_can.webp");
 }
 
 .bottle {
-  background-image: url("/public/images/water_bottle.webp");
+  background-image: url("/images/water_bottle.webp");
 }
 
 @media only screen and (max-width: 1050px) {

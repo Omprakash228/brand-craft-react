@@ -15,7 +15,7 @@ export default function Export() {
         items: aspectRatios.map((v) => { return { label: v, value: v } }),
     });
 
-    const exportImage = (type: 'png' | 'jpg') => {
+    const exportImage = (type: 'png' | 'jpeg') => {
         const filename = `${product}.${type}`
 
         if (exportStore.gl !== null && exportStore.camera !== null && exportStore.scene !== null) {
@@ -71,7 +71,7 @@ export default function Export() {
             </div>
             <div className="button-wrapper">
                 <Button size="xs" variant={'subtle'} style={{ width: '48%' }} onClick={() => exportImage('png')}>Export PNG</Button>
-                <Button size="xs" variant={'subtle'} style={{ width: '48%' }} onClick={() => exportImage('jpg')}>Export JPG</Button>
+                <Button size="xs" variant={'subtle'} style={{ width: '48%' }} onClick={() => exportImage('jpeg')}>Export JPG</Button>
             </div>
         </>
     )

@@ -1,21 +1,21 @@
 @font-face {
   font-family: 'Roboto Mono';
-  src: url('fonts/RobotoMono.ttf');
+  src: url('/fonts/RobotoMono.ttf');
 }
 
 @font-face {
   font-family: 'DM Sans';
-  src: url('fonts/DMSans.ttf');
+  src: url('/fonts/DMSans.ttf');
 }
 
 @font-face {
   font-family: 'DM Serif';
-  src: url('fonts/DMSerifText.ttf');
+  src: url('/fonts/DMSerifText.ttf');
 }
 
 @font-face {
   font-family: 'Roboto';
-  src: url('fonts/Roboto.ttf');
+  src: url('/fonts/Roboto.ttf');
 }
 
 html {

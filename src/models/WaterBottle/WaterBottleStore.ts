@@ -10,6 +10,7 @@ const createTransformState = () => ({
   rotationX: 0,
   rotationY: 0,
   rotationZ: 0,
+  globalMaterial: false,
 });
 
 export const useBottleTransform = create<Transform & TransformActions>((set) => ({
@@ -17,7 +18,8 @@ export const useBottleTransform = create<Transform & TransformActions>((set) => 
   setScale: (scale: number) => set(() => ({ scale: scale })),
   setRotationX: (rotationX: number) => set(() => ({ rotationX: rotationX })),
   setRotationY: (rotationY: number) => set(() => ({ rotationY: rotationY })),
-  setRotationZ: (rotationZ: number) => set(() => ({ rotationZ: rotationZ })),
+  setRotationZ: (rotationZ: number) => set(() => ({ rotationZ: rotationZ })),  
+  setGlobalMaterial: (globalMaterial: boolean) => set(() => ({ globalMaterial: globalMaterial })),
   resetTransform: () => set(createTransformState())
 }));
 

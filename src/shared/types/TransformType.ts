@@ -3,6 +3,7 @@ export type Transform = {
   rotationX: number;
   rotationY: number;
   rotationZ: number;
+  globalMaterial: boolean;
 };
 
 export type TransformActions = {
@@ -10,6 +11,7 @@ export type TransformActions = {
   setRotationX: (rotationX: number) => void;
   setRotationY: (rotationY: number) => void;
   setRotationZ: (rotationZ: number) => void;
+  setGlobalMaterial: (globalMaterial: boolean) => void;
   resetTransform: () => void;
 };
 
