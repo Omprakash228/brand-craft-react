@@ -3,7 +3,7 @@ import InputSlider from "../../components/ui/InputSlider/InputSlider"
 import type { Material, MaterialActions } from "../types/MaterialType"
 
 interface MaterialProps {
-    store: Material & MaterialActions
+    store: Array<Material & MaterialActions>
 }
 
 export default function MaterialControls({
@@ -16,8 +16,8 @@ export default function MaterialControls({
                 <Colorpicker
                     size="2xs"
                     width="55%"
-                    selectedValue={store.color}
-                    onChange={((value) => { store.setColor(value) })} />
+                    selectedValue={store[0].color}
+                    onChange={((value) => { store.forEach(s => s.setColor(value) )})} />
             </div>
             <div className="input-wrapper">
                 Roughness
@@ -27,8 +27,8 @@ export default function MaterialControls({
                     max={1}
                     step={0.1}
                     width="55%"
-                    selectedValue={store.roughness}
-                    onChange={((value) => { store.setRoughness(value) })} />
+                    selectedValue={store[0].roughness}
+                    onChange={((value) => { store.forEach(s => s.setRoughness(value) )})} />
             </div>
             <div className="input-wrapper">
                 Metallic
@@ -38,8 +38,8 @@ export default function MaterialControls({
                     max={1}
                     step={0.1}
                     width="55%"
-                    selectedValue={store.metallic}
-                    onChange={((value) => { store.setMetallic(value) })} />
+                    selectedValue={store[0].metallic}
+                    onChange={((value) => { store.forEach(s => s.setMetallic(value) )})} />
             </div>
             <div className="input-wrapper">
                 Glass
@@ -49,8 +49,8 @@ export default function MaterialControls({
                     max={1}
                     step={0.1}
                     width="55%"
-                    selectedValue={store.transmission}
-                    onChange={((value) => { store.setTransmission(value) })} />
+                    selectedValue={store[0].transmission}
+                    onChange={((value) => { store.forEach(s => s.setTransmission(value) )})} />
             </div>
         </>
     )

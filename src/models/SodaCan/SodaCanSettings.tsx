@@ -35,7 +35,7 @@ export default function SodaCanSettings() {
                     </Accordion.ItemTrigger>
                     <Accordion.ItemContent>
                         <Accordion.ItemBody>
-                            <MaterialControls store={canMaterial} />
+                            <MaterialControls store={[canMaterial]} />
                         </Accordion.ItemBody>
                     </Accordion.ItemContent>
                 </Accordion.Item>

@@ -6,8 +6,6 @@ import MaterialControls from "../../shared/components/MaterialControls";
 import { LuImage } from "react-icons/lu";
 import TextureControls from "../../shared/components/TextureControls";
 import CheckBox from "../../components/ui/CheckBox/CheckBox";
-import Colorpicker from "../../components/ui/Colorpicker/Colorpicker";
-import InputSlider from "../../components/ui/InputSlider/InputSlider";
 
 export default function ShirtSettings() {
     const shirtTransform = useShirtTransform();
@@ -58,73 +56,11 @@ export default function ShirtSettings() {
                                 onChange={((value) => { shirtTransform.setGlobalMaterial(!!value) })} />
                             {
                                 shirtTransform.globalMaterial &&
-                                <>
-                                    <div className="input-wrapper">
-                                        Color
-                                        <Colorpicker
-                                            size="2xs"
-                                            width="55%"
-                                            selectedValue={frontMaterial.color}
-                                            onChange={((value) => {
-                                                frontMaterial.setColor(value)
-                                                backMaterial.setColor(value)
-                                                rightSleeveMaterial.setColor(value)
-                                                leftSleeveMaterial.setColor(value)
-                                                collarMaterial.setColor(value)
-                                            })} />
-                                    </div>
-                                    <div className="input-wrapper">
-                                        Roughness
-                                        <InputSlider
-                                            size="sm"
-                                            min={0}
-                                            max={1}
-                                            step={0.1}
-                                            width="55%"
-                                            selectedValue={frontMaterial.roughness}
-                                            onChange={((value) => {
-                                                frontMaterial.setRoughness(value)
-                                                backMaterial.setRoughness(value)
-                                                rightSleeveMaterial.setRoughness(value)
-                                                leftSleeveMaterial.setRoughness(value)
-                                                collarMaterial.setRoughness(value)
-                                            })} />
-                                    </div>
-                                    <div className="input-wrapper">
-                                        Metallic
-                                        <InputSlider
-                                            size="sm"
-                                            min={0}
-                                            max={1}
-                                            step={0.1}
-                                            width="55%"
-                                            selectedValue={frontMaterial.metallic}
-                                            onChange={((value) => {
-                                                frontMaterial.setMetallic(value)
-                                                backMaterial.setMetallic(value)
-                                                rightSleeveMaterial.setMetallic(value)
-                                                leftSleeveMaterial.setMetallic(value)
-                                                collarMaterial.setMetallic(value)
-                                            })} />
-                                    </div>
-                                    <div className="input-wrapper">
-                                        Glass
-                                        <InputSlider
-                                            size="sm"
-                                            min={0}
-                                            max={1}
-                                            step={0.1}
-                                            width="55%"
-                                            selectedValue={frontMaterial.transmission}
-                                            onChange={((value) => {
-                                                frontMaterial.setTransmission(value)
-                                                backMaterial.setTransmission(value)
-                                                rightSleeveMaterial.setTransmission(value)
-                                                leftSleeveMaterial.setTransmission(value)
-                                                collarMaterial.setTransmission(value)
-                                            })} />
-                                    </div>
-                                </>
+                                <MaterialControls store={[frontMaterial,
+                                    backMaterial,
+                                    rightSleeveMaterial,
+                                    leftSleeveMaterial,
+                                    collarMaterial,]} />
                             }
                         </Accordion.ItemBody>
                     </Accordion.ItemContent>
@@ -139,7 +75,7 @@ export default function ShirtSettings() {
                         </Accordion.ItemTrigger>
                         <Accordion.ItemContent>
                             <Accordion.ItemBody>
-                                <MaterialControls store={collarMaterial} />
+                                <MaterialControls store={[collarMaterial]} />
                             </Accordion.ItemBody>
                         </Accordion.ItemContent>
                     </Accordion.Item>
@@ -154,7 +90,7 @@ export default function ShirtSettings() {
                         </Accordion.ItemTrigger>
                         <Accordion.ItemContent>
                             <Accordion.ItemBody>
-                                <MaterialControls store={frontMaterial} />
+                                <MaterialControls store={[frontMaterial]} />
                             </Accordion.ItemBody>
                         </Accordion.ItemContent>
                     </Accordion.Item>
@@ -181,7 +117,7 @@ export default function ShirtSettings() {
                         </Accordion.ItemTrigger>
                         <Accordion.ItemContent>
                             <Accordion.ItemBody>
-                                <MaterialControls store={backMaterial} />
+                                <MaterialControls store={[backMaterial]} />
                             </Accordion.ItemBody>
                         </Accordion.ItemContent>
                     </Accordion.Item>
@@ -208,7 +144,7 @@ export default function ShirtSettings() {
                         </Accordion.ItemTrigger>
                         <Accordion.ItemContent>
                             <Accordion.ItemBody>
-                                <MaterialControls store={rightSleeveMaterial} />
+                                <MaterialControls store={[rightSleeveMaterial]} />
                             </Accordion.ItemBody>
                         </Accordion.ItemContent>
                     </Accordion.Item>
@@ -235,7 +171,7 @@ export default function ShirtSettings() {
                         </Accordion.ItemTrigger>
                         <Accordion.ItemContent>
                             <Accordion.ItemBody>
-                                <MaterialControls store={leftSleeveMaterial} />
+                                <MaterialControls store={[leftSleeveMaterial]} />
                             </Accordion.ItemBody>
                         </Accordion.ItemContent>
                     </Accordion.Item>

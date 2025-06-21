@@ -25,8 +25,8 @@ export function SodaCanLandingPage(props: JSX.IntrinsicElements['group']) {
       <mesh receiveShadow castShadow geometry={(nodes.Soda_can_body as THREE.Mesh).geometry} material={materials.white_shd} />
       <mesh receiveShadow castShadow geometry={(nodes.Soda_can_metal as THREE.Mesh).geometry}>
         <meshPhysicalMaterial
-          color={'#cacaca'}
-          roughness={0.1}
+          color={'#8a8a8a'}
+          roughness={0}
           side={THREE.DoubleSide}
           metalness={1}></meshPhysicalMaterial>
       </mesh>

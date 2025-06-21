@@ -6,8 +6,6 @@ import TransformControls from "../../shared/components/TransformControls";
 import MaterialControls from "../../shared/components/MaterialControls";
 import TextureControls from "../../shared/components/TextureControls";
 import CheckBox from "../../components/ui/CheckBox/CheckBox";
-import Colorpicker from "../../components/ui/Colorpicker/Colorpicker";
-import InputSlider from "../../components/ui/InputSlider/InputSlider";
 
 export default function WaterBottleSettings() {
     const bottleTransform = useBottleTransform();
@@ -35,61 +33,7 @@ export default function WaterBottleSettings() {
                             onChange={((value) => { bottleTransform.setGlobalMaterial(!!value) })} />
                         {
                             bottleTransform.globalMaterial &&
-                            <>
-                                <div className="input-wrapper">
-                                    Color
-                                    <Colorpicker
-                                        size="2xs"
-                                        width="55%"
-                                        selectedValue={bodyMaterial.color}
-                                        onChange={((value) => {
-                                            bodyMaterial.setColor(value)
-                                            capMaterial.setColor(value)
-                                        })} />
-                                </div>
-                                <div className="input-wrapper">
-                                    Roughness
-                                    <InputSlider
-                                        size="sm"
-                                        min={0}
-                                        max={1}
-                                        step={0.1}
-                                        width="55%"
-                                        selectedValue={bodyMaterial.roughness}
-                                        onChange={((value) => {
-                                            bodyMaterial.setRoughness(value)
-                                            capMaterial.setRoughness(value)
-                                        })} />
-                                </div>
-                                <div className="input-wrapper">
-                                    Metallic
-                                    <InputSlider
-                                        size="sm"
-                                        min={0}
-                                        max={1}
-                                        step={0.1}
-                                        width="55%"
-                                        selectedValue={bodyMaterial.metallic}
-                                        onChange={((value) => {
-                                            bodyMaterial.setMetallic(value)
-                                            capMaterial.setMetallic(value)
-                                        })} />
-                                </div>
-                                <div className="input-wrapper">
-                                    Glass
-                                    <InputSlider
-                                        size="sm"
-                                        min={0}
-                                        max={1}
-                                        step={0.1}
-                                        width="55%"
-                                        selectedValue={bodyMaterial.transmission}
-                                        onChange={((value) => {
-                                            bodyMaterial.setTransmission(value)
-                                            capMaterial.setTransmission(value)
-                                        })} />
-                                </div>
-                            </>
+                            <MaterialControls store={[bodyMaterial, capMaterial]} />
                         }
                     </Accordion.ItemBody>
                 </Accordion.ItemContent>
@@ -104,7 +48,7 @@ export default function WaterBottleSettings() {
                     </Accordion.ItemTrigger>
                     <Accordion.ItemContent>
                         <Accordion.ItemBody>
-                            <MaterialControls store={capMaterial} />
+                            <MaterialControls store={[capMaterial]} />
                         </Accordion.ItemBody>
                     </Accordion.ItemContent>
                 </Accordion.Item>
@@ -119,7 +63,7 @@ export default function WaterBottleSettings() {
                     </Accordion.ItemTrigger>
                     <Accordion.ItemContent>
                         <Accordion.ItemBody>
-                            <MaterialControls store={bodyMaterial} />
+                            <MaterialControls store={[bodyMaterial]} />
                         </Accordion.ItemBody>
                     </Accordion.ItemContent>
                 </Accordion.Item>

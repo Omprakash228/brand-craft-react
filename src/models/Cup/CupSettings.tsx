@@ -35,7 +35,7 @@ export default function CupSettings() {
                     </Accordion.ItemTrigger>
                     <Accordion.ItemContent>
                         <Accordion.ItemBody>
-                            <MaterialControls store={cupMaterial} />                            
+                            <MaterialControls store={[cupMaterial]} />                            
                         </Accordion.ItemBody>
                     </Accordion.ItemContent>
                 </Accordion.Item>
