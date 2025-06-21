@@ -1,9 +1,115 @@
 #examples {
-    height: 400px;
-    color: black;
-    display: flex;
+  background: rgba(244, 238, 235, 1);
+  width: 100%;
+}
+
+#examples-content {
+  width: 100%;
+  max-width: 1800px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: row;
+  margin: 0 auto;
+  padding: 75px 50px;
+}
+
+#examples-left,
+#examples-right {
+  width: 49%;
+}
+
+#examples-left {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 2.5rem;
+}
+
+.examples-card-ctr {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2rem;
+}
+
+.examples-card {
+  border-radius: 10px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  background: white;
+  padding: 30px;
+  max-width: 400px;
+}
+
+.examples-card-title {
+  font-family: "DM Serif";
+  font-size: 24px;
+  line-height: 32px;
+  color: rgba(26, 22, 20, 1);
+  font-weight: 400;
+}
+
+.examples-card-description {
+  font-family: "DM Sans";
+  font-size: 16px;
+  line-height: 26px;
+  color: rgba(124, 101, 93, 1);
+  font-weight: 400;
+  margin-top: 20px;
+}
+
+#image-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(150px, 300px));
+  grid-gap: 5px;
+  height: 100%;
+  justify-content: center;
+}
+
+.image {
+  border-radius: 5px;
+  padding: 10px;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: 50% 50%;
+}
+
+.image-full {
+  grid-row-end: span 2;
+  min-height: 400px;
+}
+
+.image-half {
+  grid-row-end: span 1;
+  min-height: 200px;
+}
+
+.cup {
+  background-image: url("/public/images/cup.webp");
+}
+
+.soda-can {
+  background-image: url("/public/images/soda_can.webp");
+}
+
+.bottle {
+  background-image: url("/public/images/water_bottle.webp");
+}
+
+@media only screen and (max-width: 1050px) {
+  #examples-content {
+    flex-direction: column;
+    gap: 30px;
+  }
+
+  #examples-left,
+  #examples-right {
+    width: 100%;
+  }
+
+  #examples-right {
+    height: fit-content;
+  }
+
+  .examples-card-ctr {
     justify-content: center;
-    align-items: center;
-    font-size: 16px;
-    background: rgba(244, 238, 235, 1);
+  }
 }

@@ -5,6 +5,8 @@ import Pricing from "./Pricing/Pricing";
 import './LandingPage.css';
 import { MdArrowForward, MdMenu } from "react-icons/md";
 import { usePath } from "crossroad";
+import Problem from "./Problem/Problem";
+import Solution from "./Solution/Solution";
 
 export default function LandingPage() {
     const setPath = usePath()[1];
@@ -48,9 +50,11 @@ export default function LandingPage() {
             </div>
             <div id="content">
                 <Home />
+                <Problem />
+                <Solution />
                 <Features />
                 <Examples />
-                <Pricing />
+                {/* <Pricing /> */}
             </div>
         </>
     )
