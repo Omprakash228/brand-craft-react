@@ -50,7 +50,7 @@ export default function ShirtSettings() {
                         <Accordion.ItemBody>
                             <TransformControls store={shirtTransform} />
                             <CheckBox
-                                label="Use global material"
+                                label="Single material mode"
                                 size="lg"
                                 selectedValue={shirtTransform.globalMaterial}
                                 onChange={((value) => { shirtTransform.setGlobalMaterial(!!value) })} />

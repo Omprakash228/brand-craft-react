@@ -30,7 +30,8 @@ export function Cup(props: JSX.IntrinsicElements['group']) {
       }
       // set Position
       if (texture && (texture.offset.x !== state.texturePosX || texture.offset.y !== state.texturePosY)) {
-        texture.offset.set(state.texturePosX, state.texturePosY);
+        const safeScale = 1 / Math.max(state.textureScale, 0.01);
+        texture.offset.set(state.texturePosX * safeScale, state.texturePosY * safeScale);
       }
       // // set Repeat
       // if (texture && (state.textureRepeat !== prevState.textureRepeat)) {

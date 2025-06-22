@@ -56,7 +56,8 @@ export function Shirt(props: JSX.IntrinsicElements['group']) {
             }
             // set Position
             if (frontTexture && (frontTexture.offset.x !== state.texturePosX || frontTexture.offset.y !== state.texturePosY)) {
-                frontTexture.offset.set(state.texturePosX, state.texturePosY);
+                const safeScale = 1 / Math.max(state.textureScale, 0.01);
+                frontTexture.offset.set(state.texturePosX * safeScale, state.texturePosY * safeScale);
             }
         })
 
@@ -69,7 +70,8 @@ export function Shirt(props: JSX.IntrinsicElements['group']) {
             }
             // set Position
             if (backTexture && (backTexture.offset.x !== state.texturePosX || backTexture.offset.y !== state.texturePosY)) {
-                backTexture.offset.set(state.texturePosX, state.texturePosY);
+                const safeScale = 1 / Math.max(state.textureScale, 0.01);
+                backTexture.offset.set(state.texturePosX * safeScale, state.texturePosY * safeScale);
             }
         })
 
@@ -82,7 +84,8 @@ export function Shirt(props: JSX.IntrinsicElements['group']) {
             }
             // set Position
             if (rightSleeveTexture && (rightSleeveTexture.offset.x !== state.texturePosX || rightSleeveTexture.offset.y !== state.texturePosY)) {
-                rightSleeveTexture.offset.set(state.texturePosX, state.texturePosY);
+                const safeScale = 1 / Math.max(state.textureScale, 0.01);
+                rightSleeveTexture.offset.set(state.texturePosX * safeScale, state.texturePosY * safeScale);
             }
         })
 
@@ -95,7 +98,8 @@ export function Shirt(props: JSX.IntrinsicElements['group']) {
             }
             // set Position
             if (leftSleeveTexture && (leftSleeveTexture.offset.x !== state.texturePosX || leftSleeveTexture.offset.y !== state.texturePosY)) {
-                leftSleeveTexture.offset.set(state.texturePosX, state.texturePosY);
+                const safeScale = 1 / Math.max(state.textureScale, 0.01);
+                leftSleeveTexture.offset.set(state.texturePosX * safeScale, state.texturePosY * safeScale);
             }
         })
     }, [frontTexture, backTexture, rightSleeveTexture, leftSleeveTexture]);

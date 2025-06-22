@@ -30,10 +30,10 @@ export const CreateTexture = (
       const texture = new THREE.CanvasTexture(canvas);
       texture.generateMipmaps = false;
       texture.flipY = false;
-      texture.center.set(0.5, 0.5);
       texture.wrapS = texture.wrapT = store?.textureRepeat
-        ? THREE.RepeatWrapping
-        : THREE.ClampToEdgeWrapping;
+      ? THREE.RepeatWrapping
+      : THREE.ClampToEdgeWrapping;
+      texture.center.set(0.5, 0.5);
 
       store?.setTexture(texture);
     };

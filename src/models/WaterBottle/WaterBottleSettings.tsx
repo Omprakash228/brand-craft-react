@@ -27,7 +27,7 @@ export default function WaterBottleSettings() {
                     <Accordion.ItemBody>
                         <TransformControls store={bottleTransform} />
                         <CheckBox
-                            label="Use global material"
+                            label="Single material mode"
                             size="lg"
                             selectedValue={bottleTransform.globalMaterial}
                             onChange={((value) => { bottleTransform.setGlobalMaterial(!!value) })} />
