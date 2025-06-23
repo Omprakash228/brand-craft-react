@@ -1,12 +1,12 @@
 import { Auth } from "@supabase/auth-ui-react"
-import { createClient, type Session } from "@supabase/supabase-js"
+import { createClient } from "@supabase/supabase-js"
 import { useEffect, useState } from "react"
 import './CustomAuth.css'
 import { ThemeSupa } from "@supabase/auth-ui-shared"
 import { useAuthStore } from "./AuthStore"
 import { CloseButton, Dialog, Portal } from "@chakra-ui/react"
 
-const supabase = createClient('https://wxveujokpwgpajidobsz.supabase.co', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Ind4dmV1am9rcHdncGFqaWRvYnN6Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDk0MTIyNTIsImV4cCI6MjA2NDk4ODI1Mn0.5b5m04f8tmunQ0_C_YubsjPM12SmwMGVj4tLFrxPQfo')
+const supabase = createClient(process.env.VITE_SUPABASE_URL || '', process.env.VITE_SUPABASE_KEY || '')
 
 export default function CustomAuth() {
     const [open, setOpen] = useState(false)
