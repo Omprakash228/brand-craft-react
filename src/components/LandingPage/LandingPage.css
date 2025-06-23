@@ -31,18 +31,28 @@
 }
 
 #navigation {
-  color: black;
   display: flex;
   font-size: 14px;
   align-items: center;
   gap: 1rem;
 }
 
+#right-ctr {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+}
+
 #content {
   height: 100%;
 }
 
-.nav-item, #contact {
+.nav-item {
+  color: black;
+  cursor: pointer;
+}
+ 
+#contact {
   cursor: pointer;
 }
 
@@ -59,10 +69,6 @@
 
 #mobile-menu {
   display: none;
-  height: 24px;
-  width: 24px;
-  color: black;
-  cursor: pointer;
 }
 
 @media only screen and (max-width: 700px) {
@@ -71,15 +77,17 @@
   }
   
   #top-bar-contents {
-    padding: 15px 25px;
+    padding: 10px 25px;
   }
 
-  #navigation, #contact {
+  #navigation, #right-ctr {
     display: none;
   }
 
   #mobile-menu {
-    display: block;
+    display: flex;
+    gap: 1rem;
+    align-items: center;
   }
 }
 
