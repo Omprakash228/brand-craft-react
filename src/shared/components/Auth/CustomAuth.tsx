@@ -6,7 +6,7 @@ import { ThemeSupa } from "@supabase/auth-ui-shared"
 import { useAuthStore } from "./AuthStore"
 import { CloseButton, Dialog, Portal } from "@chakra-ui/react"
 
-const supabase = createClient(process.env.VITE_SUPABASE_URL || '', process.env.VITE_SUPABASE_KEY || '')
+const supabase = createClient(import.meta.env.VITE_SUPABASE_URL || '', import.meta.env.VITE_SUPABASE_KEY || '')
 
 export default function CustomAuth() {
     const [open, setOpen] = useState(false)
