@@ -1,8 +1,9 @@
-import type { Session } from "@supabase/supabase-js";
+import { createClient, type Session, type SupabaseClient } from "@supabase/supabase-js";
 import { create } from "zustand";
 
 type Auth = {
   session: Session | null;
+  supabase: SupabaseClient<any, "public", any>;
 };
 
 export type AuthActions = {
@@ -11,5 +12,6 @@ export type AuthActions = {
 
 export const useAuthStore = create<Auth & AuthActions>((set) => ({
     session: null,
+    supabase: createClient(import.meta.env.VITE_SUPABASE_URL || '', import.meta.env.VITE_SUPABASE_KEY || ''),
     setSession: (session: Session | null) => set(() => ({ session: session })),
 }));

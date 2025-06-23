@@ -4,6 +4,9 @@ import './User.css'
 
 export default function User() {
     const authStore = useAuthStore();
+    const signout = async () => {
+        await authStore.supabase.auth.signOut().then(() => { authStore.setSession(null) })
+    }
 
     return (
         <Menu.Root>
@@ -20,6 +23,7 @@ export default function User() {
                     <Menu.Content>
                         <Menu.Item value="projects">Projects</Menu.Item>
                         <Menu.Item value="account">Account</Menu.Item>
+                        <Menu.Item value="logout" onClick={() => signout()}>Log out</Menu.Item>
                     </Menu.Content>
                 </Menu.Positioner>
             </Portal>

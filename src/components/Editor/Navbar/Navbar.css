@@ -15,6 +15,10 @@
   gap: 1.2rem;
 }
 
+#right-container > .nav-item {
+  color: white!important;
+}
+
 #app-name-container {
   display: flex;
   align-items: center;
