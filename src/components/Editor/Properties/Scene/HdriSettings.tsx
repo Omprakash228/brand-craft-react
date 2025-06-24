@@ -2,12 +2,13 @@ import { Accordion, createListCollection, Span } from "@chakra-ui/react"
 import { MdImage } from "react-icons/md"
 import useEnvironmentStore from "./SceneStore"
 import Dropdown from "../../../ui/Dropdown/Dropdown"
-import { hdrMap } from "../../../../shared/Constants"
+import { useHdrMap } from "../../../../shared/Constants"
 import CheckBox from "../../../ui/CheckBox/CheckBox"
 import InputSlider from "../../../ui/InputSlider/InputSlider"
 
 export default function HdriSettings() {
     const envStore = useEnvironmentStore()
+    const hdrMap = useHdrMap();
 
     const hdriOptions = createListCollection({
         items: Object.keys(hdrMap).map((key) => { return { label: key, value: key } })

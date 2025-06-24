@@ -3,7 +3,7 @@ import { useThree } from "@react-three/fiber";
 import { Suspense, useEffect } from "react";
 import * as THREE from 'three';
 import useEnvironmentStore from "../Properties/Scene/SceneStore";
-import { hdrMap, productMap } from "../../../shared/Constants";
+import { useHdrMap, productMap } from "../../../shared/Constants";
 import useExportStore from "../Properties/Export/ExportStore";
 import useProductStore from "../Properties/Product/ProductStore";
 import Loading from "./Loading";
@@ -14,6 +14,7 @@ export default function Scene() {
     const envStore = useEnvironmentStore();
     const { gl, scene, camera } = useThree();
     const setHandles = useExportStore((s) => s.setHandles);
+    const hdrMap = useHdrMap();
 
     useEffect(() => {
         setHandles(gl, scene, camera);
