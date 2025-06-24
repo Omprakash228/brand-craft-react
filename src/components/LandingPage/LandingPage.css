@@ -25,6 +25,13 @@
   background-position: center;
 }
 
+#app-name-container {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  cursor: pointer;
+}
+
 #app-name-dark {
   font-size: 20px;
   color: black;

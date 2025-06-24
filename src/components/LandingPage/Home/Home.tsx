@@ -22,11 +22,10 @@ export default function Home() {
                 <div id="home-right">
                     <Canvas id="home-canvas" camera={{ fov: 35, position: [3, 2, 6] }} resize={{ debounce: 100 }} gl={{ preserveDrawingBuffer: true }}>
                         <Bvh>
-                            <ambientLight intensity={0.5} />
-                            <directionalLight position={[10, 10, 10]} intensity={1.5} />
+                            <ambientLight intensity={0.2} />
+                            <directionalLight position={[10, 10, 10]} intensity={7} color={'#bbb'} />
                             <directionalLight position={[0, -10, 0]} intensity={0.1} />
-                            <directionalLight position={[-10, -10, 10]} intensity={0.5} />
-                            <directionalLight position={[0, 0, -10]} intensity={0.4} />
+                            <directionalLight position={[-10, -10, 10]} intensity={0} color={'#333'} />
                             <Environment background={false} near={1} far={1000} resolution={256} environmentIntensity={1}>
                                 <mesh scale={100}>
                                     <sphereGeometry args={[1, 64, 64]} />
