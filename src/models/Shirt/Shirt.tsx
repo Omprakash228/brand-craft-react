@@ -8,7 +8,7 @@ import { useEffect, useRef, type JSX } from 'react'
 import { useGLTF } from '@react-three/drei'
 import { useBackMaterial, useBackTexture, useCollarMaterial, useFrontMaterial, useFrontTexture, useLeftSleeveMaterial, useLeftSleeveTexture, useRightSleeveMaterial, useRightSleeveTexture, useShirtTransform } from './ShirtStore'
 
-export function Shirt(props: JSX.IntrinsicElements['group']) {
+export default function Shirt(props: JSX.IntrinsicElements['group']) {
     const { nodes } = useGLTF('/shirt.glb')
     const shirtTransform = useShirtTransform();
     const collarMaterial = useCollarMaterial();

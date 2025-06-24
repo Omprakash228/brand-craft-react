@@ -8,7 +8,7 @@ import { useEffect, useRef, type JSX } from 'react'
 import { useGLTF } from '@react-three/drei'
 import { useCupMaterial, useCupTexture, useCupTransform } from './CupStore'
 
-export function Cup(props: JSX.IntrinsicElements['group']) {
+export default function Cup(props: JSX.IntrinsicElements['group']) {
   const { nodes } = useGLTF('/cup.glb')
   const meshGroup = useRef(new THREE.Group())
   const cupTexture = useCupTexture();

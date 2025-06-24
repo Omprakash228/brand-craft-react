@@ -8,7 +8,7 @@ import { useEffect, useRef, type JSX } from 'react'
 import { useGLTF } from '@react-three/drei'
 import { useBodyMaterial, useBodyTexture, useBottleTransform, useCapMaterial } from './WaterBottleStore';
 
-export function WaterBottle(props: JSX.IntrinsicElements['group']) {
+export default function WaterBottle(props: JSX.IntrinsicElements['group']) {
   const { nodes } = useGLTF('/water_bottle.glb')
   const texture = useBodyTexture((state) => state.texture);
   const bottleTransform = useBottleTransform();

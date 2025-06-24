@@ -8,7 +8,7 @@ import { useEffect, useRef, type JSX } from 'react'
 import { useGLTF } from '@react-three/drei'
 import { useCanMaterial, useCanTexture, useCanTransform } from './SodaCanStore';
 
-export function SodaCan(props: JSX.IntrinsicElements['group']) {
+export default function SodaCan(props: JSX.IntrinsicElements['group']) {
   const { nodes } = useGLTF('/soda_can.glb')
   const canTexture = useCanTexture();
   const texture = useCanTexture((state) => state.texture);
