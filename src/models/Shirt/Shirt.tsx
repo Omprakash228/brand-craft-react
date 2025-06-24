@@ -7,6 +7,7 @@ import * as THREE from 'three'
 import { useEffect, useRef, type JSX } from 'react'
 import { useGLTF } from '@react-three/drei'
 import { useBackMaterial, useBackTexture, useCollarMaterial, useFrontMaterial, useFrontTexture, useLeftSleeveMaterial, useLeftSleeveTexture, useRightSleeveMaterial, useRightSleeveTexture, useShirtTransform } from './ShirtStore'
+import { updateTexture } from '../../shared/services/TextureService'
 
 export default function Shirt(props: JSX.IntrinsicElements['group']) {
     const { nodes } = useGLTF('/shirt.glb')
@@ -48,59 +49,19 @@ export default function Shirt(props: JSX.IntrinsicElements['group']) {
         }
 
         useFrontTexture.subscribe((state) => {
-            // set Scale
-            if (frontTexture && frontTexture.repeat.x !== state.textureScale) {
-                // Avoid divide-by-zero
-                const safeScale = 1 / Math.max(state.textureScale, 0.01);
-                frontTexture.repeat.set(safeScale, safeScale);
-            }
-            // set Position
-            if (frontTexture && (frontTexture.offset.x !== state.texturePosX || frontTexture.offset.y !== state.texturePosY)) {
-                const safeScale = 1 / Math.max(state.textureScale, 0.01);
-                frontTexture.offset.set(state.texturePosX * safeScale, state.texturePosY * safeScale);
-            }
+            updateTexture(frontTexture, state);
         })
 
         useBackTexture.subscribe((state) => {
-            // set Scale
-            if (backTexture && backTexture.repeat.x !== state.textureScale) {
-                // Avoid divide-by-zero
-                const safeScale = 1 / Math.max(state.textureScale, 0.01);
-                backTexture.repeat.set(safeScale, safeScale);
-            }
-            // set Position
-            if (backTexture && (backTexture.offset.x !== state.texturePosX || backTexture.offset.y !== state.texturePosY)) {
-                const safeScale = 1 / Math.max(state.textureScale, 0.01);
-                backTexture.offset.set(state.texturePosX * safeScale, state.texturePosY * safeScale);
-            }
+            updateTexture(backTexture, state);
         })
 
         useRightSleeveTexture.subscribe((state) => {
-            // set Scale
-            if (rightSleeveTexture && rightSleeveTexture.repeat.x !== state.textureScale) {
-                // Avoid divide-by-zero
-                const safeScale = 1 / Math.max(state.textureScale, 0.01);
-                rightSleeveTexture.repeat.set(safeScale, safeScale);
-            }
-            // set Position
-            if (rightSleeveTexture && (rightSleeveTexture.offset.x !== state.texturePosX || rightSleeveTexture.offset.y !== state.texturePosY)) {
-                const safeScale = 1 / Math.max(state.textureScale, 0.01);
-                rightSleeveTexture.offset.set(state.texturePosX * safeScale, state.texturePosY * safeScale);
-            }
+            updateTexture(rightSleeveTexture, state);
         })
 
         useLeftSleeveTexture.subscribe((state) => {
-            // set Scale
-            if (leftSleeveTexture && leftSleeveTexture.repeat.x !== state.textureScale) {
-                // Avoid divide-by-zero
-                const safeScale = 1 / Math.max(state.textureScale, 0.01);
-                leftSleeveTexture.repeat.set(safeScale, safeScale);
-            }
-            // set Position
-            if (leftSleeveTexture && (leftSleeveTexture.offset.x !== state.texturePosX || leftSleeveTexture.offset.y !== state.texturePosY)) {
-                const safeScale = 1 / Math.max(state.textureScale, 0.01);
-                leftSleeveTexture.offset.set(state.texturePosX * safeScale, state.texturePosY * safeScale);
-            }
+            updateTexture(leftSleeveTexture, state);
         })
     }, [frontTexture, backTexture, rightSleeveTexture, leftSleeveTexture]);
 

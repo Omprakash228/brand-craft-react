@@ -1,6 +1,6 @@
 import Fileupload from "../../components/ui/Fileupload/Fileupload"
 import InputSlider from "../../components/ui/InputSlider/InputSlider";
-import { CreateTexture } from "../ImageService";
+import { CreateTexture } from "../services/TextureService";
 import type { Texture, TextureActions } from "../types/TextureType";
 
 interface TextureProps {

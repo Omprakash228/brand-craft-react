@@ -26,11 +26,10 @@ export default function Scene() {
             {
                 envStore.environment !== 'HDRI' &&
                 <>
-                    <ambientLight intensity={0.5} />
-                    <directionalLight position={[10, 10, 10]} intensity={1.5} />
+                    <ambientLight intensity={0.2} />
+                    <directionalLight position={[10, 10, 10]} intensity={7} color={'#bbb'} />
                     <directionalLight position={[0, -10, 0]} intensity={0.1} />
-                    <directionalLight position={[-10, -10, 10]} intensity={0.5} />
-                    <directionalLight position={[0, 0, -10]} intensity={0.2} />
+                    <directionalLight position={[-10, -10, 10]} intensity={1} color={'#333'} />
                 </>
             }
 

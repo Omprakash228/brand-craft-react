@@ -7,6 +7,7 @@ import * as THREE from 'three'
 import { useEffect, useRef, type JSX } from 'react'
 import { useGLTF } from '@react-three/drei'
 import { useCanMaterial, useCanTexture, useCanTransform } from './SodaCanStore';
+import { updateTexture } from '../../shared/services/TextureService';
 
 export default function SodaCan(props: JSX.IntrinsicElements['group']) {
   const { nodes } = useGLTF('/soda_can.glb')
@@ -21,17 +22,7 @@ export default function SodaCan(props: JSX.IntrinsicElements['group']) {
       materialRef.current.needsUpdate = true;
     }
     useCanTexture.subscribe((state) => {
-      // set Scale
-      if (texture && texture.repeat.x !== state.textureScale) {
-        // Avoid divide-by-zero
-        const safeScale = 1 / Math.max(state.textureScale, 0.01);
-        texture.repeat.set(safeScale, safeScale);
-      }
-      // set Position
-      if (texture && (texture.offset.x !== state.texturePosX || texture.offset.y !== state.texturePosY)) {
-        const safeScale = 1 / Math.max(state.textureScale, 0.01);
-        texture.offset.set(state.texturePosX * safeScale, state.texturePosY * safeScale);
-      }
+      updateTexture(texture, state);
     })
   }, [texture]);
 
