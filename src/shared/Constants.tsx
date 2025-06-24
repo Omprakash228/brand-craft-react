@@ -22,7 +22,10 @@ export const useHdrMap = () : Record<string, string> => {
     Forest: supabase.storage.from('assets').getPublicUrl('hdris/forest_slope_1k.hdr').data.publicUrl,
     Lounge: supabase.storage.from('assets').getPublicUrl('hdris/wooden_lounge_1k.hdr').data.publicUrl,
     Night: supabase.storage.from('assets').getPublicUrl('hdris/rogland_clear_night_1k.hdr').data.publicUrl,
+    Park: supabase.storage.from('assets').getPublicUrl('hdris/rooitou_park_1k.hdr').data.publicUrl,
     Studio: supabase.storage.from('assets').getPublicUrl('hdris/cyclorama_hard_light_1k.hdr').data.publicUrl,
+    Sunset: supabase.storage.from('assets').getPublicUrl('hdris/venice_sunset_1k.hdr').data.publicUrl,
+    Warehouse: supabase.storage.from('assets').getPublicUrl('hdris/empty_warehouse_01_1k.hdr').data.publicUrl,
   };
 };
 
