@@ -13,6 +13,15 @@ const createTransformState = () => ({
   globalMaterial: false,
 });
 
+const resetMaterials = (state: Transform & TransformActions) => {
+  if (state.globalMaterial) {
+    useCapMaterial.getState().resetMaterial();
+    useBodyMaterial.getState().resetMaterial();
+  }
+
+  return createTransformState();
+}
+
 export const useBottleTransform = create<Transform & TransformActions>((set) => ({
   ...createTransformState(),
   setScale: (scale: number) => set(() => ({ scale: scale })),
@@ -20,7 +29,7 @@ export const useBottleTransform = create<Transform & TransformActions>((set) => 
   setRotationY: (rotationY: number) => set(() => ({ rotationY: rotationY })),
   setRotationZ: (rotationZ: number) => set(() => ({ rotationZ: rotationZ })),  
   setGlobalMaterial: (globalMaterial: boolean) => set(() => ({ globalMaterial: globalMaterial })),
-  resetTransform: () => set(createTransformState())
+  resetTransform: () => set((state) => resetMaterials(state))
 }));
 
 // Cap state

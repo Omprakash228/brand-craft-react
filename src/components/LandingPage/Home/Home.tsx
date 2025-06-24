@@ -25,7 +25,7 @@ export default function Home() {
                             <ambientLight intensity={0.2} />
                             <directionalLight position={[10, 10, 10]} intensity={7} color={'#bbb'} />
                             <directionalLight position={[0, -10, 0]} intensity={0.1} />
-                            <directionalLight position={[-10, -10, 10]} intensity={0} color={'#333'} />
+                            <directionalLight position={[-10, -10, 10]} intensity={0.1} color={'#333'} />
                             <Environment background={false} near={1} far={1000} resolution={256} environmentIntensity={1}>
                                 <mesh scale={100}>
                                     <sphereGeometry args={[1, 64, 64]} />

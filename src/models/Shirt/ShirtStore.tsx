@@ -13,6 +13,18 @@ const createTransformState = () => ({
   globalMaterial: false,
 });
 
+const resetMaterials = (state: Transform & TransformActions) => {
+  if (state.globalMaterial) {
+    useCollarMaterial.getState().resetMaterial();
+    useFrontMaterial.getState().resetMaterial();
+    useBackMaterial.getState().resetMaterial();
+    useRightSleeveMaterial.getState().resetMaterial();
+    useLeftSleeveMaterial.getState().resetMaterial();
+  }
+
+  return createTransformState();
+}
+
 export const useShirtTransform = create<Transform & TransformActions>((set) => ({
   ...createTransformState(),
   setScale: (scale: number) => set(() => ({ scale: scale })),
@@ -20,7 +32,7 @@ export const useShirtTransform = create<Transform & TransformActions>((set) => (
   setRotationY: (rotationY: number) => set(() => ({ rotationY: rotationY })),
   setRotationZ: (rotationZ: number) => set(() => ({ rotationZ: rotationZ })),
   setGlobalMaterial: (globalMaterial: boolean) => set(() => ({ globalMaterial: globalMaterial })),
-  resetTransform: () => set(createTransformState()),
+  resetTransform: () => set((state) => resetMaterials(state)),
 }));
 
 // Collar state
