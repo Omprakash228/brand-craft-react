@@ -5,7 +5,7 @@ Command: npx gltfjsx@6.5.3 .\public\water_bottle.glb -t
 
 import * as THREE from "three";
 import { useEffect, useRef, type JSX } from "react";
-import { Outlines, Select, useGLTF } from "@react-three/drei";
+import { Edges, Outlines, Select, useGLTF } from "@react-three/drei";
 import {
   useBodyMaterial,
   useBodyTexture,
@@ -63,7 +63,11 @@ export default function WaterBottle(props: JSX.IntrinsicElements["group"]) {
             side={THREE.DoubleSide}
             transmission={capMaterial.transmission}
           ></meshPhysicalMaterial>
-          <Outlines visible={bottleSelection.selectedMesh==='Cap'} thickness={inputConstants.outlineThickness} color={inputConstants.outlineColor} />
+          <Outlines
+            visible={bottleSelection.selectedMesh === "Cap"}
+            thickness={inputConstants.outlineThickness}
+            color={inputConstants.outlineColor}
+          />
         </mesh>
         <mesh
           name="Bottle"
@@ -90,7 +94,17 @@ export default function WaterBottle(props: JSX.IntrinsicElements["group"]) {
             side={THREE.DoubleSide}
             transmission={bodyMaterial.transmission}
           ></meshPhysicalMaterial>
-          <Outlines visible={bottleSelection.selectedMesh==='Bottle'} thickness={inputConstants.outlineThickness} color={inputConstants.outlineColor} />
+          <Edges
+            visible={bottleSelection.selectedMesh === "Bottle"}
+            lineWidth={inputConstants.outlineThickness}
+            threshold={45}
+            color={inputConstants.outlineColor}
+          ></Edges>
+          <Outlines
+            visible={bottleSelection.selectedMesh === "Bottle"}
+            thickness={inputConstants.outlineThickness}
+            color={inputConstants.outlineColor}
+          />
         </mesh>
         {texture !== null && (
           <mesh
