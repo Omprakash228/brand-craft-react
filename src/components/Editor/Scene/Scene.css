@@ -4,10 +4,31 @@
   z-index: 2;
 }
 
+.dropdown-label {
+  font-size: 14px;
+}
+
 .input-wrapper {
   display: flex;
   align-items: center;
   justify-content: space-between;
+}
+
+.slider-label {
+  width: 33%;
+}
+
+.slider-value {
+  width: 12%;
+  text-align: right;
+}
+
+.slider-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 5%;
+  width: 65%;
 }
 
 .button-wrapper {

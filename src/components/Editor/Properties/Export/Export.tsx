@@ -60,7 +60,7 @@ export default function Export() {
         <>
             <div className="property-title"><LuFileOutput />Export</div>
             <div className="input-wrapper">
-                Choose aspect ratio
+                <span className="dropdown-label">Choose aspect ratio</span>
                 <Dropdown
                     collection={aspectOptions}
                     selectedValue={exportStore.aspectRatio}

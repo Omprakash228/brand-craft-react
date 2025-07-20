@@ -25,14 +25,14 @@ type Action = {
 };
 
 const useEnvironmentStore = create<Scene & Action>((set) => ({
-  environment: "Solid color",
+  environment: "HDRI",
   color: "#2e2e2e",
   colorTransparent: false,
   colorIntensity: 1,
-  hdri: "Apartment",
+  hdri: "City",
   hdriTransparent: false,
   hdriIntensity: 1,
-  hdriBlurness: 0,
+  hdriBlurness: 0.4,
   hdriRotation: 0,
   setEnvironment: (environment: string) => set(() => ({ environment: environment })),
   setColor: (color: string) => set(() => ({ color: color })),

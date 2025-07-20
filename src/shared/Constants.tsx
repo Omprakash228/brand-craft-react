@@ -51,3 +51,11 @@ export const productMap: Record<string, JSX.Element[]> = {
   'Soda can': [<SodaCan />, <SodaCanSettings />],
   'T-shirt': [<Shirt />, <ShirtSettings />]
 }
+
+export const inputConstants = {
+  singleMaterial: "Use same material for all parts",
+  sliderWidth: "83%",
+  outlineScale: 1.001,
+  outlineThickness: 2.5,
+  outlineColor: "#fa8054",
+}

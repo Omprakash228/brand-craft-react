@@ -4,6 +4,21 @@ import type { Transform, TransformActions } from "../../shared/types/TransformTy
 import type { Material, MaterialActions } from "../../shared/types/MaterialType";
 import type { Texture, TextureActions } from "../../shared/types/TextureType";
 
+type Selected = {
+  selectedMesh: string;
+};
+
+type SelectedActions = {
+  setSelected: (selectedMesh: string) => void;
+  resetSelected: () => void;
+};
+
+export const useSelection = create<Selected & SelectedActions>((set) => ({
+  selectedMesh: '',
+  setSelected: (selectedMesh: string) => set(() => ({selectedMesh: selectedMesh})),
+  resetSelected: () => set(() => ({selectedMesh: ''}))
+}));
+
 // Transform state
 const createTransformState = () => ({
   scale: 2,

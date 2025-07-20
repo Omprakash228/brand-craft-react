@@ -6,7 +6,8 @@
 #property-container {
   width: 25%;
   background: #101012;
-  /* border-left: 1px solid #ffffff1f; */
+  position: relative;
+  z-index: 3;
 }
 
 #scene-container {

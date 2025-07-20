@@ -1,19 +1,31 @@
 import { Accordion, Span } from "@chakra-ui/react";
 import { LuImage } from "react-icons/lu";
-import { useBodyMaterial, useBodyTexture, useBottleTransform, useCapMaterial } from "./WaterBottleStore";
+import { useBodyMaterial, useBodyTexture, useBottleTransform, useCapMaterial, useSelection } from "./WaterBottleStore";
 import { MdColorLens, MdRefresh, MdTransform } from "react-icons/md";
 import TransformControls from "../../shared/components/TransformControls";
 import MaterialControls from "../../shared/components/MaterialControls";
 import TextureControls from "../../shared/components/TextureControls";
 import CheckBox from "../../components/ui/CheckBox/CheckBox";
+import { useEffect } from "react";
+import { inputConstants } from "../../shared/Constants";
 
 export default function WaterBottleSettings() {
+    const bottleSelection = useSelection();
     const bottleTransform = useBottleTransform();
     const capMaterial = useCapMaterial();
     const bodyMaterial = useBodyMaterial();
     const bodyTexture = useBodyTexture();
 
     const [targetWidth, targetHeight] = [1000, 993]
+
+    // Set default selection
+    useEffect(() => {
+        bottleSelection.setSelected("Bottle");
+
+        return () => {
+            bottleSelection.resetSelected();
+        }
+    }, [])
 
     return (<>
         <Accordion.Root collapsible defaultValue={['Transform', 'Cap Material', 'Body Material', 'Image']} multiple={true}>
@@ -27,7 +39,7 @@ export default function WaterBottleSettings() {
                     <Accordion.ItemBody>
                         <TransformControls store={bottleTransform} />
                         <CheckBox
-                            label="Single material mode"
+                            label={inputConstants.singleMaterial}
                             size="lg"
                             selectedValue={bottleTransform.globalMaterial}
                             onChange={((value) => { bottleTransform.setGlobalMaterial(!!value) })} />
@@ -39,7 +51,7 @@ export default function WaterBottleSettings() {
                 </Accordion.ItemContent>
             </Accordion.Item>
             {
-                !bottleTransform.globalMaterial &&
+                bottleSelection.selectedMesh === "Cap" && !bottleTransform.globalMaterial &&
                 <Accordion.Item value='Cap Material'>
                     <Accordion.ItemTrigger>
                         <Span flex="10" style={{ display: "flex", alignItems: "center", gap: "0.2rem" }}><MdColorLens size={"16px"} />Cap Appearance</Span>
@@ -54,7 +66,7 @@ export default function WaterBottleSettings() {
                 </Accordion.Item>
             }
             {
-                !bottleTransform.globalMaterial &&
+                bottleSelection.selectedMesh === "Bottle" && !bottleTransform.globalMaterial &&
                 <Accordion.Item value='Body Material'>
                     <Accordion.ItemTrigger>
                         <Span flex="10" style={{ display: "flex", alignItems: "center", gap: "0.2rem" }}><MdColorLens size={"16px"} />Body Appearance</Span>
@@ -68,18 +80,21 @@ export default function WaterBottleSettings() {
                     </Accordion.ItemContent>
                 </Accordion.Item>
             }
-            <Accordion.Item value='Image'>
-                <Accordion.ItemTrigger>
-                    <Span flex="10" style={{ display: "flex", alignItems: "center", gap: "0.2rem" }}><LuImage size={"16px"} />Body Image</Span>
-                    <Span flex="0" style={{ cursor: "pointer", opacity: "0.5" }} onClick={($event) => { $event.stopPropagation(); bodyTexture.resetTexture() }}><MdRefresh /></Span>
-                    <Accordion.ItemIndicator />
-                </Accordion.ItemTrigger>
-                <Accordion.ItemContent>
-                    <Accordion.ItemBody>
-                        <TextureControls store={bodyTexture} targetWidth={targetWidth} targetHeight={targetHeight} />
-                    </Accordion.ItemBody>
-                </Accordion.ItemContent>
-            </Accordion.Item>
+            {
+                bottleSelection.selectedMesh === "Bottle" && 
+                <Accordion.Item value='Image'>
+                    <Accordion.ItemTrigger>
+                        <Span flex="10" style={{ display: "flex", alignItems: "center", gap: "0.2rem" }}><LuImage size={"16px"} />Body Image</Span>
+                        <Span flex="0" style={{ cursor: "pointer", opacity: "0.5" }} onClick={($event) => { $event.stopPropagation(); bodyTexture.resetTexture() }}><MdRefresh /></Span>
+                        <Accordion.ItemIndicator />
+                    </Accordion.ItemTrigger>
+                    <Accordion.ItemContent>
+                        <Accordion.ItemBody>
+                            <TextureControls store={bodyTexture} targetWidth={targetWidth} targetHeight={targetHeight} />
+                        </Accordion.ItemBody>
+                    </Accordion.ItemContent>
+                </Accordion.Item>
+            }
         </Accordion.Root>
     </>)
 }
