@@ -63,7 +63,7 @@ export default function HdriSettings() {
                       envStore.setHdriIntensity(value);
                     }}
                   />
-                  <span className="slider-value">{envStore.hdriBlurness}</span>
+                  <span className="slider-value">{envStore.hdriIntensity}</span>
                 </div>
               </div>
               <div className="input-wrapper">
