@@ -54,7 +54,7 @@ export const productMap: Record<string, JSX.Element[]> = {
 
 export const inputConstants = {
   singleMaterial: "Use same material for all parts",
-  sliderWidth: "83%",
+  sliderWidth: "80%",
   outlineScale: 1.001,
   outlineThickness: 2.5,
   outlineColor: "#fa8054",
