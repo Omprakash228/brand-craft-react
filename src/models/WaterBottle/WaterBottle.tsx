@@ -4,7 +4,7 @@ Command: npx gltfjsx@6.5.3 .\public\water_bottle.glb -t
 */
 
 import * as THREE from "three";
-import { useEffect, useRef, useState, type JSX } from "react";
+import { useEffect, useRef, type JSX } from "react";
 import { Outlines, Select, useGLTF } from "@react-three/drei";
 import {
   useBodyMaterial,
