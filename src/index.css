@@ -32,3 +32,40 @@ body {
 #root {
   height: 100vh;
 }
+
+.tooltip {
+  position: relative;
+  display: inline-block;
+}
+
+.tooltip .tooltiptext {
+  visibility: hidden;
+  max-width: 350px;
+  text-wrap: nowrap;
+  background: rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(100px);
+  color: #fff;
+  text-align: center;
+  border-radius: 6px;
+  padding: 10px 15px;
+  font-size: 14px;
+  line-height: 14px;
+}
+
+.tooltip .tooltiptext-left {
+  position: absolute;
+  z-index: 50;
+  left: 50px;
+  top: calc(50% - 15px);
+}
+
+.tooltip .tooltiptext-right {
+  position: absolute;
+  z-index: 50;
+  right: 50px;
+  top: calc(50% - 15px);
+}
+
+.tooltip:hover .tooltiptext {
+  visibility: visible;
+}

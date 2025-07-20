@@ -16,7 +16,7 @@ export default function ProductSettings() {
         <>
             <div className="property-title"><LuPackage />Product</div>
             <div className="input-wrapper">
-                Choose product
+                <span className="dropdown-label">Choose product</span>
                 <Dropdown
                     collection={products}
                     selectedValue={productStore.product}

@@ -11,7 +11,7 @@ export default function SceneSettings() {
     const envOptions = createListCollection({
         items: [
             { label: "Solid color", value: "Solid color" },
-            { label: "HDRI", value: "HDRI" },
+            { label: "Image", value: "HDRI" },
         ],
     })
 
@@ -19,7 +19,7 @@ export default function SceneSettings() {
         <>
             <div className="property-title"><MdTexture />Background</div>
             <div className="input-wrapper">
-                Choose background
+                <span className="dropdown-label">Choose background</span>
                 <Dropdown 
                     collection={envOptions} 
                     selectedValue={envStore.environment} 
