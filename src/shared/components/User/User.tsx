@@ -5,7 +5,7 @@ import './User.css'
 export default function User() {
     const authStore = useAuthStore();
     const signout = async () => {
-        await authStore.supabase.auth.signOut().then(() => { authStore.setSession(null) })
+        // await authStore.supabase.auth.signOut().then(() => { authStore.setSession(null) })
     }
 
     return (
