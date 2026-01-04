@@ -6,12 +6,9 @@ Command: npx gltfjsx@6.5.3 .\public\soda_can_landing_page.glb -t
 import * as THREE from 'three'
 import { useGLTF } from '@react-three/drei'
 import { useEffect, useState, type JSX } from 'react'
-import { useAuthStore } from '../shared/components/Auth/AuthStore'
 
-export function SodaCanLandingPage(props: JSX.IntrinsicElements['group']) {
-  const authStore = useAuthStore();
-  const { data } = authStore.supabase.storage.from('assets').getPublicUrl('models/soda_can_landing_page.glb')
-  const { nodes, materials } = useGLTF(data.publicUrl)
+export function SodaCanLandingPage(props: JSX.IntrinsicElements['group']) {  
+  const { nodes, materials } = useGLTF("/soda_can_landing_page.glb")
   const [isMobile, setIsMobile] = useState(window.innerWidth < 1050);
 
   useEffect(() => {

@@ -3,7 +3,7 @@ import { create } from "zustand";
 
 type Auth = {
   session: Session | null;
-  supabase: SupabaseClient<any, "public", any>;
+  supabase: SupabaseClient<any, "public", any> | null;
 };
 
 export type AuthActions = {
@@ -12,6 +12,6 @@ export type AuthActions = {
 
 export const useAuthStore = create<Auth & AuthActions>((set) => ({
     session: null,
-    supabase: createClient(import.meta.env.VITE_SUPABASE_URL || '', import.meta.env.VITE_SUPABASE_KEY || ''),
+    supabase: null,
     setSession: (session: Session | null) => set(() => ({ session: session })),
 }));

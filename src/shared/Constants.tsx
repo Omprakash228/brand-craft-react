@@ -1,5 +1,4 @@
 import { lazy, type JSX } from "react";
-import { useAuthStore } from "./components/Auth/AuthStore";
 
 const Cup = lazy(() => import('../models/Cup/Cup'));
 const CupSettings = lazy(() => import('../models/Cup/CupSettings'));
@@ -14,18 +13,17 @@ const WaterBottle = lazy(() => import('../models/WaterBottle/WaterBottle'));
 const WaterBottleSettings = lazy(() => import('../models/WaterBottle/WaterBottleSettings'));
 
 export const useHdrMap = () : Record<string, string> => {
-  const { supabase } = useAuthStore();
   return {
-    Apartment: supabase.storage.from('assets').getPublicUrl('hdris/lebombo_1k.hdr').data.publicUrl,
-    City: supabase.storage.from('assets').getPublicUrl('hdris/docklands_02_1k.hdr').data.publicUrl,
-    Dawn: supabase.storage.from('assets').getPublicUrl('hdris/kiara_1_dawn_1k.hdr').data.publicUrl,
-    Forest: supabase.storage.from('assets').getPublicUrl('hdris/forest_slope_1k.hdr').data.publicUrl,
-    Lounge: supabase.storage.from('assets').getPublicUrl('hdris/wooden_lounge_1k.hdr').data.publicUrl,
-    Night: supabase.storage.from('assets').getPublicUrl('hdris/rogland_clear_night_1k.hdr').data.publicUrl,
-    Park: supabase.storage.from('assets').getPublicUrl('hdris/rooitou_park_1k.hdr').data.publicUrl,
-    Studio: supabase.storage.from('assets').getPublicUrl('hdris/cyclorama_hard_light_1k.hdr').data.publicUrl,
-    Sunset: supabase.storage.from('assets').getPublicUrl('hdris/venice_sunset_1k.hdr').data.publicUrl,
-    Warehouse: supabase.storage.from('assets').getPublicUrl('hdris/empty_warehouse_01_1k.hdr').data.publicUrl,
+    Apartment: '/hdris/lebombo_1k.hdr',
+    City: '/hdris/docklands_02_1k.hdr',
+    Dawn: '/hdris/kiara_1_dawn_1k.hdr',
+    Forest: '/hdris/forest_slope_1k.hdr',
+    Lounge: '/hdris/wooden_lounge_1k.hdr',
+    Night: '/hdris/rogland_clear_night_1k.hdr',
+    Park: '/hdris/rooitou_park_1k.hdr',
+    Studio: '/hdris/cyclorama_hard_light_1k.hdr',
+    Sunset: '/hdris/venice_sunset_1k.hdr',
+    Warehouse: '/hdris/empty_warehouse_01_1k.hdr',
   };
 };
 
